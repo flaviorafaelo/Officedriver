@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\altima\Altima.Broker\Altima.Broker.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Cidades\Model\" />
+    <Folder Include="Cooperados\Services\" />
+    <Folder Include="Enums\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\altima\Altima.Broker.AspNetCore\Altima.Broker.AspNet.Mvc.csproj" />
+    <ProjectReference Include="..\..\altima\Altima.Broker\Altima.Broker.csproj" />
+    <ProjectReference Include="..\Officedriver.Contratos.Core\Officedriver.Contratos.Core.csproj" />
+  </ItemGroup>
+
+</Project>
