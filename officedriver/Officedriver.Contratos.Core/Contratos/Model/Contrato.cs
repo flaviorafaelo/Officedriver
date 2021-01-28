@@ -26,18 +26,6 @@ namespace Officedriver.Contratos.Core.Contratos.Model
         public int Intervalo { get; set; } 
         public IEnumerable<Cooperado> Cooperados { get; set; }
         public IEnumerable<Veiculo> Veiculos { get; set; }
-        public int QtdeGestores1 { get; set; }
-        public int QtdeGestores2 { get; set; }
-        public Valor Valor { get; set; }
-        public Valor ValorHoraDiurnaGestor1 { get; set; }
-        public Valor ValorHoraNoturnaGestor1 { get; set; }
-        public Valor ValorHoraExcedenteGestor1 { get; set; }
-        public Valor ValorHoraDiurnaGestor2 { get; set; }
-        public Valor ValorHoraNoturnaGestor2 { get; set; }
-        public Valor ValorHoraExcedenteGestor2 { get; set; }
-
-
-
-
+        public Template Template { get; set; }
     }
 }
