@@ -2,11 +2,11 @@
 
 namespace Officedriver.Contratos.Core.Types
 {
-    public struct Valor : IDecimalType
+    public struct Moeda : IDecimalType
     {
         private readonly string _value;
-        private Valor(string value) => _value = value;
-        public static implicit operator Valor(string value) => new Valor(value);
+        private Moeda(string value) => _value = value;
+        public static implicit operator Moeda(string value) => new Moeda(value);
         public override string ToString() => _value;
     }
 }

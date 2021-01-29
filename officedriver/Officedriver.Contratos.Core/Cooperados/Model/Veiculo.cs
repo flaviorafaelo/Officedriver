@@ -26,7 +26,7 @@ namespace Officedriver.Contratos.Core.Cooperados.Model
         public string Cor { get; set; }
         public string Rastreador { get; set; }
         public string NumeroRastreador { get; set; }
-        public DateTime? VencimentoSeguroAPP { get; set; }
+        public Data? VencimentoSeguroAPP { get; set; }
         public IEnumerable<Imagem> Documentos { get; set; }
         public IEnumerable<Contato> Contatos { get; set; }
     }

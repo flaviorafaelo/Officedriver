@@ -46,9 +46,9 @@ namespace Officedriver.Contratos.Core.Cooperados.Model
         public DataMatricula DataMatricula { get; set; }
         
         [ModelAttribute(Required = true, Disabled = true)]
-        public DateTime DataCadastro { get; set; }
+        public Data DataCadastro { get; set; }
         
-        public DateTime DataDesligamento { get; set; }
+        public Data DataDesligamento { get; set; }
         
         public Situacao Situacao { get; set; }
         
