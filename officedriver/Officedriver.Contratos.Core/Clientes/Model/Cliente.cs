@@ -11,7 +11,9 @@ namespace Officedriver.Contratos.Core.Clientes.Model
     public class Cliente: BaseModel
     {
         public TipoPessoa TipoPessoa { get; set; }
+        [ModelAttribute(Required = true)]
         public Nome Nome { get; set; }
+        [ModelAttribute(Required = true)]
         public Cnpj Cnpj { get; set; }
         public Imagem Logo { get; set; }
         public Endereco Endereco { get; set; }
