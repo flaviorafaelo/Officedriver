@@ -1,44 +1,67 @@
 ﻿using System.Linq;
-using Altima.Broker.Core;
-using Altima.Broker.Business;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Loader;
-using System.IO;
-using Altima.Broker.Business.Types;
+using Altima.Broker.System;
+using Altima.Broker.Core;
+using Altima.Broker.Business;
+using System.Reflection;
+using Altima.Broker.Metadata.Generator;
 
 public class ApplicationBroker : IApplicationBroker
 {
-    public IList<Type> Models { get; private set; }
+    private readonly IList<Assembly> _assemblies;
+    public IList<Type> TypeModels { get; private set; }
+    public IList<Model> Models { get; private set; }
+    public IList<View> Views { get; private set; }
 
-    public IList<Type> Services { get; private set; }
-
-    public IList<Type> Types { get; private set; }
-
-    public void Build()
+    private IList<Assembly> GetAllAssembliesSystem()
     {
-        //Criar uma função para o item abaixo em utils
-        var referencedPaths = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll").ToList<string>();
+        var assemblies = new List<Assembly>();
+        var referencedPaths = Workaround.GetFiles("*.dll");
         foreach (var reference in referencedPaths)
+            assemblies.Add(AssemblyLoadContext.Default.LoadFromAssemblyPath(reference));
+        return assemblies;
+    }
+
+    private IList<Type> FilterTypes(IList<Assembly> assemblies, Type type)
+    {
+        IList<Type> models = new List<Type>();
+
+        foreach (var assembly in assemblies)
         {
-            var currentAssembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(reference);
-
-            foreach (var model in currentAssembly.GetExportedTypes().Where(x => typeof(BaseModel).IsAssignableFrom(x) && !x.IsAbstract))
+            foreach (var model in assembly.GetExportedTypes().Where(x => type.IsAssignableFrom(x) && !x.IsAbstract))
             {
-                Models.Add(model);
-            };
-
-            foreach (var type in currentAssembly.GetExportedTypes().Where(x => typeof(IStringType).IsAssignableFrom(x) && !x.IsAbstract))
-            {
-                Types.Add(type);
+                models.Add(model);
             };
         }
+        return models;
+    }
+
+    private IList<Model> CreateModels(IList<Type> typeModels)
+    {
+        IList<Model> models = new List<Model>();
+        foreach (var typeModel in typeModels)
+           models.Add(ModelGenerator.Create(typeModel));
+        return models;
+    }
+
+    private IList<View> CreateViews(IList<Model> models)
+    {
+        IList<View> views = new List<View>();
+        foreach (var model in models)
+            views.Add(ViewGenerator.Create(model));
+        return views;
     }
 
     public ApplicationBroker()
     {
-        Models = new List<Type>();
-        Types = new List<Type>();
-        Build();
+        _assemblies = GetAllAssembliesSystem();
+
+        TypeModels = FilterTypes(_assemblies, typeof(BaseModel));
+
+        Models = CreateModels(TypeModels);
+
+        Views = CreateViews(Models);
     }
 }

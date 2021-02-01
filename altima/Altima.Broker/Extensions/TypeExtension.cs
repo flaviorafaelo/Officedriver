@@ -14,41 +14,39 @@ namespace Altima.Broker.Extensions
             return types.Count() > 0; 
         }
 
-        public static string ToStringType(this Type type)
+        public static DataType ToDataType(this Type type)
         {
             if (Implements(type, typeof(IBlobType)))
-                return "blob";
+                return DataType.Blob;
 
             if (Implements(type, typeof(IImageType)))
-                return "image";
+                return DataType.Image;
 
             if (Implements(type, typeof(IList<>)) && Implements(type, typeof(IObjectType)))
-                return "record";
+                return DataType.Record;
 
             if (Implements(type, typeof(IObjectType)))
-                return "object";
+                return DataType.Object;
 
             if (type.IsEnum)
-                return "list-fixed";
+                return DataType.List;
 
             if (Implements(type,typeof(IStringType))) 
-                return "string";
+                return DataType.String;
 
             if (Implements(type, typeof(IIntegerType)))
-                return "integer";
+                return DataType.Integer;
 
             if (Implements(type, typeof(IDateType)))
-                return "date";
+                return DataType.Date;
 
             if (Implements(type, typeof(IDateTimeType)))
-                return "datetime";
+                return DataType.DateTime;
 
             if (Implements(type, typeof(IBooleanType)))
-                return "boolean";
+                return DataType.Boolean;         
 
-           
-
-            return "unknown";
+            return DataType.Unknown;
         }
     }
 }

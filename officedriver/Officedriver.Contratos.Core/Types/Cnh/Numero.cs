@@ -8,6 +8,7 @@ namespace Officedriver.Contratos.Core.Types.Cnh
     {
         private readonly string _value;
         private Numero(string value) => _value = value;
+
         public static implicit operator Numero(string value) => new Numero(value);
     }
 }

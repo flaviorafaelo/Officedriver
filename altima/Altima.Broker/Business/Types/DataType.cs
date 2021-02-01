@@ -10,6 +10,11 @@
         Numeric,
         Decimal,
         Image,
-        Record
+        Record,
+        Blob,
+        Object,
+        List,
+        Unknown
     }
+
 }

@@ -1,6 +1,7 @@
 ﻿namespace Altima.Broker.Business.Types
 {
-    public interface IStringType
+    public interface IStringType: IType
     {
+        //int Size { get; set; }
     }
 }

@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Altima.Broker.System;
 
 namespace Altima.Broker.Core
 {
     public interface IApplicationBroker
     {
-        IList<System.Type> Models { get; }
-        IList<System.Type> Services { get; }
-        void Build();
+        IList<Type> TypeModels { get; }
+        IList<Model> Models { get; }
+        IList<View> Views { get; }
     }
 }

@@ -1,0 +1,18 @@
+{
+  "module": "Contratos",
+  "routes": [
+    {
+      "id":  "CONTR_1",
+      "route": "Cadastros\\Cooperados",
+      "model": "cooperado",
+      "service": "",
+      "actions": [
+        {
+          "id": "CONTR_2",
+          "name": "Inativar",
+          "service": "\\cooperados\\inativar"
+        }
+      ]
+    }
+  ]
+}
