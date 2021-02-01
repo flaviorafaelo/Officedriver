@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Loader;
-using Altima.Broker.Business;
+﻿using System.Reflection;
 using Altima.Broker.Core;
 using Microsoft.EntityFrameworkCore;
 
