@@ -11,15 +11,11 @@ namespace Altima.Broker.AspNet.Mvc.Data
 {
     public class DataContext : DbContext
     {
-        private IApplicationBroker _applicationBroker;
+        private readonly IApplicationBroker _applicationBroker;
         public DataContext(IApplicationBroker applicationBroker, DbContextOptions<DataContext> options) : base(options)
         {
             _applicationBroker = applicationBroker;
         }
-
-  
-
-        //public DbSet<Cooperado> Cooperados { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -34,7 +30,6 @@ namespace Altima.Broker.AspNet.Mvc.Data
             {
                 modelBuilder.Entity(type);
             }
-            
         }
     }
 }
