@@ -1,6 +1,6 @@
 ﻿namespace Altima.Broker.Business.Types
 {
-    public interface IObjectType: IType
+    public interface IType
     {
     }
 }

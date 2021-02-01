@@ -9,6 +9,11 @@
         Boolean,
         Numeric,
         Image,
-        Record
+        Record,
+        Blob,
+        Object,
+        List,
+        Unknown
     }
+
 }

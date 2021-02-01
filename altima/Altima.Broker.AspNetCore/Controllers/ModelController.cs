@@ -4,6 +4,7 @@ using Altima.Broker.Business;
 using Altima.Broker.Data;
 using Altima.Broker.Metadata;
 using Altima.Broker.Metadata.Generator;
+using Altima.Broker.System;
 //using Microsoft.AspNet.OData;
 
 namespace Altima.Broker.AspNet.Mvc.Controllers
@@ -79,8 +80,16 @@ namespace Altima.Broker.AspNet.Mvc.Controllers
         [Route("[controller]/metadata")]
         public async Task<ActionResult<Model>> Metadata()
         {
-            //TODO: Criar um cache em momeria
+            //pegar essa informação do cache em application
             return Ok(ModelGenerator.Create(typeof(T)));
+        }
+
+        [HttpGet]
+        [Route("[controller]/metaview")]
+        public async Task<ActionResult<View>> Metaview()
+        {
+            Model model = ModelGenerator.Create(typeof(T));
+            return Ok(ViewGenerator.Create(model));
         }
     }
 }

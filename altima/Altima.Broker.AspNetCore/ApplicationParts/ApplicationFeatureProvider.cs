@@ -20,7 +20,7 @@ namespace Altima.Broker.AspNet.Mvc.ApplicationParts
 
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {
-            foreach (var model in ApplicationBroker.Models)
+            foreach (var model in ApplicationBroker.TypeModels)
             {
                 feature.Controllers.Add(typeof(ModelController<>).MakeGenericType(model).GetTypeInfo());
             }

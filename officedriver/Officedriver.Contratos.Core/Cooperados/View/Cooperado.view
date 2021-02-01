@@ -1,0 +1,79 @@
+{
+  "description": "Cadastro de Cooperados",
+  "version": 1,
+  "target": "Officedriver.Contratos.Core.Cooperados.Model.Cooperado",
+  "pages": [
+    {
+      "description": "Dados Pessoais",
+      "groups": [
+        {
+          "description": "",
+          "items": [
+            {
+              "property": "Matricula",
+              "label": "Mudei o nome original",
+              "VisibilityRule": null,
+              "EnablingRule": null,
+              "Hint": "será que funcioa"
+            },
+            {
+              "property": "Nome"
+            },
+            {
+              "property": "Tipo"
+            },
+            {
+              "property": "DataNascimento"
+            }
+          ]
+        },
+        {
+          "description": "Documentos",
+          "items": [
+            {
+              "property": "Rg"
+            },
+            {
+              "property": "Cpf"
+            },
+            {
+              "property": "Cnh"
+            }
+          ]
+        },
+        {
+          "description": "Endereco",
+          "items": [
+            {
+              "property": "Endereco"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Contatos",
+      "groups": [
+        {
+          "items": [
+            {
+              "property": "Contatos"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Dados Bancário",
+      "groups": [
+        {
+          "items": [
+            {
+              "property": "Conta"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
