@@ -4,15 +4,17 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 using Altima.Broker.Business;
+using Altima.Broker.Core;
 using Microsoft.EntityFrameworkCore;
 
 namespace Altima.Broker.AspNet.Mvc.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        private IApplicationBroker _applicationBroker;
+        public DataContext(IApplicationBroker applicationBroker, DbContextOptions<DataContext> options) : base(options)
         {
-            //
+            _applicationBroker = applicationBroker;
         }
 
   
@@ -28,16 +30,11 @@ namespace Altima.Broker.AspNet.Mvc.Data
 
         private void RegisterAllModels(ModelBuilder modelBuilder)
         {
-            var referencedPaths = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll").ToList<string>();
-            foreach (var reference in referencedPaths)
+            foreach (var type in _applicationBroker.TypeModels)
             {
-                var currentAssembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(reference);
-
-                foreach (var entity in currentAssembly.GetExportedTypes().Where(x => typeof(BaseModel).IsAssignableFrom(x) && !x.IsAbstract))
-                {
-                    modelBuilder.Entity(entity);
-                };
+                modelBuilder.Entity(type);
             }
+            
         }
     }
 }
