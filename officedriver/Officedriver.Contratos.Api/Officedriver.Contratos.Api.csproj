@@ -11,6 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\altima\Altima.Broker.AspNetCore\Altima.Broker.AspNet.Mvc.csproj" />
     <ProjectReference Include="..\..\altima\Altima.Broker\Altima.Broker.csproj" />
     <ProjectReference Include="..\Officedriver.Contratos.Core\Officedriver.Contratos.Core.csproj" />

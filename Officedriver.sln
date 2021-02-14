@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altima.Broker", "altima\Alt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altima.Broker.AspNet.Mvc", "altima\Altima.Broker.AspNetCore\Altima.Broker.AspNet.Mvc.csproj", "{E22FDA5D-8C45-4766-A9C7-1C16B27FFF08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officedriver.Contratos.Api", "officedriver\Officedriver.Contratos.Api\Officedriver.Contratos.Api.csproj", "{7A04D961-293B-4CBD-A716-8445450A14AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Officedriver.Contratos.Api", "officedriver\Officedriver.Contratos.Api\Officedriver.Contratos.Api.csproj", "{7A04D961-293B-4CBD-A716-8445450A14AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Officedriver.Contratos.Core", "officedriver\Officedriver.Contratos.Core\Officedriver.Contratos.Core.csproj", "{76D26813-7652-455B-9CDB-115F74E64D6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Officedriver.Contratos.Core", "officedriver\Officedriver.Contratos.Core\Officedriver.Contratos.Core.csproj", "{76D26813-7652-455B-9CDB-115F74E64D6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{7BB928DF-1C08-4755-82D6-C2BAEB5036F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{76D26813-7652-455B-9CDB-115F74E64D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76D26813-7652-455B-9CDB-115F74E64D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76D26813-7652-455B-9CDB-115F74E64D6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BB928DF-1C08-4755-82D6-C2BAEB5036F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BB928DF-1C08-4755-82D6-C2BAEB5036F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BB928DF-1C08-4755-82D6-C2BAEB5036F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BB928DF-1C08-4755-82D6-C2BAEB5036F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
