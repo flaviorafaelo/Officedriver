@@ -1,0 +1,37 @@
+@import "../node_modules/@syncfusion/ej2-base/styles/fabric.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/fabric.css";
+
+@import '../node_modules/@syncfusion/ej2-inputs/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-angular-inputs/styles/fabric.css';
+
+@import '../node_modules/@syncfusion/ej2-popups/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-calendars/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-angular-calendars/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-angular-navigations/styles/fabric.css';
+
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/fabric.css';
+
+@import '../node_modules/@syncfusion/ej2-base/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/fabric.css';
+
+
+@import '../node_modules/@syncfusion/ej2-icons/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/fabric.css';
+@import '../node_modules/@syncfusion/ej2-angular-layouts/styles/fabric.css';
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+
+html {
+  height: 100%;
+}
+body {
+  margin: 30px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #fff;
+}

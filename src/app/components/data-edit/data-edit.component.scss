@@ -1,0 +1,24 @@
+divX {
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    Height: 100vh;
+    background-color: aqua;
+    border: 1px;
+    margin: 50px;
+
+}
+
+.effect1{
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+       -moz-box-shadow: 0 10px 6px -6px #777;
+            box-shadow: 0 10px 6px -6px #777;
+}
+
+.title-content {
+  height: 80px;
+
+  h4{
+
+    color: rgb(0, 132, 184);
+  }
+}
