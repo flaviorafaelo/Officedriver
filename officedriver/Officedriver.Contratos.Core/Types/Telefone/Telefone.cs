@@ -2,8 +2,10 @@
 
 namespace Officedriver.Contratos.Core.Types.Telefone
 {
-    public struct Telefone: IObjectType
+    public class Telefone : ObjectType
     {
+        protected Telefone() { }
+
         public Telefone(Ddd ddd, Numero numero)
         {
             Ddd = ddd;

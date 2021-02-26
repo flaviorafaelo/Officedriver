@@ -7,7 +7,6 @@
         Date,
         DateTime,
         Boolean,
-        Numeric,
         Decimal,
         Image,
         Record,

@@ -4,10 +4,10 @@ using Altima.Broker.Business.Types;
 namespace Officedriver.Contratos.Core.Types.Telefone
 {
     [TypeAttribute(Size = 2)]
-    public struct Ddd : IStringType
+    public class Ddd : StringType
     {
-        private readonly string _value;
-        private Ddd(string value) => _value = value;
-        public static implicit operator Ddd(string value) => new Ddd(value);
+        public Ddd(string value) : base(value)
+        {
+        }
     }
 }

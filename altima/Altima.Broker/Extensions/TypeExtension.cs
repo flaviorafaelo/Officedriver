@@ -1,50 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Altima.Broker.Business.Types;
 
 namespace Altima.Broker.Extensions
 {
     public static class TypeExtension
     {
-        public static bool Implements(this Type self, Type type)
-        {
-            var types = self.Assembly.GetExportedTypes().Where(x =>
-                type.IsAssignableFrom(x) && /*!x.IsAbstract &&*/ x.Name.Equals(self.Name)).ToList();
-            return types.Count() > 0; 
-        }
-
         public static DataType ToDataType(this Type type)
         {
-            if (Implements(type, typeof(IBlobType)))
-                return DataType.Blob;
 
-            if (Implements(type, typeof(IImageType)))
-                return DataType.Image;
-
-            if (Implements(type, typeof(IList<>)) && Implements(type, typeof(IObjectType)))
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
                 return DataType.Record;
 
-            if (Implements(type, typeof(IObjectType)))
+            if (type.IsSubclassOf(typeof(BlobType)))
+                return DataType.Blob;
+
+            if (type.IsSubclassOf(typeof(ImageType)))
+                return DataType.Image;
+
+            if (type.IsSubclassOf(typeof(ObjectType)))
                 return DataType.Object;
 
             if (type.IsEnum)
                 return DataType.List;
 
-            if (Implements(type,typeof(IStringType))) 
+            if (type.IsSubclassOf(typeof(StringType)))
                 return DataType.String;
 
-            if (Implements(type, typeof(IIntegerType)))
+            if (type.IsSubclassOf(typeof(IntegerType)))
                 return DataType.Integer;
 
-            if (Implements(type, typeof(IDateType)))
+            if (type.IsSubclassOf(typeof(DateType)))
                 return DataType.Date;
 
-            if (Implements(type, typeof(IDateTimeType)))
+            if (type.IsSubclassOf(typeof(DateTimeType)))
                 return DataType.DateTime;
 
-            if (Implements(type, typeof(IBooleanType)))
-                return DataType.Boolean;         
+            if (type.IsSubclassOf(typeof(BooleanType)))
+                return DataType.Boolean;
 
             return DataType.Unknown;
         }

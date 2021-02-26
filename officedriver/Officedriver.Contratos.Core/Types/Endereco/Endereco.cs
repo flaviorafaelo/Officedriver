@@ -2,15 +2,17 @@
 
 namespace Officedriver.Contratos.Core.Types.Endereco
 {
-    public struct Endereco : IObjectType
-    {   
+    public class Endereco : ObjectType
+    {
+        protected Endereco() { }
+
         //criar evento de validação do campo se ele é valido
         public Cep Cep { get; set; } 
         public Logradouro Logradouro { get; set; }
-        public string Numero { get; set; }
-        public string Complemento { get; set; }
-        public string Bairro { get; set; }
-        public string Estado { get; set; }
-        public string Cidade { get; set; }
+        public Numero Numero { get; set; }
+        public Complemento Complemento { get; set; }
+        public Bairro Bairro { get; set; }
+        public Estado Estado { get; set; }
+        public Cidade Cidade { get; set; }
     }
 }

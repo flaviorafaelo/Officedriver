@@ -16,55 +16,55 @@ namespace Officedriver.Contratos.Core.Cooperados.Model
     {
         [ModelAttribute(Required = true)]
         public Matricula Matricula { get; set; }
-        
+
         [ModelAttribute(Required = true)]
-        
+
         public Nome Nome { get; set; }
-        
+
         public Types.Cooperado.Tipo Tipo { get; set; }
-        
-        public DataNascimento Nascimento { get; set; }
-        
+
+        public Data Nascimento { get; set; }
+
         [ModelAttribute(Required = true)]
         public Rg Rg { get; set; }
-        
+
         [ModelAttribute(Required = true)]
         public Cpf Cpf { get; set; }
-        
+
         [ModelAttribute(Required = true)]
         public Cnh Cnh { get; set; }
-        
+
         public Endereco Endereco { get; set; }
-        
-        public IList<Contato> Contatos { get; set; }
-        
+
         public Conta Conta { get; set; }
-        
-        public Imagem Foto { get; set; }
-        
-        [ModelAttribute(Required = true, Disabled = true)]
-        public DataMatricula DataMatricula { get; set; }
-        
-        [ModelAttribute(Required = true, Disabled = true)]
+
+        //public Imagem Foto { get; set; }
+
+        [ModelAttribute(Required = true)]
+        public Data DataMatricula { get; set; }
+
+        [ModelAttribute(Required = true)]
         public Data DataCadastro { get; set; }
-        
+
         public Data DataDesligamento { get; set; }
-        
+
         public Situacao Situacao { get; set; }
-        
+
         public Telefone Telefone { get; set; }
-        
+
         public Telefone Celular { get; set; }
-        
+
         [ModelAttribute(Required = true)]
         public EMail EMail { get; set; }
-        
-        public IEnumerable<Imagem> Documentos { get; set; }
-        
-        public IEnumerable<Contrato> Contratos { get; set; }
-        
-        public IEnumerable<Veiculo> Veiculos { get; set; }
-        //Verificar como funciona o DBSet do Context e implemenar algo parecediro para os serviço
+
+        public IEnumerable<Contato> Contatos { get; set; }
+
+        // public IEnumerable<Imagem> Documentos { get; set; }
+
+       // public IEnumerable<Contrato> Contratos { get; set; }
+
+        //public IEnumerable<Veiculo> Veiculos { get; set; }
+        //Verificar como funciona o DBSet do Context e implemenar algo parecediro para os serviço*/
 
     }
 }

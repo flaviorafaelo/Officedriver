@@ -1,6 +1,10 @@
-﻿namespace Altima.Broker.Business.Types
+﻿using System;
+
+namespace Altima.Broker.Business.Types
 {
-    public interface IType
+    public interface IType<T>
     {
+        T Value { get; set; }
+        //Type PrimitiveType { get; }
     }
 }

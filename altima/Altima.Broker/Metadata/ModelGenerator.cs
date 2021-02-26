@@ -66,13 +66,11 @@ namespace Altima.Broker.Metadata.Generator
                     case DataType.Boolean:
                         property = new BooleanProperty(propInfo.Name, required);
                         break;
-                    case DataType.Numeric:
-                        property = new NumericProperty(propInfo.Name, 2, required);
-                        break;
                     case DataType.Image:
                         break;
                     case DataType.Record:
-                        property = new RecordProperty(propInfo.Name, required, ModelGenerator.Create(propInfo.PropertyType).Properties);
+                        var recordType = propInfo.PropertyType.GetGenericArguments()[0];
+                        property = new RecordProperty(propInfo.Name, required, ModelGenerator.Create(recordType).Properties);
                         break;
                     case DataType.Blob:
                         break;

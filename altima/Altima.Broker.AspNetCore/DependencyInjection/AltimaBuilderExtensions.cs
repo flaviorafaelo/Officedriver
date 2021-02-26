@@ -38,8 +38,8 @@ namespace Microsoft.AspNetCore.Builder
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                //var context = serviceScope.ServiceProvider.GetService<DataContext>();
-               // context.Database.Migrate();
+                var context = serviceScope.ServiceProvider.GetService<DataContext>();
+                context.Database.Migrate();
             }
 
             return app;
@@ -57,6 +57,8 @@ namespace Microsoft.AspNetCore.Builder
             });
 
             IApplicationBroker applicationBroker = new ApplicationBroker();
+
+            services.AddScoped(typeof(IApplicationBroker), typeof(ApplicationBroker));
 
             services.AddDbContext<DataContext>(c => c.UseSqlServer(options.StringConnection));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));

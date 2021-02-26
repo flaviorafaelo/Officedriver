@@ -1,4 +1,5 @@
 ﻿using Altima.Broker.Business.Types;
+using System;
 
 namespace Altima.Broker.System
 {
@@ -8,6 +9,7 @@ namespace Altima.Broker.System
         string TypeName { get; }
         string Name { get; }
         bool Required { get; }
-     //   string ToString();
+        //Type PrimitiveType { get; }
+        //   string ToString();
     }
 }

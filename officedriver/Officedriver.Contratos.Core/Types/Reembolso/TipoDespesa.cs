@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Officedriver.Contratos.Core.Types.Reembolso
+﻿namespace Officedriver.Contratos.Core.Types.Reembolso
 {
     public enum TipoDespesa
     {

@@ -4,11 +4,12 @@ using Altima.Broker.Business.Types;
 namespace Officedriver.Contratos.Core.Types.Cnh
 {
     [TypeAttribute(Size = 20)]
-    public struct Numero : IStringType
+    public class Numero : StringType
     {
-        private readonly string _value;
-        private Numero(string value) => _value = value;
-
-        public static implicit operator Numero(string value) => new Numero(value);
+        //private Numero(string value) => Value = value;
+        //public static implicit operator Numero(string value) => new Numero(value);
+        public Numero(string value) : base(value)
+        {
+        }
     }
 }

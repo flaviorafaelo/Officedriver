@@ -1,11 +1,12 @@
-﻿using Altima.Broker.Business.Types;
+﻿using System;
+using Altima.Broker.Business.Types;
 
 namespace Officedriver.Contratos.Core.Types
 {
-    public struct Data : IDateType
+    public class Data : DateType
     {
-        private readonly string _value;
-        private Data(string value) => _value = value;
-        public static implicit operator Data(string value) => new Data(value);
+        public Data(DateTime value) : base(value)
+        {
+        }
     }
 }

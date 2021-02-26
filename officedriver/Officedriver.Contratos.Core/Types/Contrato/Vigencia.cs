@@ -1,13 +1,12 @@
 ﻿using Altima.Broker.Business.Types;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Officedriver.Contratos.Core.Types.Contrato
 {
-    public struct Vigencia : IObjectType
+    public class Vigencia : ObjectType
     {
-        public DateTime Inicial { get; set; }
-        public DateTime Final { get; set; }
+        protected Vigencia() { }
+
+        public Data Inicial { get; set; }
+        public Data Final { get; set; }
     }
 }

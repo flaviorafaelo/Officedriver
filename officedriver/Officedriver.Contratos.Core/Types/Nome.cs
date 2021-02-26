@@ -4,11 +4,10 @@ using Altima.Broker.Business.Types;
 namespace Officedriver.Contratos.Core.Types
 {
     [TypeAttribute(Size = 200)]
-    public struct Nome : IStringType
+    public class Nome : StringType
     {
-        private readonly string _value;        
-        private Nome(string value) => _value = value;
-        public static implicit operator Nome(string value) => new Nome(value);
-        public override string ToString() => _value;
+        public Nome(string value) : base(value)
+        {
+        }
     }
 }

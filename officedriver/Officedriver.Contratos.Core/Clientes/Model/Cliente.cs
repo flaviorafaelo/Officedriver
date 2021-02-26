@@ -8,17 +8,17 @@ using System.Collections.Generic;
 
 namespace Officedriver.Contratos.Core.Clientes.Model
 {
-    public class Cliente: BaseModel
+    public class Cliente : BaseModel
     {
-        public TipoPessoa TipoPessoa { get; set; }
+        public Tipo TipoPessoa { get; set; }
         [ModelAttribute(Required = true)]
         public Nome Nome { get; set; }
         [ModelAttribute(Required = true)]
         public Cnpj Cnpj { get; set; }
-        public Imagem Logo { get; set; }
+        // public Imagem Logo { get; set; }
         public Endereco Endereco { get; set; }
-        public IEnumerable<Contato> Contatos { get; set; }
-        public IEnumerable<Veiculo> Veiculos { get; set; }
-        public IEnumerable<Contrato> Contratos { get; set; }
+       // public IEnumerable<Contato> Contatos { get; set; }
+        // public IEnumerable<Veiculo> Veiculos { get; set; }
+        //public IEnumerable<Contrato> Contratos { get; set; }
     }
 }

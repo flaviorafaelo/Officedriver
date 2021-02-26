@@ -20,7 +20,7 @@ namespace Officedriver.Contratos.Core.Contratos.Model
         [ModelAttribute(Required = true)] 
         public Cliente Cliente { get; set; }
         [ModelAttribute(Required = true)] 
-        public DataVigencia Vigencia { get; set; }
+        public Data Vigencia { get; set; }
         [ModelAttribute(Required = true)] 
         public int DiaFechamento { get; set; }
         public int Intervalo { get; set; } 

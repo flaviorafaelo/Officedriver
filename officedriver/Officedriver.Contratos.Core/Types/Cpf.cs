@@ -5,13 +5,13 @@ using Altima.Broker.Business.Types;
 namespace Officedriver.Contratos.Core.Types
 {
     [TypeAttribute(Size = 14, Mask = "999.999.999-99")]
-    public struct Cpf: IStringType
+    public class Cpf: StringType
     {
         private readonly string _value;
-        private Cpf(string value) 
+        public Cpf(string value): base(value) 
             => _value = value; 
 
-        public static Cpf Parse(string value)
+        private static Cpf Parse(string value)
         {
             if (TryParse(value, out var result))
             {

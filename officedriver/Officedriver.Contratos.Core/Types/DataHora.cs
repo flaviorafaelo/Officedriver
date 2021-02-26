@@ -1,11 +1,12 @@
-﻿using Altima.Broker.Business.Types;
+﻿using System;
+using Altima.Broker.Business.Types;
 
 namespace Officedriver.Contratos.Core.Types
 {
-    public struct DataHora : IDateTimeType
+    public class DataHora : DateTimeType
     {
-        private readonly string _value;
-        private DataHora(string value) => _value = value;
-        public static implicit operator DataHora(string value) => new DataHora(value);
+        public DataHora(DateTime value) : base(value)
+        {
+        }
     }
 }

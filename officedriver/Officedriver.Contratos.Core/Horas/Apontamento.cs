@@ -21,9 +21,9 @@ namespace Officedriver.Contratos.Core.Horas
         [ModelAttribute(Required = true)]
         public DataHora Saida { get; set; }
 
-        public Inteiro KMInicial { get; set; }
-        public Inteiro KMFinal { get; set; }
-        public Inteiro Intervalo { get; set; }
+        public Kilometragem KMInicial { get; set; }
+        public Kilometragem KMFinal { get; set; }
+        public Kilometragem Intervalo { get; set; }
         public bool Viagem { get; set; }
    //     public IEnumerable<Reembolso> Reembolsos { get; set; }
     }

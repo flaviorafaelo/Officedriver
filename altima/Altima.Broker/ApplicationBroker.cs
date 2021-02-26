@@ -32,7 +32,8 @@ public class ApplicationBroker : IApplicationBroker
         {
             foreach (var model in assembly.GetExportedTypes().Where(x => type.IsAssignableFrom(x) && !x.IsAbstract))
             {
-                models.Add(model);
+                if (model.Name.Contains("Cooperado") || model.Name.Contains("Cliente"))
+                        models.Add(model);
             };
         }
         return models;
@@ -50,7 +51,7 @@ public class ApplicationBroker : IApplicationBroker
     {
         IList<View> views = new List<View>();
         foreach (var model in models)
-            views.Add(ViewGenerator.Create(model));
+          views.Add(ViewGenerator.Create(model));
         return views;
     }
 

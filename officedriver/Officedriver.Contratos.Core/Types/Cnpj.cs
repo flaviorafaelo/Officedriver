@@ -5,11 +5,13 @@ using System;
 namespace Officedriver.Contratos.Core.Types
 {
     [TypeAttribute(Size = 19, Mask = "099.999.999/9999-99")]
-    public struct Cnpj : IStringType
+    public class Cnpj : StringType
     {
         private readonly string _value;
-        private Cnpj(string value)
-            => _value = value;
+        private Cnpj(string value) : base (value)
+        {
+            _value = value;
+        }
 
         public static Cnpj Parse(string value)
         {
