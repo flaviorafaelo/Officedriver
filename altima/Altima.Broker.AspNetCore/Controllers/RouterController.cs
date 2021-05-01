@@ -60,7 +60,7 @@ namespace Altima.Broker.AspNet.Mvc.Controllers
         }
 
         [HttpGet]
-        [Route("{routeName}actions")]
+        [Route("{routeName}/actions")]
         public async Task<ActionResult<Action[]>> ListActions(string routeName)
         {
             IList<routes.Action> actions = new List<routes.Action>();
