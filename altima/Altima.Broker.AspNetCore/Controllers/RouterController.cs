@@ -10,41 +10,33 @@ namespace Altima.Broker.AspNet.Mvc.Controllers
     public class RouterController : ControllerBase
     {
         private IApplicationBroker _applcationBroker;
+        private IList<Module> _modules;  
 
         public RouterController(IApplicationBroker applcationBroker)
         {
             _applcationBroker = applcationBroker;
+            _modules = _applcationBroker.Modules;
         }
 
         [HttpGet]
         public async Task<ActionResult<Module[]>> List()
         {
-            /*            IList<Action> actions = new List<Action>();
-
-                        actions.Add(new Action(1, "Criar", ActionType.Create, "DataEditComponent", null));
-                        actions.Add(new Action(1, "Alterar", ActionType.Update, "DataEditComponent",
-                            new Service("cooperado", new List<Param>()
-                            {
-                                new Param("id","{data.id}")
-                            })));
-                        actions.Add(new Action(1, "Excluir", ActionType.Delete, "DataEditComponent",
-                            new Service("cooperado", new List<Param>()
-                            {
-                                new Param("id","{data.id}")
-                            })));
-                        actions.Add(new Action(1, "Inativar", ActionType.None, "DataEditComponent",
-                            new Service("cooperado\\inativar", new List<Param>()
-                            {
-                                new Param("id","{data.id}")
-                            })));
-
-                        IList<Route> routes = new List<Route>();
-
-                        routes.Add(new Route("DASHBOARD", "Dashboard", "DashboardComponent", null, null));
-                        routes.Add(new Route("COOPERADO","Cadastros/Cooperados", "DataEditComponent", new Service("cooperado",null), actions));*/
-
-
-            return Ok(_applcationBroker.Modules);
+            return Ok(_modules);
         }
+
+        [HttpGet]
+        [Route("{routeName}/actions")]
+        public async Task<ActionResult<Action[]>> ListActions(string routeName)
+        {
+            IList<Action> actions = new List<Action>();
+            foreach (var module in _modules)
+            {
+                actions = module.GetActionsByRoute(routeName);
+                if (actions != null)
+                    break;
+            }
+            return Ok(actions);
+        }
+
     }
 }

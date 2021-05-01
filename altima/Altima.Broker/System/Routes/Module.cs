@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Altima.Broker.System.Routes
 {
@@ -14,5 +15,10 @@ namespace Altima.Broker.System.Routes
         public string Id { get; }
         public string Name { get; }
         public IList<Route> Routes { get; }
+
+        public IList<Action> GetActionsByRoute(string routeName)
+        {
+            return Routes.Where(a => a.Id == routeName).FirstOrDefault().Actions;
+        }
     }
 }
