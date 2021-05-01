@@ -16,9 +16,9 @@ namespace Altima.Broker.System.Routes
         public string Name { get; }
         public IList<Route> Routes { get; }
 
-        public IList<Action> GetActionsByRoute(string routeName)
+        public IList<Action> GetActionsByRoute(string routeId)
         {
-            return Routes.Where(a => a.Id == routeName).FirstOrDefault().Actions;
+            return Routes.Where(a => a.Display == routeId).FirstOrDefault().Actions;
         }
     }
 }
