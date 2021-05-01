@@ -13,7 +13,7 @@ namespace Altima.Broker.System.Routes
             Actions = actions;
         }
 
-        public string Id { get; }
+        public string Id { get; set; }
         public string Display { get; }
         public string Target { get; }
         public Service Service { get; }

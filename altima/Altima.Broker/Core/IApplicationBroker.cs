@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Altima.Broker.System;
+using Altima.Broker.System.Routes;
 
 namespace Altima.Broker.Core
 {
@@ -10,5 +11,6 @@ namespace Altima.Broker.Core
         //IList<Type> BussinesTypes { get; }
         IList<Model> Models { get; }
         IList<View> Views { get; }
+        IList<Module> Modules { get; }
     }
 }

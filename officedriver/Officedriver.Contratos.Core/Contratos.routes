@@ -1,34 +1,144 @@
-{
-  "module": "Contratos",
-  "routes": [
-    {
-      "id": "COOP_1",
-      "category": "Cadastros\Cooperados",
-      "target": "\data-form\listar-cooperado",
-      "actions": [
-        {
-          "id": "COOP_1.1",
-          "name": "Criar",
-          "type": "ADD",
-          "target": "\data-form\cooperado"
-        },
-        {
-          "id": "COOP_1.2",
-          "name": "UPDATE",
-          "type": "INSERT",
-          "target": "\data-form\cooperado?id={data.id}"
-        },
-        {
-          "id": "COOP_1.3",
-          "name": "Excluir",
-          "type": "DELETE",
-          "target": "\data-form\cooperado?id={data.id}"
-        },
-        {
-          "id": "COOP_1.2",
-          "service": "\data-form\cooperado\{data.id}\inativar"
+[
+  {
+    "id": "CONTRATO",
+    "name": "Contratos",
+    "routes": [
+      {
+        "id": "DASHBOARD",
+        "display": "Dashboard",
+        "target": "DashboardComponent",
+        "service": {
+          "name": "dashboard",
+          "params": null
         }
-      ]
-    }
-  ]
-}
+      },
+      {
+        "id": "COOPERADO",
+        "display": "Cadastros/Cooperados",
+        "target": "DataEditComponent",
+        "service": {
+          "name": "cooperado",
+          "params": null
+        },
+        "actions": [
+          {
+            "id": "1",
+            "type": 5
+          },
+          {
+            "id": "2",
+            "display": "Inativar",
+            "type": 0,
+            "target": "DataEditComponent",
+            "service": {
+              "name": "cooperado",
+              "params": null
+            }
+          }
+        ]
+      },
+      {
+        "id": "CLIENTE",
+        "display": "Cadastros/Clientes",
+        "target": "DataEditComponent",
+        "service": {
+          "name": "cliente",
+          "params": null
+        },
+        "actions": [
+          {
+            "id": "1",
+            "type": 5
+          }
+        ]
+      },
+      {
+        "id": "CONTRATO",
+        "display": "Cadastros/Contratos",
+        "target": "DataEditComponent",
+        "service": {
+          "name": "contrato",
+          "params": null
+        },
+        "actions": [
+          {
+            "id": "1",
+            "type": 5
+          }
+        ]
+      },
+      {
+        "id": "VEICULO",
+        "display": "Cadastros/Veículos",
+        "target": "DataEditComponent",
+        "service": {
+          "name": "veiculo",
+          "params": null
+        },
+        "actions": [
+          {
+            "id": "1",
+            "type": 5
+          }
+        ]
+      },
+      {
+        "id": "MODELO",
+        "display": "Cadastros/Modelos",
+        "target": "DataEditComponent",
+        "service": {
+          "name": "modelo",
+          "params": null
+        },
+        "actions": [
+          {
+            "id": "1",
+            "type": 5
+          }
+        ]
+      },
+      {
+        "id": "MARCA",
+        "display": "Cadastros/Marcas",
+        "target": "DataEditComponent",
+        "service": {
+          "name": "Marca",
+          "params": null
+        },
+        "actions": [
+          {
+            "id": "1",
+            "type": 5
+          }
+        ]
+      },
+      {
+        "id": "FECHAMENTO",
+        "display": "Relatorios/Fechamento",
+        "target": "DataEditComponent",
+        "service": {
+          "name": "Marca",
+          "params": null
+        }
+      },
+      {
+        "id": "LISTAGEM.CLIENTES",
+        "display": "Relatorios/Listagem de Clientes",
+        "target": "DataEditComponent",
+        "service": {
+          "name": "listagemClientes",
+          "params": null
+        }
+      },
+      {
+        "id": "LISTAGEM.COOPERADOS",
+        "display": "Relatorios/Listagem de Cooperados",
+        "target": "DataEditComponent",
+        "service": {
+          "name": "listagemCooperados",
+          "params": null
+        }
+      }
+    ]
+  }
+]

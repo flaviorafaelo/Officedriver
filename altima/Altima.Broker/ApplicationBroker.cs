@@ -7,6 +7,10 @@ using Altima.Broker.Core;
 using Altima.Broker.Business;
 using System.Reflection;
 using Altima.Broker.Metadata.Generator;
+using System.IO;
+using Newtonsoft.Json;
+using broker = Altima.Broker.System.Routes;
+using Altima.Broker.System.Routes;
 
 public class ApplicationBroker : IApplicationBroker
 {
@@ -14,6 +18,7 @@ public class ApplicationBroker : IApplicationBroker
     public IList<Type> TypeModels { get; private set; }
     public IList<Model> Models { get; private set; }
     public IList<View> Views { get; private set; }
+    public IList<broker.Module> Modules { get; set; }
 
     private IList<Assembly> GetAllAssembliesSystem()
     {
@@ -47,6 +52,50 @@ public class ApplicationBroker : IApplicationBroker
         return models;
     }
 
+    private IList<broker.Module> LoadModules()
+    {
+        var referencedPaths = Workaround.GetFiles("*.routes");
+        var modules = new List<broker.Module>();
+
+        foreach (var reference in referencedPaths)
+        {
+            string json = File.ReadAllText(reference);
+            var fileModules = JsonConvert.DeserializeObject<List<broker.Module>>(json);
+            foreach (var module in fileModules)
+            {
+                foreach (var route in module.Routes)
+                {
+                    route.Id = $"{module.Id}.{route.Id}";
+                    var idAction = 1;
+
+                    if (route.Actions != null)
+                    {
+                        foreach (var action in route.Actions)
+                            action.Id = $"{route.Id}.{action.Id}";
+                    }
+
+                    var crudAction = route.Actions?.Where(r => r.Type == ActionType.CRUD).FirstOrDefault();
+                    if (crudAction != null)
+                    {
+                        //Create
+                        route.Actions.Add(new broker.Action($"{crudAction.Id}.{idAction++}", "Criar", ActionType.Create, crudAction.Target, null));
+
+                        //Update
+                        route.Actions.Add(new broker.Action($"{crudAction.Id}.{idAction++}", "Alterar", ActionType.Update, crudAction.Target, new Service(route.Service.Name, new List<Param>() { new Param("id", "{data.id}") })));
+
+                        //Excluir
+                        route.Actions.Add(new broker.Action($"{crudAction.Id}.{idAction++}", "Excluir", ActionType.Create, crudAction.Target, new Service(route.Service.Name, new List<Param>() { new Param("id", "{data.id}") })));
+
+                        route.Actions.Remove(crudAction);
+                    }
+                }
+            }
+            modules.AddRange(fileModules);
+        }
+
+        return modules;
+    }
+
     private IList<View> CreateViews(IList<Model> models)
     {
         IList<View> views = new List<View>();
@@ -64,5 +113,7 @@ public class ApplicationBroker : IApplicationBroker
         Models = CreateModels(TypeModels);
 
         Views = CreateViews(Models);
+
+        Modules = LoadModules();
     }
 }
