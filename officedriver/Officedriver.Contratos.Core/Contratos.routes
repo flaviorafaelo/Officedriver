@@ -1,0 +1,34 @@
+{
+  "module": "Contratos",
+  "routes": [
+    {
+      "id": "COOP_1",
+      "category": "Cadastros\Cooperados",
+      "target": "\data-form\listar-cooperado",
+      "actions": [
+        {
+          "id": "COOP_1.1",
+          "name": "Criar",
+          "type": "ADD",
+          "target": "\data-form\cooperado"
+        },
+        {
+          "id": "COOP_1.2",
+          "name": "UPDATE",
+          "type": "INSERT",
+          "target": "\data-form\cooperado?id={data.id}"
+        },
+        {
+          "id": "COOP_1.3",
+          "name": "Excluir",
+          "type": "DELETE",
+          "target": "\data-form\cooperado?id={data.id}"
+        },
+        {
+          "id": "COOP_1.2",
+          "service": "\data-form\cooperado\{data.id}\inativar"
+        }
+      ]
+    }
+  ]
+}
