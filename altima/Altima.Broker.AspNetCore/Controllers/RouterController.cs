@@ -43,9 +43,6 @@ namespace Altima.Broker.AspNet.Mvc.Controllers
                         routes.Add(new Route("DASHBOARD", "Dashboard", "DashboardComponent", null, null));
                         routes.Add(new Route("COOPERADO","Cadastros/Cooperados", "DataEditComponent", new Service("cooperado",null), actions));*/
 
-            RouteDataEdit routeDataEdit = new RouteDataEdit(@"C:\Users\cristiano.alves\Source\Repos\flaviorafaelo\Officedriver\officedriver\Officedriver.Contratos.Core\Contratos.routes");
-
-
 
             return Ok(_applcationBroker.Modules);
         }
