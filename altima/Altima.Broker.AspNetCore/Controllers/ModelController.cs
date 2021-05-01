@@ -1,16 +1,18 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNet.OData;
+
 using Altima.Broker.Business;
 using Altima.Broker.Data;
-using Altima.Broker.Metadata;
-using Altima.Broker.Metadata.Generator;
+using System.Linq;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Altima.Broker.System;
-//using Microsoft.AspNet.OData;
+using Altima.Broker.Metadata.Generator;
 
 namespace Altima.Broker.AspNet.Mvc.Controllers
 {
     [Route("api/[controller]")]
-    public class ModelController<T> : Controller/*ODataController*/ where T : BaseModel
+    public class ModelController<T> : ODataController/*ControllerBase*/ where T : BaseModel
     {
         private readonly IAsyncRepository<T> _repository;
 
@@ -19,77 +21,78 @@ namespace Altima.Broker.AspNet.Mvc.Controllers
             _repository = Repository;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<T>> Create([FromBody] T model)
+       // [HttpGet]
+        [EnableQuery]
+        public IQueryable<T> Get()
         {
-            await _repository.AddAsync(model);
-            return Created("",model);
+            var value = _repository.ListAllAsync();
+
+            return new EnumerableQuery<T>((IEnumerable<T>)value);
         }
 
-        [HttpDelete]
-        [Route("{id}")]
-        ///<summary>
-        ///isso é um teste
-        ///</summary>
-        public async Task<ActionResult> Delete(long id)
-        {
-            var deletedCount = await _repository.DeleteAsync(id);
-            if (deletedCount == 0)
-                return NotFound();
+         [HttpPost]
+         public async Task<ActionResult<T>> Create([FromBody] T model)
+         {
+             await _repository.AddAsync(model);
+             return Created("", model);
+         }
 
-            return NoContent();
-        }
+         [HttpDelete]
+         [Route("{id}")]
+         ///<summary>
+         ///isso é um teste
+         ///</summary>
+         public async Task<ActionResult> Delete(long id)
+         {
+             var deletedCount = await _repository.DeleteAsync(id);
+             if (deletedCount == 0)
+                 return NotFound();
 
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<ActionResult<T>> Read(long id)
-        {
-            var model = await _repository.GetByIdAsync(id);
-            if (model == null)
-                return NotFound();
+             return NoContent();
+         }
 
-            return Ok(model);
-        }
+         [HttpGet]
+         [Route("{id}")]
+         public async Task<ActionResult<T>> Read(long id)
+         {
+             var model = await _repository.GetByIdAsync(id);
+             if (model == null)
+                 return NotFound();
 
-        [HttpPut]
-        [Route("{id}")]
-        public async Task<ActionResult> Update(long id, [FromBody] T model)
-        {
-            var modifiedCount = await _repository.UpdateAsync(id, model);
+             return Ok(model);
+         }
 
-            //if (_notificationContext.HasNotifications)
-            //    return BadRequest(_notificationContext.Notifications);
+         [HttpPut]
+         [Route("{id}")]
+         public async Task<ActionResult> Update(long id, [FromBody] T model)
+         {
+             var modifiedCount = await _repository.UpdateAsync(id, model);
 
-            if (modifiedCount == 0)
-                return Conflict();
+             //if (_notificationContext.HasNotifications)
+             //    return BadRequest(_notificationContext.Notifications);
 
-            return Ok();
-        }
+             if (modifiedCount == 0)
+                 return Conflict();
 
-        //PACTH
+             return Ok();
+         }
 
-        [HttpGet]
-        //[EnableQuery]
-        public async Task<ActionResult<T>> ListAll()
-        {
-            var model = await _repository.ListAllAsync();
-            return Ok(model);
-        }
+         //PACTH
 
-        [HttpGet]
-        [Route("[controller]/metadata")]
-        public async Task<ActionResult<Model>> Metadata()
-        {
-            //pegar essa informação do cache em application
-            return Ok(ModelGenerator.Create(typeof(T)));
-        }
+         [HttpGet]
+         [Route("[controller]/metadata")]
+         public async Task<ActionResult<Model>> Metadata()
+         {
+             //pegar essa informação do cache em application
+             return Ok(ModelGenerator.Create(typeof(T)));
+         }
 
-        [HttpGet]
-        [Route("[controller]/metaview")]
-        public async Task<ActionResult<View>> Metaview()
-        {
-            Model model = ModelGenerator.Create(typeof(T));
-            return Ok(ViewGenerator.Create(model));
-        }
+         [HttpGet]
+         [Route("[controller]/metaview")]
+         public async Task<ActionResult<View>> Metaview()
+         {
+             Model model = ModelGenerator.Create(typeof(T));
+             return Ok(ViewGenerator.Create(model));
+         }
     }
 }

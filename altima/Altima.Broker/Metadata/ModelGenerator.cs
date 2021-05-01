@@ -20,7 +20,7 @@ namespace Altima.Broker.Metadata.Generator
             foreach (var propInfo in props)
             {
                 DataType dataType = propInfo.PropertyType.ToDataType();
-                bool required = false;
+                bool required = true;// propInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>);
                 int size = 0;
                 int maxLen = 0;
                 int minLen = 0;

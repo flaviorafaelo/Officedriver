@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Altima.Broker.Data;
 using Altima.Broker.Business;
-using System;
+using System.Linq;
+using Officedriver.Contratos.Core.Cooperados.Model;
 
 namespace Altima.Broker.AspNet.Mvc.Data
 {
@@ -20,13 +21,12 @@ namespace Altima.Broker.AspNet.Mvc.Data
 
         public virtual async Task<T> GetByIdAsync(long id)
         {
-            var set = _dbContext.Set<T>();
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task<IReadOnlyList<T>> ListAllAsync()
+        public IQueryable<T> ListAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            return _dbSet.AsQueryable();
         }
 
         //public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)

@@ -18,11 +18,6 @@ namespace Altima.Broker.AspNet.Mvc.Data
             _applicationBroker = applicationBroker;
         }
 
-     //   public DbSet<Cooperado> Cooperados { get; set; }
-     //   public DbSet<Cliente> Clientes { get; set; }
-
-        
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             RegisterAllModels(builder);
@@ -91,7 +86,12 @@ namespace Altima.Broker.AspNet.Mvc.Data
                 var propertyName = atmProperty.Name;
                 var propertyFullName = type.GetProperty(propertyName).PropertyType.FullName;
 
-                Console.WriteLine(propertyFullName);
+                //temporario
+                if (propertyName == "Id")
+                {
+                    continue;
+                }
+
                 switch (atmProperty.Type)
                 {
 

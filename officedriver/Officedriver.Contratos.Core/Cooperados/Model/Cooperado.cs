@@ -14,8 +14,8 @@ namespace Officedriver.Contratos.Core.Cooperados.Model
 {
     public class Cooperado : BaseModel
     {
-        [ModelAttribute(Required = true)]
-        public Matricula Matricula { get; set; }
+       // [ModelAttribute(Required = true)]
+        public Matricula? Matricula { get; set; }
 
         [ModelAttribute(Required = true)]
 

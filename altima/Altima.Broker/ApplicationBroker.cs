@@ -32,7 +32,7 @@ public class ApplicationBroker : IApplicationBroker
         {
             foreach (var model in assembly.GetExportedTypes().Where(x => type.IsAssignableFrom(x) && !x.IsAbstract))
             {
-                if (model.Name.Contains("Cooperado") || model.Name.Contains("Cliente"))
+                if (model.Name.Contains("Cooperado") || model.Name.Contains("ClienteX"))
                         models.Add(model);
             };
         }

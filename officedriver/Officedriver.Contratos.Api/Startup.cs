@@ -1,4 +1,5 @@
 using Altima.Broker.AspNet.Mvc;
+using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +19,12 @@ namespace Officedriver.Contratos.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAltima(new Options{ ApplicationName = "Officedriver Contratos", StringConnection = "server=mssql.officedriver.kinghost.net;database=officedriver;User Id=officedriver;Password=officedriver;" });           
+            services.AddAltima(new Options
+            {
+                ApplicationName = "Officedriver Contratos",
+                //StringConnection = "server=191.255.226.139;database=officedriver;User Id=sa;Password=sql@2020;"
+                StringConnection = "server=.;database=officedriver;Integrated Security=True;"
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -29,5 +35,6 @@ namespace Officedriver.Contratos.Api
             }
             app.UseAltima();
         }
+
     }
 }
