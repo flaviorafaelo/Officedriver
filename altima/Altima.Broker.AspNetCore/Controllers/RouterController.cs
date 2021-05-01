@@ -64,7 +64,7 @@ namespace Altima.Broker.AspNet.Mvc.Controllers
         public async Task<ActionResult<Action[]>> ListActions(string routeName)
         {
             IList<routes.Action> actions = new List<routes.Action>();
-            foreach (var module in _modules)
+            foreach (var module in _modules)                    
             {
                 actions = module.GetActionsByRoute(Encoding.UTF8.GetString(Convert.FromBase64String(routeName)));
                 if (actions != null)
