@@ -15,7 +15,7 @@ export class RouteService {
 
   //private metadataUrl = 'http://api.officedriver.kinghost.net/api';
   private metadataUrl = 'http://localhost:52473/api';
-  private currentRoutes: Module[] = [];
+  public currentRoutes: Module[] = [];
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

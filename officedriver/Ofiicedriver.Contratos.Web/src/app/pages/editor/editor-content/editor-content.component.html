@@ -10,6 +10,26 @@
             (toolbarClick)="toolbarClick($event)">
             <e-columns>
                 <e-column field='Id' headerText='Id' width=30></e-column>
+                <e-column field='Username.Value' headerText='Usuario' width=80 textAlign='Left'></e-column>
+                <e-column field='Password.Value' headerText='Senha' width=120 textAlign='Left'></e-column>
+            </e-columns>
+        </ejs-grid>
+    </div>
+</div>
+
+<!--
+<div class="row">
+
+    <div class="col">
+
+        <ejs-grid #grid [dataSource]='data' [toolbar]='toolbar' [allowPaging]='true' [allowSorting]='true'
+            [allowPdfExport]="true" [allowFiltering]="true" [filterSettings]='filterOptions'
+            [pageSettings]='initialPage' [contextMenuItems]='contextMenuItems' [allowReordering]='true'
+            showColumnMenu='true'
+            (recordDoubleClick)="dblUpdateEvent($event)"
+            (toolbarClick)="toolbarClick($event)">
+            <e-columns>
+                <e-column field='Id' headerText='Id' width=30></e-column>
                 <e-column field='Matricula.Value' headerText='Matricula' width=80 textAlign='Left'></e-column>
                 <e-column field='Nome.Value' headerText='Nome' width=120 textAlign='Left'></e-column>
                 <e-column field='Endereco.Logradouro.Value' headerText='Logradouro' width=120></e-column>
@@ -20,3 +40,5 @@
         </ejs-grid>
     </div>
 </div>
+
+-->

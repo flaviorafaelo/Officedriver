@@ -12,13 +12,14 @@
 
     public class Action
     {
-        public Action(string id, string display, ActionType type, string target, Service service)
+        public Action(string id, string display, ActionType type, string target, Service service, string url)
         {
             Id = id;
             Display = display;
             Type = type;
             Target = target;
             Service = service;
+            Url = url;
         }
 
         public string Id { get; set; }

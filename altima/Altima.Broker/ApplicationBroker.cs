@@ -85,13 +85,13 @@ public class ApplicationBroker : IApplicationBroker
                     if (crudAction != null)
                     {
                         //Create
-                        route.Actions.Add(new broker.Action($"{crudAction.Id}.{idAction++}", "Criar", ActionType.Create, crudAction.Target, null));
+                        route.Actions.Add(new broker.Action($"{crudAction.Id}.{idAction++}", "Criar", ActionType.Create, crudAction.Target, null, $"{route.Url}/criar"));
 
                         //Update
-                        route.Actions.Add(new broker.Action($"{crudAction.Id}.{idAction++}", "Alterar", ActionType.Update, crudAction.Target, new Service(route.Service.Name, new List<Param>() { new Param("id", "{data.id}") })));
+                        route.Actions.Add(new broker.Action($"{crudAction.Id}.{idAction++}", "Alterar", ActionType.Update, crudAction.Target, new Service(route.Service.Name, new List<Param>() { new Param("id", "{data.id}") }), $"{route.Url}/alterar"));
 
                         //Excluir
-                        route.Actions.Add(new broker.Action($"{crudAction.Id}.{idAction++}", "Excluir", ActionType.Create, crudAction.Target, new Service(route.Service.Name, new List<Param>() { new Param("id", "{data.id}") })));
+                        route.Actions.Add(new broker.Action($"{crudAction.Id}.{idAction++}", "Excluir", ActionType.Create, crudAction.Target, new Service(route.Service.Name, new List<Param>() { new Param("id", "{data.id}") }), $"{route.Url}/excluir"));
 
                         route.Actions.Remove(crudAction);
                     }

@@ -11,7 +11,7 @@ namespace Altima.Broker.Extensions
         {
             if (string.IsNullOrEmpty(value))
                 return "";
-            return Regex.Replace(value, "[^0-9a-zA-Z]+", "").Replace(' ','-').ToLower();
+            return value.Replace(' ', '-').ToLower();// Regex.Replace(value, "[^0-9a-zA-Z]+", "").Replace(' ','-').ToLower();
         }
     }
 }

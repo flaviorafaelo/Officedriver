@@ -3,7 +3,7 @@ using Altima.Broker.Business.Types;
 
 namespace Officedriver.Contratos.Core.Types.Conta
 {
-    [TypeAttribute(Size = 10)]
+    [TypeAttribute(Size = 20)]
     public class Numero : StringType
     {
 

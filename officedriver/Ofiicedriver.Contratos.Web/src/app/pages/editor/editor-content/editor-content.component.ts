@@ -83,7 +83,7 @@ export class EditorContentComponent implements OnInit {
     let action: Action;
     this.actions.forEach(a => {
       if (a.type == ActionType.Update)
-        action = action;
+        action = a;
     })
     this.navigateTo(action); 
   };
@@ -92,7 +92,7 @@ export class EditorContentComponent implements OnInit {
     let action: Action;
     this.actions.forEach(a => {
       if (a.id == args.item.id)
-        action = action;
+        action = a;
     })
     this.navigateTo(action);
   }

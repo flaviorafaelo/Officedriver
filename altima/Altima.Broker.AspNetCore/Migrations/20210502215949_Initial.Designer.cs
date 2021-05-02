@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Altima.Broker.AspNet.Mvc.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210502173822_Initial")]
+    [Migration("20210502215949_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,6 +59,25 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
 
             modelBuilder.Entity("Altima.Broker.System.Account.User", b =>
                 {
+                    b.OwnsOne("Altima.Broker.System.Type.Owner", "Owner", b1 =>
+                        {
+                            b1.Property<long>("UserId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("bigint")
+                                .UseIdentityColumn();
+
+                            b1.Property<int>("Value")
+                                .HasColumnType("int")
+                                .HasColumnName("Owner");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("User");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
                     b.OwnsOne("Altima.Broker.System.Type.Password", "Password", b1 =>
                         {
                             b1.Property<long>("UserId")
@@ -98,6 +117,8 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
                         });
+
+                    b.Navigation("Owner");
 
                     b.Navigation("Password");
 
@@ -186,8 +207,8 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                                         .UseIdentityColumn();
 
                                     b2.Property<string>("Value")
-                                        .HasMaxLength(5)
-                                        .HasColumnType("nvarchar(5)")
+                                        .HasMaxLength(10)
+                                        .HasColumnType("nvarchar(10)")
                                         .HasColumnName("ContaAgencia");
 
                                     b2.HasKey("ContaCooperadoId");
@@ -206,8 +227,8 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                                         .UseIdentityColumn();
 
                                     b2.Property<string>("Value")
-                                        .HasMaxLength(10)
-                                        .HasColumnType("nvarchar(10)")
+                                        .HasMaxLength(20)
+                                        .HasColumnType("nvarchar(20)")
                                         .HasColumnName("ContaNumero");
 
                                     b2.HasKey("ContaCooperadoId");
@@ -628,8 +649,8 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                                         .UseIdentityColumn();
 
                                     b2.Property<string>("Value")
-                                        .HasMaxLength(2)
-                                        .HasColumnType("nvarchar(2)")
+                                        .HasMaxLength(3)
+                                        .HasColumnType("nvarchar(3)")
                                         .HasColumnName("CelularDdd");
 
                                     b2.HasKey("TelefoneCooperadoId");
@@ -648,8 +669,8 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                                         .UseIdentityColumn();
 
                                     b2.Property<string>("Value")
-                                        .HasMaxLength(10)
-                                        .HasColumnType("nvarchar(10)")
+                                        .HasMaxLength(20)
+                                        .HasColumnType("nvarchar(20)")
                                         .HasColumnName("CelularNumero");
 
                                     b2.HasKey("TelefoneCooperadoId");
@@ -687,8 +708,8 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                                         .UseIdentityColumn();
 
                                     b2.Property<string>("Value")
-                                        .HasMaxLength(2)
-                                        .HasColumnType("nvarchar(2)")
+                                        .HasMaxLength(3)
+                                        .HasColumnType("nvarchar(3)")
                                         .HasColumnName("TelefoneDdd");
 
                                     b2.HasKey("TelefoneCooperadoId");
@@ -707,8 +728,8 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                                         .UseIdentityColumn();
 
                                     b2.Property<string>("Value")
-                                        .HasMaxLength(10)
-                                        .HasColumnType("nvarchar(10)")
+                                        .HasMaxLength(20)
+                                        .HasColumnType("nvarchar(20)")
                                         .HasColumnName("TelefoneNumero");
 
                                     b2.HasKey("TelefoneCooperadoId");
@@ -815,8 +836,8 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                                                 .UseIdentityColumn();
 
                                             b3.Property<string>("Value")
-                                                .HasMaxLength(2)
-                                                .HasColumnType("nvarchar(2)")
+                                                .HasMaxLength(3)
+                                                .HasColumnType("nvarchar(3)")
                                                 .HasColumnName("TelefoneDdd");
 
                                             b3.HasKey("Telefone0, Culture=neutral, PublicKeyToken=null]]CooperadoId", "Telefone0, Culture=neutral, PublicKeyToken=null]]Id");
@@ -838,8 +859,8 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                                                 .UseIdentityColumn();
 
                                             b3.Property<string>("Value")
-                                                .HasMaxLength(10)
-                                                .HasColumnType("nvarchar(10)")
+                                                .HasMaxLength(20)
+                                                .HasColumnType("nvarchar(20)")
                                                 .HasColumnName("TelefoneNumero");
 
                                             b3.HasKey("Telefone0, Culture=neutral, PublicKeyToken=null]]CooperadoId", "Telefone0, Culture=neutral, PublicKeyToken=null]]Id");

@@ -29,16 +29,16 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                     EnderecoBairro = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     EnderecoEstado = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     EnderecoCidade = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ContaAgencia = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true),
-                    ContaNumero = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    ContaAgencia = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    ContaNumero = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     DataMatricula = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DataDesligamento = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Situacao = table.Column<int>(type: "int", nullable: false),
-                    TelefoneDdd = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: true),
-                    TelefoneNumero = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CelularDdd = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: true),
-                    CelularNumero = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    TelefoneDdd = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
+                    TelefoneNumero = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    CelularDdd = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
+                    CelularNumero = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     EMail = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
                 },
                 constraints: table =>
@@ -54,7 +54,8 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Rule = table.Column<int>(type: "int", nullable: false)
+                    Rule = table.Column<int>(type: "int", nullable: false),
+                    Owner = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,8 +70,8 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    TelefoneDdd = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: true),
-                    TelefoneNumero = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    TelefoneDdd = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
+                    TelefoneNumero = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     EMail = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
                 },
                 constraints: table =>

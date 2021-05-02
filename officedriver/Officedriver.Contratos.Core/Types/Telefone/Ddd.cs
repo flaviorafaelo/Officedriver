@@ -3,7 +3,7 @@ using Altima.Broker.Business.Types;
 
 namespace Officedriver.Contratos.Core.Types.Telefone
 {
-    [TypeAttribute(Size = 2)]
+    [TypeAttribute(Size = 3)]
     public class Ddd : StringType
     {
         public Ddd(string value) : base(value)

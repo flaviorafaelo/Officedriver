@@ -22,8 +22,8 @@ namespace Officedriver.Contratos.Api
             services.AddAltima(new Options
             {
                 ApplicationName = "Officedriver Contratos",
-                //StringConnection = "server=191.255.226.139;database=officedriver;User Id=sa;Password=sql@2020;"
-                StringConnection = "server=.;database=officedriver;Integrated Security=True;"
+                StringConnection = "server=191.255.226.139;database=officedriver;User Id=sa;Password=sql@2020;"
+                //StringConnection = "server=.;database=officedriver;Integrated Security=True;"
             });
         }
 
