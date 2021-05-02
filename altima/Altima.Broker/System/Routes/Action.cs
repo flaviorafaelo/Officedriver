@@ -23,6 +23,7 @@
 
         public string Id { get; set; }
         public string Display { get; }
+        public string Url { get; set; }
         public ActionType Type { get; }
         public string Target { get; }
         public Service Service { get; }

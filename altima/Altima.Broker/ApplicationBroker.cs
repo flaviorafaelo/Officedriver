@@ -11,6 +11,7 @@ using System.IO;
 using Newtonsoft.Json;
 using broker = Altima.Broker.System.Routes;
 using Altima.Broker.System.Routes;
+using Altima.Broker.Extensions;
 
 public class ApplicationBroker : IApplicationBroker
 {
@@ -37,7 +38,7 @@ public class ApplicationBroker : IApplicationBroker
         {
             foreach (var model in assembly.GetExportedTypes().Where(x => type.IsAssignableFrom(x) && !x.IsAbstract))
             {
-                if (model.Name.Contains("Cooperado") || model.Name.Contains("ClienteX"))
+                if (model.Name.Contains("Cooperado") || model.Name.Contains("ClienteX") || model.Name.Contains("User"))
                         models.Add(model);
             };
         }
@@ -66,12 +67,18 @@ public class ApplicationBroker : IApplicationBroker
                 foreach (var route in module.Routes)
                 {
                     route.Id = $"{module.Id}.{route.Id}";
+                    route.Url = route.Display.FormatToUrl();
+
                     var idAction = 1;
 
                     if (route.Actions != null)
                     {
                         foreach (var action in route.Actions)
+                        {
                             action.Id = $"{route.Id}.{action.Id}";
+                            action.Url = $"{route.Url}/{action.Display.FormatToUrl()}" ;
+                        }
+                           
                     }
 
                     var crudAction = route.Actions?.Where(r => r.Type == ActionType.CRUD).FirstOrDefault();

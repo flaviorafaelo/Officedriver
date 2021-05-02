@@ -3,32 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Altima.Broker.AspNet.Mvc.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Cliente",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoPessoa = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    Cnpj = table.Column<string>(type: "nvarchar(19)", maxLength: 19, nullable: true),
-                    EnderecoCep = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: true),
-                    EnderecoLogradouro = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    EnderecoNumero = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    EnderecoComplemento = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    EnderecoBairro = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    EnderecoEstado = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    EnderecoCidade = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cliente", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Cooperado",
                 columns: table => new
@@ -69,6 +47,21 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Rule = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CooperadoContatos",
                 columns: table => new
                 {
@@ -95,10 +88,10 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Cliente");
+                name: "CooperadoContatos");
 
             migrationBuilder.DropTable(
-                name: "CooperadoContatos");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Cooperado");

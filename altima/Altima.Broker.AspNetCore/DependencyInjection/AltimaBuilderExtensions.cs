@@ -93,6 +93,8 @@ namespace Microsoft.AspNetCore.Builder
 
             services.AddDbContext<DataContext>(c => c.UseSqlServer(options.StringConnection));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
+            services.AddScoped(typeof(AsyncUserRepository), typeof(AsyncUserRepository));
+            
             services.AddSingleton<IApplicationBroker, ApplicationBroker>();
 
 

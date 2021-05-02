@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Altima.Broker.AspNet.Mvc.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210225210319_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210502173822_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,20 +21,20 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
 
-            modelBuilder.Entity("Officedriver.Contratos.Core.Clientes.Model.Cliente", b =>
+            modelBuilder.Entity("Altima.Broker.System.Account.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .UseIdentityColumn();
 
-                    b.Property<int>("TipoPessoa")
+                    b.Property<int>("Rule")
                         .HasColumnType("int")
-                        .HasColumnName("TipoPessoa");
+                        .HasColumnName("Rule");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cliente");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Officedriver.Contratos.Core.Cooperados.Model.Cooperado", b =>
@@ -57,222 +57,51 @@ namespace Altima.Broker.AspNet.Mvc.Migrations
                     b.ToTable("Cooperado");
                 });
 
-            modelBuilder.Entity("Officedriver.Contratos.Core.Clientes.Model.Cliente", b =>
+            modelBuilder.Entity("Altima.Broker.System.Account.User", b =>
                 {
-                    b.OwnsOne("Officedriver.Contratos.Core.Types.Cnpj", "Cnpj", b1 =>
+                    b.OwnsOne("Altima.Broker.System.Type.Password", "Password", b1 =>
                         {
-                            b1.Property<long>("ClienteId")
+                            b1.Property<long>("UserId")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("bigint")
                                 .UseIdentityColumn();
 
                             b1.Property<string>("Value")
-                                .HasMaxLength(19)
-                                .HasColumnType("nvarchar(19)")
-                                .HasColumnName("Cnpj");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)")
+                                .HasColumnName("Password");
 
-                            b1.HasKey("ClienteId");
+                            b1.HasKey("UserId");
 
-                            b1.ToTable("Cliente");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ClienteId");
-                        });
-
-                    b.OwnsOne("Officedriver.Contratos.Core.Types.Endereco.Endereco", "Endereco", b1 =>
-                        {
-                            b1.Property<long>("ClienteId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .UseIdentityColumn();
-
-                            b1.HasKey("ClienteId");
-
-                            b1.ToTable("Cliente");
+                            b1.ToTable("User");
 
                             b1.WithOwner()
-                                .HasForeignKey("ClienteId");
-
-                            b1.OwnsOne("Officedriver.Contratos.Core.Types.Endereco.Bairro", "Bairro", b2 =>
-                                {
-                                    b2.Property<long>("EnderecoClienteId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .UseIdentityColumn();
-
-                                    b2.Property<string>("Value")
-                                        .HasMaxLength(50)
-                                        .HasColumnType("nvarchar(50)")
-                                        .HasColumnName("EnderecoBairro");
-
-                                    b2.HasKey("EnderecoClienteId");
-
-                                    b2.ToTable("Cliente");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("EnderecoClienteId");
-                                });
-
-                            b1.OwnsOne("Officedriver.Contratos.Core.Types.Endereco.Cep", "Cep", b2 =>
-                                {
-                                    b2.Property<long>("EnderecoClienteId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .UseIdentityColumn();
-
-                                    b2.Property<string>("Value")
-                                        .HasMaxLength(9)
-                                        .HasColumnType("nvarchar(9)")
-                                        .HasColumnName("EnderecoCep");
-
-                                    b2.HasKey("EnderecoClienteId");
-
-                                    b2.ToTable("Cliente");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("EnderecoClienteId");
-                                });
-
-                            b1.OwnsOne("Officedriver.Contratos.Core.Types.Endereco.Cidade", "Cidade", b2 =>
-                                {
-                                    b2.Property<long>("EnderecoClienteId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .UseIdentityColumn();
-
-                                    b2.Property<string>("Value")
-                                        .HasMaxLength(50)
-                                        .HasColumnType("nvarchar(50)")
-                                        .HasColumnName("EnderecoCidade");
-
-                                    b2.HasKey("EnderecoClienteId");
-
-                                    b2.ToTable("Cliente");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("EnderecoClienteId");
-                                });
-
-                            b1.OwnsOne("Officedriver.Contratos.Core.Types.Endereco.Complemento", "Complemento", b2 =>
-                                {
-                                    b2.Property<long>("EnderecoClienteId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .UseIdentityColumn();
-
-                                    b2.Property<string>("Value")
-                                        .HasMaxLength(50)
-                                        .HasColumnType("nvarchar(50)")
-                                        .HasColumnName("EnderecoComplemento");
-
-                                    b2.HasKey("EnderecoClienteId");
-
-                                    b2.ToTable("Cliente");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("EnderecoClienteId");
-                                });
-
-                            b1.OwnsOne("Officedriver.Contratos.Core.Types.Endereco.Estado", "Estado", b2 =>
-                                {
-                                    b2.Property<long>("EnderecoClienteId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .UseIdentityColumn();
-
-                                    b2.Property<string>("Value")
-                                        .HasMaxLength(50)
-                                        .HasColumnType("nvarchar(50)")
-                                        .HasColumnName("EnderecoEstado");
-
-                                    b2.HasKey("EnderecoClienteId");
-
-                                    b2.ToTable("Cliente");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("EnderecoClienteId");
-                                });
-
-                            b1.OwnsOne("Officedriver.Contratos.Core.Types.Endereco.Logradouro", "Logradouro", b2 =>
-                                {
-                                    b2.Property<long>("EnderecoClienteId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .UseIdentityColumn();
-
-                                    b2.Property<string>("Value")
-                                        .HasMaxLength(200)
-                                        .HasColumnType("nvarchar(200)")
-                                        .HasColumnName("EnderecoLogradouro");
-
-                                    b2.HasKey("EnderecoClienteId");
-
-                                    b2.ToTable("Cliente");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("EnderecoClienteId");
-                                });
-
-                            b1.OwnsOne("Officedriver.Contratos.Core.Types.Endereco.Numero", "Numero", b2 =>
-                                {
-                                    b2.Property<long>("EnderecoClienteId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .UseIdentityColumn();
-
-                                    b2.Property<string>("Value")
-                                        .HasMaxLength(20)
-                                        .HasColumnType("nvarchar(20)")
-                                        .HasColumnName("EnderecoNumero");
-
-                                    b2.HasKey("EnderecoClienteId");
-
-                                    b2.ToTable("Cliente");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("EnderecoClienteId");
-                                });
-
-                            b1.Navigation("Bairro");
-
-                            b1.Navigation("Cep");
-
-                            b1.Navigation("Cidade");
-
-                            b1.Navigation("Complemento");
-
-                            b1.Navigation("Estado");
-
-                            b1.Navigation("Logradouro");
-
-                            b1.Navigation("Numero");
+                                .HasForeignKey("UserId");
                         });
 
-                    b.OwnsOne("Officedriver.Contratos.Core.Types.Nome", "Nome", b1 =>
+                    b.OwnsOne("Altima.Broker.System.Type.Username", "Username", b1 =>
                         {
-                            b1.Property<long>("ClienteId")
+                            b1.Property<long>("UserId")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("bigint")
                                 .UseIdentityColumn();
 
                             b1.Property<string>("Value")
-                                .HasMaxLength(200)
-                                .HasColumnType("nvarchar(200)")
-                                .HasColumnName("Nome");
+                                .HasMaxLength(256)
+                                .HasColumnType("nvarchar(256)")
+                                .HasColumnName("Username");
 
-                            b1.HasKey("ClienteId");
+                            b1.HasKey("UserId");
 
-                            b1.ToTable("Cliente");
+                            b1.ToTable("User");
 
                             b1.WithOwner()
-                                .HasForeignKey("ClienteId");
+                                .HasForeignKey("UserId");
                         });
 
-                    b.Navigation("Cnpj");
+                    b.Navigation("Password");
 
-                    b.Navigation("Endereco");
-
-                    b.Navigation("Nome");
+                    b.Navigation("Username");
                 });
 
             modelBuilder.Entity("Officedriver.Contratos.Core.Cooperados.Model.Cooperado", b =>

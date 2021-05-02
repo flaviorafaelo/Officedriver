@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Altima.Broker.Data;
 using Altima.Broker.Business;
 using System.Linq;
-using Officedriver.Contratos.Core.Cooperados.Model;
 
 namespace Altima.Broker.AspNet.Mvc.Data
 {

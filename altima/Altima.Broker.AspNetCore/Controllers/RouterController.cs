@@ -5,6 +5,11 @@ using System.Collections.Generic;
 using Altima.Broker.Core;
 using System;
 using System.Text;
+using Altima.Broker.Data;
+using Altima.Broker.System.Account;
+using Altima.Broker.AspNet.Mvc.Data;
+using Altima.Broker.System.Routes;
+using Action = Altima.Broker.System.Routes.Action;
 
 namespace Altima.Broker.AspNet.Mvc.Controllers
 {
@@ -12,12 +17,14 @@ namespace Altima.Broker.AspNet.Mvc.Controllers
     public class RouterController : ControllerBase
     {
         private IApplicationBroker _applcationBroker;
-        private IList<routes.Module> _modules;  
+        private IList<routes.Module> _modules;
+        private AsyncUserRepository _userRepository;
 
-        public RouterController(IApplicationBroker applcationBroker)
+        public RouterController(IApplicationBroker applcationBroker, AsyncUserRepository userRepository)
         {
             _applcationBroker = applcationBroker;
             _modules = _applcationBroker.Modules;
+            _userRepository = userRepository;
         }
 
         [HttpGet]
@@ -73,5 +80,21 @@ namespace Altima.Broker.AspNet.Mvc.Controllers
             return Ok(actions);
         }
 
+        [HttpPost]
+        [Route("login")]
+        public async Task<ActionResult<Route[]>> Login([FromBody] User user)
+        {
+            var loggedUser = _userRepository.Login(user.Username, user.Password);
+            var routesResult = new List<Route>();
+            if (loggedUser != null)
+            {
+                foreach (var module in _modules)
+                    routesResult.AddRange(module.GetRouteByRule(user.Rule));
+                return Ok(routesResult);
+            }
+            else
+                return NotFound();
+            
+        }
     }
 }

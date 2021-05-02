@@ -20,5 +20,11 @@ namespace Altima.Broker.System.Routes
         {
             return Routes.Where(a => routeId.ToLower().Contains(a.Display.ToLower())).FirstOrDefault()?.Actions;
         }
+
+        public IList<Route> GetRouteByRule(RulesType rule)
+        {
+            
+            return Routes.Where(a => rule == RulesType.Admin || a.Rule == rule).ToList<Route>();
+        }
     }
 }

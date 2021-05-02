@@ -94,5 +94,6 @@ namespace Altima.Broker.AspNet.Mvc.Controllers
              Model model = ModelGenerator.Create(typeof(T));
              return Ok(ViewGenerator.Create(model));
          }
-    }
+
+     }
 }

@@ -7,6 +7,7 @@
         "id": "DASHBOARD",
         "display": "Dashboard",
         "target": "DashboardComponent",
+        "rules": [ 0 ],
         "service": {
           "name": "dashboard",
           "params": null
@@ -16,6 +17,7 @@
         "id": "COOPERADO",
         "display": "Cadastros/Cooperados",
         "target": "DataEditComponent",
+        "rules": [ 1 ],
         "service": {
           "name": "cooperado",
           "params": null
@@ -41,6 +43,7 @@
         "id": "CLIENTE",
         "display": "Cadastros/Clientes",
         "target": "DataEditComponent",
+        "rules": [ 2 ],
         "service": {
           "name": "cliente",
           "params": null
@@ -56,6 +59,7 @@
         "id": "CONTRATO",
         "display": "Cadastros/Contratos",
         "target": "DataEditComponent",
+        "rules": [ 0 ],
         "service": {
           "name": "contrato",
           "params": null
@@ -71,6 +75,7 @@
         "id": "VEICULO",
         "display": "Cadastros/Veículos",
         "target": "DataEditComponent",
+        "rules": [ 0 ],
         "service": {
           "name": "veiculo",
           "params": null
@@ -116,6 +121,7 @@
         "id": "FECHAMENTO",
         "display": "Relatorios/Fechamento",
         "target": "DataEditComponent",
+        "rules": [ 0 ],
         "service": {
           "name": "Marca",
           "params": null
@@ -125,6 +131,7 @@
         "id": "LISTAGEM.CLIENTES",
         "display": "Relatorios/Listagem de Clientes",
         "target": "DataEditComponent",
+        "rules": [ 0 ],
         "service": {
           "name": "listagemClientes",
           "params": null
@@ -134,6 +141,44 @@
         "id": "LISTAGEM.COOPERADOS",
         "display": "Relatorios/Listagem de Cooperados",
         "target": "DataEditComponent",
+        "rules": [ 0 ],
+        "service": {
+          "name": "listagemCooperados",
+          "params": null
+        }
+      },
+
+      {
+        "id": "ADMIN.USUARIO",
+        "display": "Admin/Usuário",
+        "target": "DataEditComponent",
+        "rules": [ 0 ],
+        "service": {
+          "name": "listagemCooperados",
+          "params": null
+        },
+        "actions": [
+          {
+            "id": "1",
+            "type": 5
+          }
+        ]
+      },
+      {
+        "id": "ADMIN.USUARIO",
+        "display": "Admin/Usuário",
+        "target": "DataEditComponent",
+        "rules": [ 0 ],
+        "service": {
+          "name": "listagemCooperados",
+          "params": null
+        }
+      },
+      {
+        "id": "ADMIN.ALTERARSENHA",
+        "display": "Admin/Alterar Senha",
+        "target": "DataEditComponent",
+        "rules": [ 0 ],
         "service": {
           "name": "listagemCooperados",
           "params": null
