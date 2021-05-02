@@ -1,6 +1,6 @@
 import { Type } from "@angular/core";
 
-enum ActionType {
+export enum ActionType {
     None = 0,
     Create = 1,
     Update = 2,
@@ -21,6 +21,7 @@ export class Service {
 export class Action {
     id: string;
     display: string;
+    url: string;
     type: ActionType;
     targert: string;
     service: Service;
@@ -29,6 +30,7 @@ export class Action {
 export class Route {
     id: string;
     display: string;
+    url: string;
     target: Type<any>;
     service: Service; 
     actions: Action[];
