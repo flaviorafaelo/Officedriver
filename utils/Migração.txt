@@ -1,6 +1,7 @@
 USE [officedriver]
 GO
 delete from [dbo].[Cooperado]
+DBCC checkident ('Cooperado', reseed)
 INSERT INTO [dbo].[Cooperado] (      [Matricula]
       ,[Nome]
       ,[Tipo]
