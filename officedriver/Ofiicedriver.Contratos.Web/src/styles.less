@@ -1,0 +1,45 @@
+//@import 'bootstrap/css/bootstrap.min.css';
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
+
+@import 'http://fonts.googleapis.com/css?family=Open+Sans:400,600,700';
+
+//@import "./assets/css/fontawesome/font-awesome.min.css";
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
+
+@import "./assets/css/variables.less";
+//@import "./assets/css/mixins.less";
+@import "./assets/css/error.less";
+//@import './assets/css/responsive.less';
+@import './assets/css/general_ui.less';
+//@import './assets/css/layout.less';
+//@import './assets/css/icons.less';
+
+@import './assets/css/forms.less';
+@import './assets/css/buttons.less';
+
+
+//@import './assets/css/plugins/jquery-ui.css';
+
+//@import './app/pages/layout/components/navbar/navbar.component.less';
+//@import './app/pages/layout/components/sidebar/sidebar.component.less';
+//@import './app/pages/layout/components/crumbs/crumbs.component.less';
+
+
+// Remove Chrome's Orange Outline
+* {
+	outline: none !important;
+	//box-sizing: ;
+}
+
+html, body {
+//	height: 100%;
+padding: 0px;
+margin: 0px;
+}
+
+body {
+	font-family: @baseFontFamily;
+	color: @textColor;
+	font-size: @baseFontSize;
+	//overflow-y: scroll;
+}

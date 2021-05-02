@@ -1,0 +1,96 @@
+@import "../../../../../assets/css/variables.less";
+@import "../../../../../assets/css/mixins.less";
+
+.nav {
+	z-index: 10030;
+}
+
+.navbar {
+	background: @navbarBackground;
+	height: @navbarHeight;
+	z-index: 1030;
+	//.border-radius(0);
+	padding: 0px;
+	padding-left: 10px;
+}
+
+	.navbar-brand {
+		color: @navbarBrandColor;
+		font-size: 18px;
+	}
+
+	.toggle-sidebar {
+		margin-left: -50px;
+		display: inline-block;
+		position: relative;
+		color: @navbarText;
+		padding: 14px;
+		font-size: 14px;
+		text-decoration: none;
+
+		&:hover {
+			background: @navbarLinkBackgroundHover;
+		}
+	}
+
+	.nav > li {
+		line-height: @navbarHeight;
+		border-right: 1px solid rgba(0, 0, 0, 0.2);
+
+		&:first-child {
+			border-left: 1px solid rgba(0, 0, 0, 0.21);
+		}
+
+		&.nav-toggle {
+			display: none;
+		}
+	}
+
+	.nav > li:active, .nav li.dropdown.open>.dropdown-toggle, .nav li.dropdown.active>.dropdown-toggle, .nav li.dropdown.open.active>.dropdown-toggle, .toggle-sidebar:active {
+		color: @navbarLinkColor;
+		background: @navbarLinkBackgroundOpen;
+		-webkit-box-shadow: 1px 0 0 rgba(0, 0, 0, 0.25) inset, -1px 0 0 rgba(0, 0, 0, 0.25) inset;
+		-moz-box-shadow: 1px 0 0 rgba(0, 0, 0, 0.25) inset, -1px 0 0 rgba(0, 0, 0, 0.25) inset;
+		box-shadow: 1px 0 0 rgba(0, 0, 0, 0.25) inset, -1px 0 0 rgba(0, 0, 0, 0.25) inset;
+	}
+
+	.nav > li > a {
+		color: @navbarLinkColor;
+		font-size: 13px;
+		text-shadow: 0 1px 0 @navbarTextShadow;
+		padding-top: 14px;
+		padding-bottom: 14px;
+		padding-left: 18px;
+		padding-right: 18px;
+
+		&:hover,
+		&:focus {
+			color: @navbarLinkColorHover;
+			background: lighten(@navbarBackground, 5%);
+			background: @navbarLinkBackgroundHover;
+		}
+
+		> span {
+			padding-left: 5px;
+
+			&.username {
+				font-weight: bold;
+			}
+		}
+
+		.badge {
+			position: absolute;
+			//font-size: 10px;
+			font-weight: 300;
+			top: 0px;
+			left: 10px;
+			text-align: center;
+			//height: 14px;
+			background-color: #BE4141;
+			background-color: rgba(219, 45, 42, 0.8);
+			padding: 2px 4px;
+			text-shadow: none;
+		}
+	}
+
+
