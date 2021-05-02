@@ -17,7 +17,10 @@ import { EditorTitleComponent } from './pages/editor/editor-title/editor-title.c
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { RouteService } from './services/route.service'
-import { ROUTES } from '@angular/router';
+import { EditorContentComponent } from './pages/editor/editor-content/editor-content.component';
+
+import { GridModule } from '@syncfusion/ej2-angular-grids';
+import { EditorActionComponent } from './pages/editor/editor-action/editor-action.component';
 
 
 export function initSettings(routeService: RouteService) {
@@ -37,12 +40,16 @@ export function initSettings(routeService: RouteService) {
     FrameComponent,
     DataEditComponent,
     EditorTitleComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    EditorContentComponent,
+    EditorActionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+
+    GridModule
   ],
   providers: [
     RouteService,

@@ -83,7 +83,7 @@ export class SidebarComponent implements AfterViewInit {
         }
 
         if (group == "") {
-          curLink = this.createLink(display, route.display);
+          curLink = this.createLink(display, route.url);
           ul.appendChild(curLink);
         } else {
           let subMenuEl = this.findSubMenu(ul, group);
@@ -91,7 +91,7 @@ export class SidebarComponent implements AfterViewInit {
           if (subMenuEl == undefined) {
             let groupEl = this.createLink(group, "javascript:void(0);");
             let subMenu = this.createGroupLink();
-            let curLink = this.createLink(display, route.display);
+            let curLink = this.createLink(display, route.url);
 
             subMenu.appendChild(curLink);
             groupEl.appendChild(subMenu);
@@ -99,7 +99,7 @@ export class SidebarComponent implements AfterViewInit {
             ul.appendChild(groupEl);
           } else {
 
-            let curLink = this.createLink(display, route.display);
+            let curLink = this.createLink(display, route.url);
             subMenuEl.appendChild(curLink);
           }
 
