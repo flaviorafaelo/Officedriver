@@ -1,4 +1,6 @@
-﻿namespace Altima.Broker.System.Routes
+﻿using Altima.Broker.Extensions;
+
+namespace Altima.Broker.System.Routes
 {
     public enum ActionType
     { 

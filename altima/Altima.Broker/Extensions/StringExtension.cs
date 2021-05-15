@@ -11,7 +11,13 @@ namespace Altima.Broker.Extensions
         {
             if (string.IsNullOrEmpty(value))
                 return "";
-            return value.Replace(' ', '-').ToLower();// Regex.Replace(value, "[^0-9a-zA-Z]+", "").Replace(' ','-').ToLower();
+
+            var acentos = "çÇáéíóúýÁÉÍÓÚÝàèìòùÀÈÌÒÙãõñäëïöüÿÄËÏÖÜÃÕÑâêîôûÂÊÎÔÛ";
+            var semacetos = "cCaeiouyAEIOUYaeiouAEIOUaonaeiouyAEIOUAONaeiouAEIOU";
+            for (int i = 0; i < acentos.Length; i++)
+                value = value.Replace(acentos[i], semacetos[i]);
+
+            return value.Replace(" ", "-").ToLower();
         }
     }
 }

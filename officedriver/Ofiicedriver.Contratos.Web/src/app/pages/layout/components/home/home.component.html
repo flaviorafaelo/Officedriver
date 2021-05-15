@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div  *ngIf="userLogged" class="container-fluid">
     <header>
        <app-navbar></app-navbar>
     </header>
@@ -8,10 +8,13 @@
     </aside>
 
     <main>
-        <app-crumbs></app-crumbs>        
+        <app-crumbs></app-crumbs>
         <div class="page">
-            <router-outlet></router-outlet>   
+            <router-outlet></router-outlet>
         </div>
     </main>
+</div>
+<div class="page"  *ngIf="!userLogged">
+  <router-outlet></router-outlet>
 </div>
 
