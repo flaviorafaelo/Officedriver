@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Pessoas">
-    <METHOD NAME="Endereco" DESCRIPTION="" VERSION="3" INTFTYPE="9" THREADSAFE="0">
+    <METHOD NAME="Endereco" DESCRIPTION="" VERSION="10" INTFTYPE="9" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
         </GROUPS>
-        <PARAM NAME="Cep" SIZE="9" FLAGS="1" PROJECTION="0" FIELDLABEL="Cep" CTAB="0"/>
-        <PARAM NAME="Logradouro" SIZE="200" FLAGS="1" PROJECTION="0" FIELDLABEL="Logradouro" CTAB="0"/>
-        <PARAM NAME="Numero" SIZE="20" FLAGS="1" PROJECTION="0" FIELDLABEL="Numero" CTAB="0"/>
-        <PARAM NAME="Complemento" SIZE="50" FLAGS="1" PROJECTION="0" FIELDLABEL="Complemento" CTAB="0"/>
-        <PARAM NAME="Bairro" SIZE="100" FLAGS="1" PROJECTION="0" FIELDLABEL="Bairro" CTAB="0"/>
-        <PARAM NAME="Estado" SIZE="2" FLAGS="1" PROJECTION="0" FIELDLABEL="Estado" CTAB="0"/>
-        <PARAM NAME="Cidade" SIZE="50" FLAGS="1" PROJECTION="0" FIELDLABEL="Cidade" CTAB="0"/>
+        <PARAM NAME="Cep" SIZE="9" FLAGS="1" MASK="#####-###" PROJECTION="0" ORDER="1" FIELDLABEL="Cep" CTAB="0"/>
+        <PARAM NAME="Logradouro" SIZE="200" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="Logradouro" CTAB="0"/>
+        <PARAM NAME="Numero" SIZE="20" FLAGS="1" PROJECTION="0" ORDER="3" FIELDLABEL="N&#250;mero" CTAB="0"/>
+        <PARAM NAME="Complemento" SIZE="50" FLAGS="1" PROJECTION="0" ORDER="4" FIELDLABEL="Complemento" CTAB="0"/>
+        <PARAM NAME="Bairro" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="5" FIELDLABEL="Bairro" CTAB="0"/>
+        <PARAM NAME="Estado" SIZE="2" FLAGS="1" PROJECTION="0" ORDER="6" LOOKUP="Estados.Listar" LOOKUPKEY="Estado" LOOKUPDISPLAY="Estado" FIELDLABEL="Estado" CTAB="0"/>
+        <PARAM NAME="Cidade" SIZE="50" FLAGS="1" PROJECTION="0" ORDER="7" LOOKUP="Cidades.Listar" LOOKUPKEY="Cidade" LOOKUPDISPLAY="Cidade" FIELDLABEL="Cidade" CTAB="0"/>
       </PARAMS>
       <FIELDS/>
       <ACTIONSCRIPT></ACTIONSCRIPT>
