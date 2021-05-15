@@ -1,26 +1,13 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Veiculos">
-    <METHOD NAME="Listar" DESCRIPTION="" VERSION="2" INTFTYPE="1" THREADSAFE="0">
+    <METHOD NAME="Listar" DESCRIPTION="" VERSION="7" INTFTYPE="5" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
         </GROUPS>
-        <PARAM NAME="Marca" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="6" LOOKUP="OFFICEDRIVER.FABRICANTES.LISTA" LOOKUPKEY="Marca" LOOKUPDISPLAY="Descricao" LOOKUPCODE="Id" FIELDLABEL="Marca" CTAB="0"/>
-        <PARAM NAME="Modelo" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="7" FIELDLABEL="Modelo" CTAB="0"/>
-        <PARAM NAME="Placa" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="9" FIELDLABEL="Placa" CTAB="0"/>
-        <PARAM NAME="AnoFabricacao" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="1" FIELDLABEL="Anofabricacao" CTAB="0"/>
-        <PARAM NAME="AnoModelo" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="Anomodelo" CTAB="0"/>
-        <PARAM NAME="Tipo" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="12" LOOKUP="list:'H','Hatchback';'S','Sedan';'P','Pick-up';'V','Van';" FIELDLABEL="Tipo" CTAB="0"/>
-        <PARAM NAME="Potencia" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="10" FIELDLABEL="Potencia" CTAB="0"/>
-        <PARAM NAME="TipoCombustivel" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="13" LOOKUP="list:'G','Gasolina';'A','Alcool';'D','Diesel';'F','Flex';'E','El&#233;trico';" FIELDLABEL="Tipocombustivel" CTAB="0"/>
-        <PARAM NAME="Cor" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="5" FIELDLABEL="Cor" CTAB="0"/>
-        <PARAM NAME="Rastreador" SIZE="20" FLAGS="1" PROJECTION="0" ORDER="11" FIELDLABEL="Rastreador" CTAB="0"/>
-        <PARAM NAME="NumeroRatreador" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="8" FIELDLABEL="Numeroratreador" CTAB="0"/>
-        <PARAM NAME="VencimentoAPP" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="15" FIELDLABEL="Vencimentoapp" CTAB="0"/>
-        <PARAM NAME="TipoProprietario" FLAGS="1" DEFAULT="1" PROJECTION="0" ORDER="14" LOOKUP="list:'1','Cooperado';'2','Cliente';'3','Cooperativa';" FIELDLABEL="Tipoproprietario" CTAB="0"/>
-        <PARAM NAME="Coopreado" FORMAT="N" SIZE="8" FLAGS="1" VISIBILITYRULE="(TipoProprietario=1)" PROJECTION="0" ORDER="4" FIELDLABEL="Coopreado" CTAB="0"/>
-        <PARAM NAME="Cliente" FORMAT="N" SIZE="8" FLAGS="1" VISIBILITYRULE="(TipoProprietario=2)" PROJECTION="0" ORDER="3" FIELDLABEL="Cliente" CTAB="0"/>
+        <PARAM NAME="Modelo" SIZE="100" FLAGS="1" PROJECTION="0" FIELDLABEL="Modelo" CTAB="0"/>
+        <PARAM NAME="AnoModelo" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Anomodelo" CTAB="0"/>
       </PARAMS>
       <FIELDS>
         <GROUPS>
@@ -28,7 +15,12 @@
         </GROUPS>
         <FIELD NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
       </FIELDS>
-      <ACTIONSCRIPT></ACTIONSCRIPT>
+      <ACTIONSCRIPT>SELECT MODELO, FABRINCANTE, ANOMODELO, ANOFABRICACAO
+FROM MODELO M INNER JOIN  FABRINCANTE F
+ON F.FABRINCANTE = M.FABRINCANTE
+WHERE [M.MODELO LIKE :MODELO]
+[AND M.ANOMODELO = :ANOMODELO]
+</ACTIONSCRIPT>
     </METHOD>
   </OBJECT>
 </root>

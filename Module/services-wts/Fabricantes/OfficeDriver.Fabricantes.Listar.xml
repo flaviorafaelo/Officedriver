@@ -1,8 +1,13 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Fabricantes">
-    <METHOD NAME="Listar" DESCRIPTION="" VERSION="3" INTFTYPE="5" THREADSAFE="0">
-      <PARAMS/>
+    <METHOD NAME="Listar" DESCRIPTION="" VERSION="8" INTFTYPE="5" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Descricao" FLAGS="1" PROJECTION="0" FIELDLABEL="Descricao" CTAB="0"/>
+      </PARAMS>
       <FIELDS>
         <GROUPS>
           <GROUP/>
@@ -10,7 +15,9 @@
         <FIELD NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
         <FIELD NAME="Descricao" PROJECTION="0" FIELDLABEL="Descricao" CTAB="0"/>
       </FIELDS>
-      <ACTIONSCRIPT></ACTIONSCRIPT>
+      <ACTIONSCRIPT>SELECT ID, FABRICANTE FROM FABRINCANTES
+WHERE [DESCRICAO LIKE :DESCRICAO]
+</ACTIONSCRIPT>
     </METHOD>
   </OBJECT>
 </root>

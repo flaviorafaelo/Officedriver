@@ -1,10 +1,16 @@
 <?xml version="1.0"?>
 <root>
-	<_currentid>OFFD_001</_currentid>
+	<_currentid>OFFD_003</_currentid>
 	<_name>RULES.APS</_name>
 
 	<link category="Cadastros\Cooperados" target="standard.tdataedit" _id="OFFD_001">
 		<OBJECT>OFFICEDRIVER.COOPERADOS</OBJECT>
 	</link>
-	
+		<link category="Cadastros\Veículos" target="standard.tdataedit" _id="OFFD_002">
+		<OBJECT>OFFICEDRIVER.VEICULOS</OBJECT>
+	</link>
+	</link>
+		<link category="Cadastros\Fabricantes" target="standard.tdataedit" _id="OFFD_003">
+		<OBJECT>OFFICEDRIVER.FABRICANTES</OBJECT>
+	</link>	
 </root>
