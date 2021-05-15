@@ -1,0 +1,24 @@
+<dbdic.objects.objects>
+  <ROW NAME="Bancos" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
+    <FIELDS NAME="Id" DATATYPE="3">
+      <FLAGS> AQ==
+</FLAGS>
+    </FIELDS>
+    <FIELDS NAME="Codigo" DATATYPE="1" SIZE="10">
+      <FLAGS> AQ==
+</FLAGS>
+    </FIELDS>
+    <FIELDS NAME="Nome" DATATYPE="1" SIZE="100">
+      <FLAGS> AQ==
+</FLAGS>
+    </FIELDS>
+    <INDEXES>
+      <FIELDS>Id</FIELDS>
+      <FLAGS> AQ==
+</FLAGS>
+    </INDEXES>
+    <INDEXES>
+      <FIELDS>Codigo</FIELDS>
+    </INDEXES>
+  </ROW>
+</dbdic.objects.objects>

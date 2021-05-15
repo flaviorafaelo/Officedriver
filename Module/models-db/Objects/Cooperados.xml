@@ -1,0 +1,38 @@
+<dbdic.objects.objects>
+  <ROW NAME="Cooperados" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
+    <FIELDS NAME="Id" DATATYPE="3">
+      <FLAGS> AQ==
+</FLAGS>
+    </FIELDS>
+    <FIELDS NAME="Matricula" DATATYPE="1" SIZE="20"/>
+    <FIELDS NAME="Foto" DATATYPE="15"/>
+    <FIELDS NAME="Nome" DATATYPE="1" SIZE="200"/>
+    <FIELDS NAME="Nascimento" DATATYPE="9"/>
+    <FIELDS NAME="Rg" DATATYPE="1" SIZE="20"/>
+    <FIELDS NAME="RgExpedicao" DATATYPE="9"/>
+    <FIELDS NAME="Cpf" DATATYPE="1" SIZE="14"/>
+    <FIELDS NAME="Cnh" DATATYPE="1" SIZE="20"/>
+    <FIELDS NAME="CnhValidade" DATATYPE="9"/>
+    <FIELDS NAME="CnhCategoria" DATATYPE="1" SIZE="1"/>
+    <FIELDS NAME="FreeLancer" DATATYPE="1"/>
+    <FIELDS NAME="DataMatricula" DATATYPE="9"/>
+    <FIELDS NAME="DataCadastro" DATATYPE="9"/>
+    <FIELDS NAME="DataDesligamento" DATATYPE="9"/>
+    <FIELDS NAME="Situacao" DATATYPE="3" DESCRIPTION="0-Desligado 1-Ativo"/>
+    <FIELDS NAME="PagamentoTipo" DATATYPE="3" DESCRIPTION="0-Cheque 1-Deposito Banc&#225;rio"/>
+    <FIELDS NAME="PagamentoBanco" DATATYPE="3"/>
+    <FIELDS NAME="PagamentoTipoConta" DATATYPE="3"/>
+    <FIELDS NAME="PagamentoAgencia" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="PagamentoNumeroConta" DATATYPE="1" SIZE="10"/>
+    <FIELDS NAME="DddResidencial" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="TelefoneResidencial" DATATYPE="1" SIZE="10"/>
+    <FIELDS NAME="DddCelular" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="TelefoneCelular" DATATYPE="1" SIZE="10"/>
+    <FIELDS NAME="EMail" DATATYPE="1" SIZE="200"/>
+    <INDEXES>
+      <FIELDS>Id</FIELDS>
+      <FLAGS> AQ==
+</FLAGS>
+    </INDEXES>
+  </ROW>
+</dbdic.objects.objects>
