@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Estados">
+    <METHOD NAME="Listar" DESCRIPTION="" VERSION="4" THREADSAFE="0">
+      <PARAMS/>
+      <FIELDS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <FIELD NAME="Id" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
+        <FIELD NAME="Estado" SIZE="2" FLAGS="1" PROJECTION="0" FIELDLABEL="Sigla" CTAB="0"/>
+      </FIELDS>
+      <ACTIONSCRIPT></ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

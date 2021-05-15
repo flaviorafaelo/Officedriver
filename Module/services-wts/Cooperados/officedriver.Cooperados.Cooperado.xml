@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Cooperados">
+    <METHOD NAME="Cooperado" DESCRIPTION="Cooperados" VERSION="43" INTFTYPE="10" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+          <GROUP NAME="Endere&#231;o"/>
+          <GROUP NAME="Contatos"/>
+          <GROUP NAME="Documentos" STYLE="1"/>
+          <GROUP NAME="Rg"/>
+          <GROUP NAME="Carteira Nacional de Habilita&#231;&#227;o"/>
+        </GROUPS>
+        <PARAM NAME="Id" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
+        <PARAM NAME="Matricula" SIZE="20" FLAGS="1" PROJECTION="0" ORDER="1" FIELDLABEL="Matr&#237;cula" CTAB="0"/>
+        <PARAM NAME="Foto" FORMAT="I" FLAGS="1" PROJECTION="0" ORDER="10" FIELDLABEL="Foto" CTAB="0"/>
+        <PARAM NAME="Nome" SIZE="200" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="Nome" CTAB="0"/>
+        <PARAM NAME="Nascimento" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="7" FIELDLABEL="Nascimento" CTAB="0"/>
+        <PARAM NAME="Rg" FLAGS="1" PROJECTION="0" ORDER="19" FIELDLABEL="Expedi&#231;&#227;o" GROUPNAME="Rg" CTAB="0"/>
+        <PARAM NAME="RgExpedicao" SIZE="30" FLAGS="1" PROJECTION="0" ORDER="18" FIELDLABEL="Rg" GROUPNAME="Rg" CTAB="0"/>
+        <PARAM NAME="Cpf" SIZE="14" FLAGS="1" PROJECTION="0" ORDER="16" FIELDLABEL="Cpf" GROUPNAME="Documentos" CTAB="0"/>
+        <PARAM NAME="Cnh" SIZE="20" FLAGS="1" PROJECTION="0" ORDER="21" FIELDLABEL="N&#250;mero" GROUPNAME="Carteira Nacional de Habilita&#231;&#227;o" CTAB="0"/>
+        <PARAM NAME="CnhValidade" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="22" FIELDLABEL="Validade" GROUPNAME="Carteira Nacional de Habilita&#231;&#227;o" CTAB="0"/>
+        <PARAM NAME="CnhCategoria" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="23" LOOKUP="list:'A','A';'B','B';'C','C';'D','D';'E','E';" FIELDLABEL="Categoria" GROUPNAME="Carteira Nacional de Habilita&#231;&#227;o" CTAB="0"/>
+        <PARAM NAME="FreeLancer" FORMAT="B" SIZE="1" FLAGS="17" DEFAULT="false" PROJECTION="0" ORDER="9" FIELDLABEL="Freelancer" CTAB="0"/>
+        <PARAM NAME="Endereco" FORMAT="R" FLAGS="1" STYLE="8" PROJECTION="0" ORDER="12" FIELDLABEL="Endereco" NESTEDNAME="officedriver.Pessoas.Endereco" GROUPNAME="Endere&#231;o" CTAB="0"/>
+        <PARAM NAME="DataMatricula" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="4" FIELDLABEL="Data Matr&#237;cula" CTAB="0"/>
+        <PARAM NAME="DataCadastro" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="3" FIELDLABEL="Data Cadastro" CTAB="0"/>
+        <PARAM NAME="DataDesligamento" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="5" FIELDLABEL="Data Desligamento" CTAB="0"/>
+        <PARAM NAME="Situacao" FORMAT="N" SIZE="8" FLAGS="1" DEFAULT="1" PROJECTION="0" ORDER="6" LOOKUP="list:'0','Desligado';'1','Ativo';" FIELDLABEL="Situacao" CTAB="0"/>
+        <PARAM NAME="Contatos" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="14" FIELDLABEL="Contatos" NESTEDNAME="officedriver.Pessoas.Contato" GROUPNAME="Contatos" CTAB="0"/>
+        <PARAM NAME="Pagamento" FORMAT="R" FLAGS="1" STYLE="8" PROJECTION="0" ORDER="8" FIELDLABEL="Pagamento" NESTEDNAME="OFFICEDRIVER.COOPERADOS.PAGAMENTO" CTAB="0"/>
+      </PARAMS>
+      <FIELDS/>
+      <ACTIONSCRIPT></ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<root>
+	<_currentid>OFFD_001</_currentid>
+	<_name>RULES.APS</_name>
+
+	<link category="Cadastros\Cooperados" target="standard.tdataedit" _id="OFFD_001">
+		<OBJECT>OFFICEDRIVER.COOPERADOS</OBJECT>
+	</link>
+	
+</root>

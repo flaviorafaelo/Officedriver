@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Cooperados">
+    <METHOD NAME="Pagamento" DESCRIPTION="" VERSION="2" INTFTYPE="9" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Tipo" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" LOOKUP="list:'0','Cheque';'1','Deposito Banc&#225;rio';" FIELDLABEL="Tipo" CTAB="0"/>
+        <PARAM NAME="Banco" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Banco" CTAB="0"/>
+        <PARAM NAME="TipoConta" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" LOOKUP="list:'0','Conta Corrente';'1','Poupan&#231;a';'2','Sal&#225;rio';" FIELDLABEL="Tipoconta" CTAB="0"/>
+        <PARAM NAME="Agencia" SIZE="5" FLAGS="1" PROJECTION="0" FIELDLABEL="Agencia" CTAB="0"/>
+        <PARAM NAME="NumeroConta" SIZE="10" FLAGS="1" PROJECTION="0" FIELDLABEL="Numeroconta" CTAB="0"/>
+      </PARAMS>
+      <FIELDS/>
+      <ACTIONSCRIPT></ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

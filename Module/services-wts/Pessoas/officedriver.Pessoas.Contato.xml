@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Pessoas">
+    <METHOD NAME="Contato" DESCRIPTION="" VERSION="3" INTFTYPE="9" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Nome" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Nome" CTAB="0"/>
+        <PARAM NAME="Tipo" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Tipo" CTAB="0"/>
+        <PARAM NAME="Ddd" SIZE="3" FLAGS="1" PROJECTION="0" FIELDLABEL="Ddd" CTAB="0"/>
+        <PARAM NAME="Teledone" SIZE="10" FLAGS="1" PROJECTION="0" FIELDLABEL="Teledone" CTAB="0"/>
+        <PARAM NAME="EMail" SIZE="100" FLAGS="1" PROJECTION="0" FIELDLABEL="Email" CTAB="0"/>
+      </PARAMS>
+      <FIELDS/>
+      <ACTIONSCRIPT></ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>
