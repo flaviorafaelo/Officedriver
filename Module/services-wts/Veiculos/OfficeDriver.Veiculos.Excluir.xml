@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Veiculos">
-    <METHOD NAME="Excluir" DESCRIPTION="Excluir Ve&#237;culos" VERSION="13" INTFTYPE="3" THREADSAFE="0">
+    <METHOD NAME="Excluir" DESCRIPTION="Excluir Ve&#237;culos" VERSION="19" INTFTYPE="3" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -9,7 +9,9 @@
         <PARAM NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
       </PARAMS>
       <FIELDS/>
-      <ACTIONSCRIPT></ACTIONSCRIPT>
+      <ACTIONSCRIPT>DELETE FROM VEICULOS
+WHERE ID =:ID;
+</ACTIONSCRIPT>
     </METHOD>
   </OBJECT>
 </root>
