@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Clientes">
-    <METHOD NAME="Alterar" DESCRIPTION="" VERSION="41" INTFTYPE="2" THREADSAFE="0">
+    <METHOD NAME="Alterar" DESCRIPTION="" VERSION="45" INTFTYPE="2" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -16,7 +16,7 @@
         <PARAM NAME="Logo" FORMAT="I" FLAGS="1" PROJECTION="0" ORDER="6" FIELDLABEL="Logo" CTAB="0"/>
         <PARAM NAME="Endereco" FORMAT="R" FLAGS="1" STYLE="8" PROJECTION="0" ORDER="8" FIELDLABEL="Endere&#231;os" NESTEDNAME="OfficeDriver.Pessoas.Endereco" GROUPNAME="Endere&#231;os" CTAB="0"/>
         <PARAM NAME="Contatos" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="10" FIELDLABEL="Contatos" NESTEDNAME="OfficeDriver.Pessoas.Contato" GROUPNAME="Contatos" CTAB="0"/>
-        <PARAM NAME="Ativo" FORMAT="B" SIZE="1" FLAGS="17" DEFAULT="T" PROJECTION="0" ORDER="5" FIELDLABEL="Ativo" CTAB="0"/>
+        <PARAM NAME="Situacao" FORMAT="N" SIZE="8" FLAGS="17" DEFAULT="1" PROJECTION="0" ORDER="5" LOOKUP="list:'0','Inativo';'1','Ativo';" FIELDLABEL="Ativo" CTAB="0"/>
       </PARAMS>
       <FIELDS/>
       <ACTIONSCRIPT>#CHECK("SELECT COUNT(ID) AS N FROM CLIENTES WHERE CNPJCPF=:CPF OR CNPJCPF=:CNPJ", N>0, "J&#225; existe um cliente com o CNPJ/CPF informado.");
@@ -25,10 +25,9 @@ SELECT:CLI ID FROM CLIENTES WHERE ID = :ID;
 UPDATE CLIENTES SET  ID=:ID,
                      NOME=:NOME,
 					 TIPOPESSOA=:TIPOPESSOA,
-					 CNPJ=:CNPJ,
-                     CPF=:CPF,
+					 #SELECT(TIPOPESSOA, "F":{CNPJ=NULL,CPF=:CPF,},ELSE:{CNPJ=:CNPJ,CPF=NULL,})
 					 LOGO=:LOGO,
-					 ATIVO=:ATIVO
+					 SITUACAO=:SITUACAO
 WHERE (ID=:ID);
 
 DELETE FROM ENDERECOS
