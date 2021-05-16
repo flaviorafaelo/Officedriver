@@ -6,11 +6,22 @@
 	<link category="Cadastros\Cooperados" target="standard.tdataedit" _id="OFFD_001">
 		<OBJECT>OFFICEDRIVER.COOPERADOS</OBJECT>
 	</link>
-		<link category="Cadastros\Veículos" target="standard.tdataedit" _id="OFFD_002">
+	
+	<link category="Cadastros\Bancos" target="standard.tdataedit" _id="OFFD_002">
+		<OBJECT>OFFICEDRIVER.BANCOS</OBJECT>
+	</link>
+
+	<link category="Cadastros\Veículos" target="standard.tdataedit" _id="OFFD_003">
 		<OBJECT>OFFICEDRIVER.VEICULOS</OBJECT>
 	</link>
-	</link>
-		<link category="Cadastros\Fabricantes" target="standard.tdataedit" _id="OFFD_003">
+	
+	<link category="Cadastros\Fabricantes" target="standard.tdataedit" _id="OFFD_004">
 		<OBJECT>OFFICEDRIVER.FABRICANTES</OBJECT>
 	</link>	
+	
+	<link category="Cadastros\Clientes" target="standard.tdataedit" _id="OFFD_005">
+		<OBJECT>OFFICEDRIVER.CLIENTES</OBJECT>
+	</link>	
+	
+	
 </root>
