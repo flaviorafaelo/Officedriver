@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos">
+    <METHOD NAME="Excluir" DESCRIPTION="" VERSION="12" INTFTYPE="3" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
+      </PARAMS>
+      <FIELDS>
+        <GROUPS>
+          <GROUP/>
+          <GROUP NAME="Vig&#234;ncia"/>
+          <GROUP NAME="Fechamento"/>
+          <GROUP NAME="Cooperados" STYLE="1"/>
+          <GROUP NAME="Ve&#237;culos" STYLE="1"/>
+          <GROUP NAME="Cobran&#231;a" STYLE="1"/>
+          <GROUP NAME="Repasse" STYLE="1"/>
+        </GROUPS>
+      </FIELDS>
+      <ACTIONSCRIPT></ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>
