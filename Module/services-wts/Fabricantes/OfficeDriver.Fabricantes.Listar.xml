@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Fabricantes">
-    <METHOD NAME="Listar" DESCRIPTION="" VERSION="13" INTFTYPE="5" THREADSAFE="0">
+    <METHOD NAME="Listar" DESCRIPTION="" VERSION="15" INTFTYPE="5" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>

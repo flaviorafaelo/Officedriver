@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Clientes">
-    <METHOD NAME="Consultar" DESCRIPTION="" VERSION="26" INTFTYPE="6" THREADSAFE="0">
+    <METHOD NAME="Consultar" DESCRIPTION="" VERSION="33" INTFTYPE="6" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -16,12 +16,13 @@
         </GROUPS>
         <FIELD NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" ORDER="1" FIELDLABEL="Id" CTAB="0"/>
         <FIELD NAME="Nome" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="1" FIELDLABEL="Nome" CTAB="0"/>
-        <FIELD NAME="TipoPessoa" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="2" LOOKUP="list:'F','F&#237;sica';'J','Jur&#237;dica';" FIELDLABEL="Tipo de Pessoa" CTAB="0"/>
-        <FIELD NAME="CPF" SIZE="14" FLAGS="1" MASK="###.###.###-##" PROJECTION="0" ORDER="3" FIELDLABEL="Cpf" CTAB="0"/>
-        <FIELD NAME="CNPJ" SIZE="20" FLAGS="1" MASK="###.###.###/####-##" PROJECTION="0" ORDER="4" FIELDLABEL="Cnpj" CTAB="0"/>
-        <FIELD NAME="Logo" FORMAT="I" FLAGS="1" PROJECTION="0" ORDER="5" FIELDLABEL="Logo" CTAB="0"/>
-        <FIELD NAME="Endereco" FORMAT="R" FLAGS="1" STYLE="8" PROJECTION="0" ORDER="7" FIELDLABEL="Endere&#231;os" NESTEDNAME="OfficeDriver.Pessoas.Endereco" GROUPNAME="Endere&#231;os" CTAB="0"/>
-        <FIELD NAME="Contatos" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="9" FIELDLABEL="Contatos" NESTEDNAME="OfficeDriver.Pessoas.Contato" GROUPNAME="Contatos" CTAB="0"/>
+        <FIELD NAME="TipoPessoa" SIZE="1" FLAGS="1" DEFAULT="J" PROJECTION="0" ORDER="2" LOOKUP="list:'F','F&#237;sica';'J','Jur&#237;dica';" FIELDLABEL="Tipo de Pessoa" CTAB="0"/>
+        <FIELD NAME="CPF" SIZE="14" FLAGS="1" MASK="###.###.###-##" VISIBILITYRULE="(TipoPessoa='F')" PROJECTION="0" ORDER="3" FIELDLABEL="Cpf" CTAB="0"/>
+        <FIELD NAME="CNPJ" SIZE="20" FLAGS="1" MASK="###.###.###/####-##" VISIBILITYRULE="(TipoPessoa='J')" PROJECTION="0" ORDER="4" FIELDLABEL="Cnpj" CTAB="0"/>
+        <FIELD NAME="Logo" FORMAT="I" FLAGS="1" PROJECTION="0" ORDER="6" FIELDLABEL="Logo" CTAB="0"/>
+        <FIELD NAME="Endereco" FORMAT="R" FLAGS="1" STYLE="8" PROJECTION="0" ORDER="8" FIELDLABEL="Endere&#231;os" NESTEDNAME="OfficeDriver.Pessoas.Endereco" GROUPNAME="Endere&#231;os" CTAB="0"/>
+        <FIELD NAME="Contatos" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="10" FIELDLABEL="Contatos" NESTEDNAME="OfficeDriver.Pessoas.Contato" GROUPNAME="Contatos" CTAB="0"/>
+        <FIELD NAME="Ativo" FORMAT="B" SIZE="1" FLAGS="17" DEFAULT="T" PROJECTION="0" ORDER="5" FIELDLABEL="Ativo" CTAB="0"/>
       </FIELDS>
       <ACTIONSCRIPT>SELECT
    ID,
@@ -29,7 +30,8 @@
    TIPOPESSOA,
    CPF,
    CNPJ,
-   LOGO
+   LOGO,
+   ATIVO
    #ROWSET({SELECT:ENDERECO
                       TIPOPESSOA,
                       PESSOA,
