@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Funcoes">
+    <METHOD NAME="Listar" DESCRIPTION="" VERSION="4" THREADSAFE="0">
+      <PARAMS/>
+      <FIELDS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <FIELD NAME="Id" FORMAT="&#0;" FLAGS="1" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
+        <FIELD NAME="Descricao" FORMAT="&#0;" FLAGS="1" PROJECTION="0" FIELDLABEL="Descricao" CTAB="0"/>
+      </FIELDS>
+      <ACTIONSCRIPT>SELECT 0 As Id, 'Motorista' as Descricao from dual
+union
+SELECT 1 As Id, 'Motorista Lider' as Descricao from dual
+union
+SELECT 2 As Id, 'Operador' as Descricao from dual
+union
+SELECT 3 As Id, 'Gestor' as Descricao from dual
+
+</ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

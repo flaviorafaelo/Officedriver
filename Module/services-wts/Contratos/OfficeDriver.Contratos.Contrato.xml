@@ -1,15 +1,25 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos">
-    <METHOD NAME="Contrato" DESCRIPTION="" VERSION="1" INTFTYPE="10" THREADSAFE="0">
+    <METHOD NAME="Contrato" DESCRIPTION="" VERSION="11" INTFTYPE="10" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
+          <GROUP NAME="Cobran&#231;a" STYLE="1"/>
         </GROUPS>
         <PARAM NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
-        <PARAM NAME="Numero" SIZE="15" PROJECTION="0" FIELDLABEL="Numero" CTAB="0"/>
-        <PARAM NAME="Nome" SIZE="60" PROJECTION="0" FIELDLABEL="Nome" CTAB="0"/>
-        <PARAM NAME="TipoContrato" SIZE="1" PROJECTION="0" FIELDLABEL="Tipocontrato" CTAB="0"/>
+        <PARAM NAME="Numero" SIZE="15" FLAGS="17" PROJECTION="0" ORDER="8" FIELDLABEL="Numero" CTAB="0"/>
+        <PARAM NAME="Descricao" FLAGS="1" PROJECTION="0" ORDER="7" FIELDLABEL="Nome" CTAB="0"/>
+        <PARAM NAME="TipoContrato" FORMAT="N" SIZE="8" FLAGS="17" PROJECTION="0" ORDER="9" LOOKUP="list:'0','Fixo';'1','Vari&#225;vel';" FIELDLABEL="Tipocontrato" CTAB="0"/>
+        <PARAM NAME="Cliente" FORMAT="N" SIZE="8" FLAGS="17" PROJECTION="0" ORDER="1" LOOKUP="OFFICEDRIVER.CLIENTES.LISTAR" LOOKUPKEY="ID" LOOKUPDISPLAY="NOME" FIELDLABEL="Cliente" CTAB="0"/>
+        <PARAM NAME="DataInicio" FORMAT="D" SIZE="10" FLAGS="17" PROJECTION="0" ORDER="3" FIELDLABEL="Datainicio" CTAB="0"/>
+        <PARAM NAME="DataTermino" FORMAT="D" SIZE="10" FLAGS="17" PROJECTION="0" ORDER="4" FIELDLABEL="Datatermino" CTAB="0"/>
+        <PARAM NAME="DiaFechamento" FORMAT="N" SIZE="8" FLAGS="17" PROJECTION="0" ORDER="5" FIELDLABEL="Diafechamento" CTAB="0"/>
+        <PARAM NAME="IntervaloDiaCooperado" FORMAT="N" SIZE="8" FLAGS="17" PROJECTION="0" ORDER="6" LOOKUP="list:'1','1';'2','2';'3','3';'4','4';'5','5';'6','6';'7','7';'8','8';'9','9';'10','10';'11','11';'12','12';'13','13';'14','14';'15','15';'16','16';'17','17';'18','18';'19','19';'20','20';'21','21';'22','22';'23','23';'24','24';'25','25';'26','26';'27','27';'28','28';'29','29';'30','30';'31','31';" FIELDLABEL="Intervalodiacooperado" CTAB="0"/>
+        <PARAM NAME="Cooperados" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="Cooperados" NESTEDNAME="OfficeDriver.Contratos.Cooperado" CTAB="0"/>
+        <PARAM NAME="ValorContrato" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" VISIBILITYRULE="(TipoContrato=0)" PROJECTION="0" ORDER="11" FIELDLABEL="Valor do Contrato" GROUPNAME="Cobran&#231;a" CTAB="0"/>
+        <PARAM NAME="FuncaoCobranca" FORMAT="R" FLAGS="1" PROJECTION="0" FIELDLABEL="Funcaocobranca" NESTEDNAME="OfficeDriver.Contratos.Funcao" CTAB="0"/>
+        <PARAM NAME="FuncaoRepasse" FORMAT="R" FLAGS="1" PROJECTION="0" FIELDLABEL="Funcaorepasse" NESTEDNAME="OfficeDriver.Contratos.Funcao" CTAB="0"/>
       </PARAMS>
       <FIELDS/>
       <ACTIONSCRIPT></ACTIONSCRIPT>
