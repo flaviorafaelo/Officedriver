@@ -1,0 +1,17 @@
+<dbdic.objects.objects>
+  <ROW NAME="Clientes" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
+    <FIELDS NAME="Id" DATATYPE="3">
+      <FLAGS> AQ==
+</FLAGS>
+    </FIELDS>
+    <FIELDS NAME="Nome" DATATYPE="1" SIZE="100"/>
+    <FIELDS NAME="TipoPessoa" DATATYPE="1" SIZE="1"/>
+    <FIELDS NAME="CNPJCPF" DATATYPE="1" SIZE="20"/>
+    <FIELDS NAME="Logo" DATATYPE="15"/>
+    <INDEXES>
+      <FIELDS>Id</FIELDS>
+      <FLAGS> AQ==
+</FLAGS>
+    </INDEXES>
+  </ROW>
+</dbdic.objects.objects>

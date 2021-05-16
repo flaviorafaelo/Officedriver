@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Cooperados">
-    <METHOD NAME="Alterar" DESCRIPTION="Alterar" VERSION="71" INTFTYPE="2" THREADSAFE="0">
+    <METHOD NAME="Alterar" DESCRIPTION="Alterar" VERSION="74" INTFTYPE="2" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
