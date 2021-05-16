@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Cooperados">
-    <METHOD NAME="Consultar" DESCRIPTION="Consultar" VERSION="64" INTFTYPE="6" THREADSAFE="0">
+    <METHOD NAME="Consultar" DESCRIPTION="Consultar" VERSION="67" INTFTYPE="6" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -43,7 +43,8 @@
         <FIELD NAME="DddCelular" SIZE="5" FLAGS="1" PROJECTION="0" ORDER="15" FIELDLABEL="DDD Celular" GROUPNAME="Telefones" CTAB="0"/>
         <FIELD NAME="TelefoneCelular" SIZE="10" FLAGS="1" MASK="#####-####" PROJECTION="0" ORDER="16" FIELDLABEL="Telefone Celular" GROUPNAME="Telefones" CTAB="0"/>
       </FIELDS>
-      <ACTIONSCRIPT>SELECT MATRICULA,
+      <ACTIONSCRIPT>SELECT ID,
+       MATRICULA,
        FOTO,
        NOME,
        NASCIMENTO,
@@ -62,12 +63,16 @@
        TELEFONERESIDENCIAL,
        DDDCELULAR,
        TELEFONECELULAR,
-       PAGAMENTOTIPO,
-       PAGAMENTOBANCO,
-       PAGAMENTOTIPOCONTA,
-       PAGAMENTOAGENCIA,
-       PAGAMENTONUMEROCONTA
        
+       #ROWSET({SELECT:PAGAMENTO
+                       PAGAMENTOTIPO AS TIPO,
+                       PAGAMENTOBANCO AS BANCO,
+                       PAGAMENTOTIPOCONTA AS TIPOCONTA,
+                       PAGAMENTOAGENCIA AS AGENCIA,
+                       PAGAMENTONUMEROCONTA AS NUMEROCONTA
+               FROM COOPERADOS
+               WHERE ID=:ID})
+
        #ROWSET({SELECT:ENDERECO
                       TIPOPESSOA,
                       PESSOA,

@@ -14,7 +14,7 @@
     <FIELDS NAME="Cnh" DATATYPE="1" SIZE="20"/>
     <FIELDS NAME="CnhValidade" DATATYPE="9"/>
     <FIELDS NAME="CnhCategoria" DATATYPE="1" SIZE="1"/>
-    <FIELDS NAME="FreeLancer" DATATYPE="1"/>
+    <FIELDS NAME="FreeLancer" DATATYPE="1" SIZE="1"/>
     <FIELDS NAME="DataMatricula" DATATYPE="9"/>
     <FIELDS NAME="DataCadastro" DATATYPE="9"/>
     <FIELDS NAME="DataDesligamento" DATATYPE="9"/>
