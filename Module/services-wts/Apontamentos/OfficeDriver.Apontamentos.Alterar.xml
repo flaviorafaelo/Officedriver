@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Apontamentos">
-    <METHOD NAME="Apontamento" DESCRIPTION="" VERSION="26" INTFTYPE="10" THREADSAFE="0">
+    <METHOD NAME="Alterar" DESCRIPTION="" VERSION="5" INTFTYPE="2" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -27,7 +27,15 @@
         <PARAM NAME="Reembolsos" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="17" FIELDLABEL="Reembolsos" NESTEDNAME="OfficeDriver.Apontamentos.Reembolso" GROUPNAME="Reembolsos" CTAB="0"/>
       </PARAMS>
       <FIELDS/>
-      <ACTIONSCRIPT></ACTIONSCRIPT>
+      <ACTIONSCRIPT>SELECT 0 As Id, 'Motorista' as Descricao from dual
+union
+SELECT 1 As Id, 'Motorista Lider' as Descricao from dual
+union
+SELECT 2 As Id, 'Operador' as Descricao from dual
+union
+SELECT 3 As Id, 'Gestor' as Descricao from dual
+
+</ACTIONSCRIPT>
     </METHOD>
   </OBJECT>
 </root>

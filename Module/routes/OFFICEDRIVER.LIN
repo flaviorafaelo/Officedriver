@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <root>
-	<_currentid>OFFD_007</_currentid>
+	<_currentid>OFFD_008</_currentid>
 	<_name>RULES.APS</_name>
 
 	<link category="Cadastros\Cooperados" target="standard.tdataedit" _id="OFFD_001">
@@ -22,10 +22,16 @@
 	<link category="Cadastros\Clientes" target="standard.tdataedit" _id="OFFD_005">
 		<OBJECT>OFFICEDRIVER.CLIENTES</OBJECT>
 	</link>	
+
 	<link category="Processos\Contratos" target="standard.tdataedit" _id="OFFD_006">
 		<OBJECT>OFFICEDRIVER.CONTRATOS</OBJECT>
 	</link>		
-<link category="Processos\Apontamentos" target="standard.tdataedit" _id="OFFD_007">
+	
+	<link category="Processos\Apontamentos" target="standard.tdataedit" _id="OFFD_007">
 		<OBJECT>OFFICEDRIVER.APONTAMENTOS</OBJECT>
-	</link>			
+	</link>
+
+	<link category="Cadastros\Turnos" target="standard.tdataedit" _id="OFFD_008">
+		<OBJECT>OFFICEDRIVER.TURNOS</OBJECT>
+	</link>		
 </root>

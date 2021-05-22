@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Turnos">
+    <METHOD NAME="Listar" DESCRIPTION="" VERSION="2" INTFTYPE="5" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Descricao" FLAGS="1" PROJECTION="0" FIELDLABEL="Descricao" CTAB="0"/>
+        <PARAM NAME="Situacao" FLAGS="1" PROJECTION="0" FIELDLABEL="Situacao" CTAB="0"/>
+      </PARAMS>
+      <FIELDS>
+        <FIELD NAME="Descri&#231;&#227;o" FORMAT="&#0;" PROJECTION="0" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
+      </FIELDS>
+      <ACTIONSCRIPT></ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>
