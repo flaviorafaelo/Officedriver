@@ -1,0 +1,19 @@
+<dbdic.objects.objects>
+  <ROW NAME="CondicaoComPeriodo" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
+    <FIELDS NAME="Id" DATATYPE="3">
+      <FLAGS> AQ==
+</FLAGS>
+    </FIELDS>
+    <FIELDS NAME="Condicao" DATATYPE="3"/>
+    <FIELDS NAME="Descricao" DATATYPE="1" SIZE="50"/>
+    <FIELDS NAME="Inicio" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="Fim" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="ValorNormal" DATATYPE="7" SIZE="17" PRECISION="4"/>
+    <FIELDS NAME="ValorExcedente" SIZE="17" PRECISION="4"/>
+    <INDEXES>
+      <FIELDS>Id</FIELDS>
+      <FLAGS> AQ==
+</FLAGS>
+    </INDEXES>
+  </ROW>
+</dbdic.objects.objects>
