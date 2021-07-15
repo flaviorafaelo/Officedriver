@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos">
+    <METHOD NAME="CondicaoComercialVeiculo" DESCRIPTION="" VERSION="6" INTFTYPE="9" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="TipoVeiculo" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="1" LOOKUP="list:'H','Hatchback';'S','Sedan';'P','Pick-up';'V','Van';" FIELDLABEL="Tipo Ve&#237;culo" CTAB="0"/>
+        <PARAM NAME="TotalKM" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="Total km" CTAB="0"/>
+        <PARAM NAME="ValorKM" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="3" FIELDLABEL="Valor km" CTAB="0"/>
+        <PARAM NAME="ValorKMExcedente" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="4" FIELDLABEL="Valor km excedente" CTAB="0"/>
+      </PARAMS>
+      <FIELDS/>
+      <ACTIONSCRIPT></ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <root>
-  <OBJECT NAME="Contratos">
-    <METHOD NAME="Excluir" DESCRIPTION="" VERSION="22" INTFTYPE="3" THREADSAFE="0">
+  <OBJECT NAME="Funcoes">
+    <METHOD NAME="Funcao" DESCRIPTION="" VERSION="3" INTFTYPE="10" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
         </GROUPS>
         <PARAM NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
+        <PARAM NAME="Descricao" SIZE="100" FLAGS="17" PROJECTION="0" ORDER="1" FIELDLABEL="Descricao" CTAB="0"/>
       </PARAMS>
       <FIELDS/>
       <ACTIONSCRIPT></ACTIONSCRIPT>

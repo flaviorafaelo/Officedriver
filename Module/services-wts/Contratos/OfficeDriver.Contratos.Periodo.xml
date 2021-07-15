@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos">
+    <METHOD NAME="Periodo" DESCRIPTION="" VERSION="10" INTFTYPE="9" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Descricao" SIZE="50" FLAGS="1" PROJECTION="0" ORDER="1" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
+        <PARAM NAME="Inicio" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="2" FIELDLABEL="Inicio" CTAB="0"/>
+        <PARAM NAME="Fim" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="3" FIELDLABEL="Fim" CTAB="0"/>
+        <PARAM NAME="ValorNormal" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="4" FIELDLABEL="Normal" CTAB="0"/>
+        <PARAM NAME="ValorExcedente" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="5" FIELDLABEL="Excedente" CTAB="0"/>
+      </PARAMS>
+      <FIELDS/>
+      <ACTIONSCRIPT></ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

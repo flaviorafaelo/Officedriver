@@ -1,18 +1,26 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Turnos">
-    <METHOD NAME="Listar" DESCRIPTION="" VERSION="2" INTFTYPE="5" THREADSAFE="0">
+    <METHOD NAME="Listar" DESCRIPTION="" VERSION="14" INTFTYPE="5" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
         </GROUPS>
-        <PARAM NAME="Descricao" FLAGS="1" PROJECTION="0" FIELDLABEL="Descricao" CTAB="0"/>
-        <PARAM NAME="Situacao" FLAGS="1" PROJECTION="0" FIELDLABEL="Situacao" CTAB="0"/>
+        <PARAM NAME="Descricao" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="1" FIELDLABEL="Descricao" CTAB="0"/>
       </PARAMS>
       <FIELDS>
-        <FIELD NAME="Descri&#231;&#227;o" FORMAT="&#0;" PROJECTION="0" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <FIELD NAME="Id" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
+        <FIELD NAME="Descricao" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="4" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
       </FIELDS>
-      <ACTIONSCRIPT></ACTIONSCRIPT>
+      <ACTIONSCRIPT>SELECT
+  ID,
+  DESCRICAO
+FROM TURNOS
+WHERE [DESCRICAO LIKE :DESCRICAO%]
+</ACTIONSCRIPT>
     </METHOD>
   </OBJECT>
 </root>

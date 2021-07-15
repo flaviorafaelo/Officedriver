@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos">
-    <METHOD NAME="TabelaPreco" DESCRIPTION="" VERSION="5" INTFTYPE="9" THREADSAFE="0">
+    <METHOD NAME="TabelaPreco" DESCRIPTION="" VERSION="6" INTFTYPE="9" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>

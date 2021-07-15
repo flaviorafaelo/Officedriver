@@ -1,0 +1,8 @@
+<dbdic.objects.objects>
+  <ROW NAME="ContratosCooperados" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
+    <FIELDS NAME="Id" DATATYPE="3"/>
+    <FIELDS NAME="Contrato" DATATYPE="3"/>
+    <FIELDS NAME="Cooperado" DATATYPE="3"/>
+    <FIELDS NAME="Funcao" DATATYPE="3"/>
+  </ROW>
+</dbdic.objects.objects>

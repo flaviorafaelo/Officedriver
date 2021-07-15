@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos">
+    <METHOD NAME="CondicaoComercialCooperado" DESCRIPTION="" VERSION="18" INTFTYPE="9" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+          <GROUP NAME="Configura&#231;&#227;o para o per&#237;odo normal"/>
+          <GROUP NAME="Configura&#231;&#227; para o per&#237;odo de feriado"/>
+          <GROUP NAME="Configura&#231;&#227;o para o per&#237;odo de fim de semana"/>
+        </GROUPS>
+        <PARAM NAME="Funcao" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="1" LOOKUP="FUNCOES.LISTAR" LOOKUPKEY="Id" LOOKUPDISPLAY="Descricao" LOOKUPCODE="Id" FIELDLABEL="Fun&#231;&#227;o" CTAB="0"/>
+        <PARAM NAME="Tipo" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="3" LOOKUP="list:'R','Repasse';'C','Cobranca';" FIELDLABEL="Tipo" CTAB="0"/>
+        <PARAM NAME="Horas" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="Horas" CTAB="0"/>
+        <PARAM NAME="PeriodoNormal" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="5" FIELDLABEL="Normal" NESTEDNAME="OfficeDriver.Contratos.Periodo" GROUPNAME="Configura&#231;&#227;o para o per&#237;odo normal" CTAB="0"/>
+        <PARAM NAME="PeriodoFeriado" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="7" FIELDLABEL="Feriado" NESTEDNAME="OfficeDriver.Contratos.Periodo" GROUPNAME="Configura&#231;&#227; para o per&#237;odo de feriado" CTAB="0"/>
+        <PARAM NAME="PeriodoFDS" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="9" FIELDLABEL="Fim de Semana" NESTEDNAME="OfficeDriver.Contratos.Periodo" GROUPNAME="Configura&#231;&#227;o para o per&#237;odo de fim de semana" CTAB="0"/>
+      </PARAMS>
+      <FIELDS/>
+      <ACTIONSCRIPT></ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>
