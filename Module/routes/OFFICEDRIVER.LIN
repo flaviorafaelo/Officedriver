@@ -31,7 +31,7 @@
 		<OBJECT>OFFICEDRIVER.APONTAMENTOS</OBJECT>
 	</link>
 
-	<link category="Cadastros\Turnos" target="standard.tdataedit" _id="OFFD_008">
-		<OBJECT>OFFICEDRIVER.TURNOS</OBJECT>
+	<link category="Cadastros\Funções" target="standard.tdataedit" _id="OFFD_008">
+		<OBJECT>OFFICEDRIVER.FUNCOES</OBJECT>
 	</link>		
 </root>
