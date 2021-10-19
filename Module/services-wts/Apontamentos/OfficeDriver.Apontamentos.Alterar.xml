@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Apontamentos">
-    <METHOD NAME="Alterar" DESCRIPTION="" VERSION="5" INTFTYPE="2" THREADSAFE="0">
+    <METHOD NAME="Alterar" DESCRIPTION="" VERSION="6" INTFTYPE="2" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -20,7 +20,7 @@
         <PARAM NAME="DataSaida" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="12" FIELDLABEL="Data" GROUPNAME="Saida" CTAB="0"/>
         <PARAM NAME="HoraSaida" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="13" FIELDLABEL="Hora" GROUPNAME="Saida" CTAB="0"/>
         <PARAM NAME="KmFinal" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="14" FIELDLABEL="Km" GROUPNAME="Saida" CTAB="0"/>
-        <PARAM NAME="IntervaloDescanso" FLAGS="1" PROJECTION="0" ORDER="15" FIELDLABEL="Intervalo de Descan&#231;o" GROUPNAME="Saida" CTAB="0"/>
+        <PARAM NAME="IntervaloDescanso" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="15" FIELDLABEL="Intervalo de Descan&#231;o" GROUPNAME="Saida" CTAB="0"/>
         <PARAM NAME="Viagem" FORMAT="B" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="5" FIELDLABEL="Viagem" CTAB="0"/>
         <PARAM NAME="Alteracao" FORMAT="B" SIZE="1" DEFAULT="0" PROJECTION="0" FIELDLABEL="Alteracao" CTAB="0"/>
         <PARAM NAME="Observacao" FLAGS="1" PROJECTION="0" ORDER="6" FIELDLABEL="Observacao" CTAB="0"/>

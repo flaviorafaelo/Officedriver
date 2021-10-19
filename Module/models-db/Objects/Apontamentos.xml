@@ -1,0 +1,26 @@
+<dbdic.objects.objects>
+  <ROW NAME="Apontamentos" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
+    <FIELDS NAME="Apontamento" DATATYPE="3">
+      <FLAGS> AQ==
+</FLAGS>
+    </FIELDS>
+    <FIELDS NAME="OrdemServico" DATATYPE="1" SIZE="50"/>
+    <FIELDS NAME="Contrato" DATATYPE="3"/>
+    <FIELDS NAME="Veiculo" DATATYPE="3"/>
+    <FIELDS NAME="DataEntrada" DATATYPE="9"/>
+    <FIELDS NAME="HoraEntrada" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="KmInicial" DATATYPE="3"/>
+    <FIELDS NAME="DataSaida" DATATYPE="9"/>
+    <FIELDS NAME="HoraSaida" DATATYPE="1"/>
+    <FIELDS NAME="KmFinal" DATATYPE="1"/>
+    <FIELDS NAME="Intervalo" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="Viagem" DATATYPE="5"/>
+    <FIELDS NAME="Alteracao" DATATYPE="5"/>
+    <FIELDS NAME="Observacao" DATATYPE="1" SIZE="1000"/>
+    <INDEXES>
+      <FIELDS>Apontamento</FIELDS>
+      <FLAGS> AQ==
+</FLAGS>
+    </INDEXES>
+  </ROW>
+</dbdic.objects.objects>
