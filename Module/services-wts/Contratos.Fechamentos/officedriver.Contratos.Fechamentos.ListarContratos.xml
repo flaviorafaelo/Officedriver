@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos.Fechamentos">
+    <METHOD NAME="ListarContratos" DESCRIPTION="" VERSION="13" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Cliente" FORMAT="N" SIZE="8" FLAGS="2" PROJECTION="0" FIELDLABEL="Cliente" CTAB="0"/>
+        <PARAM NAME="DataBaseFechamento" FORMAT="D" SIZE="10" FLAGS="2" PROJECTION="0" FIELDLABEL="Datafechamento" CTAB="0"/>
+      </PARAMS>
+      <FIELDS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <FIELD NAME="Id" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
+        <FIELD NAME="Numero" SIZE="20" FLAGS="1" PROJECTION="0" ORDER="6" FIELDLABEL="Numero" CTAB="0"/>
+        <FIELD NAME="Descricao" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="1" FIELDLABEL="Cliente" CTAB="0"/>
+        <FIELD NAME="Cliente" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="Datainicio" CTAB="0"/>
+        <FIELD NAME="DataInicio" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="3" FIELDLABEL="Datatermino" CTAB="0"/>
+        <FIELD NAME="DataTermino" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="4" FIELDLABEL="Diafechamento" CTAB="0"/>
+        <FIELD NAME="DiaFechamento" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="5" FIELDLABEL="Diafechamento" CTAB="0"/>
+      </FIELDS>
+      <ACTIONSCRIPT>SELECT C.Id,
+       C.Numero,
+       C.Descricao,
+       Cli.Nome as Cliente,
+       C.DataInicio,
+       C.DataTermino,
+       C.DiaFechamento
+FROM Contratos C
+INNER JOIN Clientes Cli on (Cli.Id = C.Cliente)
+WHERE :DataBaseFechamento BETWEEN C.DataInicio AND DataTermino AND
+      C.DiaFechamento &lt;=  #DAY(:DataBaseFechamento) AND
+      Cli.Id =:Cliente
+ORDER BY C.Numero
+</ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

@@ -1,0 +1,19 @@
+<dbdic.objects.objects>
+  <ROW NAME="Fechamento" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
+    <FIELDS NAME="Id" DATATYPE="3">
+      <FLAGS> AQ==
+</FLAGS>
+    </FIELDS>
+    <FIELDS NAME="Descricao" DATATYPE="1" SIZE="100">
+      <FLAGS> AQ==
+</FLAGS>
+    </FIELDS>
+    <FIELDS NAME="DataBaseFechamento" DATATYPE="9">
+      <FLAGS> AQ==
+</FLAGS>
+    </FIELDS>
+    <FIELDS NAME="Status" DATATYPE="3">
+      <CONSTRAINT>0-Aberto</CONSTRAINT>
+    </FIELDS>
+  </ROW>
+</dbdic.objects.objects>

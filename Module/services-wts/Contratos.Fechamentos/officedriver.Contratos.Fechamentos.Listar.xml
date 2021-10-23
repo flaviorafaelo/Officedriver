@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos.Fechamentos">
+    <METHOD NAME="Listar" DESCRIPTION="Lista Fechamento de Contratos" VERSION="22" INTFTYPE="5" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="DataFechamento" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="3" FIELDLABEL="Datafechamento" CTAB="0"/>
+        <PARAM NAME="Cliente" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="1" LOOKUP="Clientes.Listar" LOOKUPKEY="Id" LOOKUPDISPLAY="Nome" LOOKUPCODE="CNPJCPF" FIELDLABEL="Cliente" CTAB="0"/>
+        <PARAM NAME="Contrato" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="Contrato" CTAB="0"/>
+      </PARAMS>
+      <FIELDS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <FIELD NAME="Id" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
+        <FIELD NAME="Descricao" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="6" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
+        <FIELD NAME="Cliente" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="5" FIELDLABEL="Cliente" CTAB="0"/>
+        <FIELD NAME="DataBaseFechamento" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="7" FIELDLABEL="Data Base Fechamento" CTAB="0"/>
+        <FIELD NAME="Status" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="10" FIELDLABEL="Status" CTAB="0"/>
+        <FIELD NAME="TotalCobranca" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="8" FIELDLABEL="Cobran&#231;a" CTAB="0"/>
+        <FIELD NAME="TotalRepasse" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="9" FIELDLABEL="Repasse" CTAB="0"/>
+      </FIELDS>
+      <ACTIONSCRIPT>SELECT F.Id,
+       F.Descricao,
+       F.DataBaseFechamento,
+       C.Nome as Cliente,
+       #TRANSLATE(F.Status,"0":"Aberto", "1":"Fechado") as Status
+FROM Fechamentos F
+INNER JOIN Clientes C ON (C.Id = F.Cliente)
+ORDER BY F.Id
+</ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

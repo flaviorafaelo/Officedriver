@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos.Fechamentos">
+    <METHOD NAME="Processar" DESCRIPTION="" VERSION="8" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Fechamento" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Fechamento" CTAB="0"/>
+      </PARAMS>
+      <FIELDS/>
+      <ACTIONSCRIPT>#EACH SELECT:CONTRATOS
+             Contrato
+      FROM FechamentosContratos FC
+      WHERE FC.Fechamento=:Fechamento;
+  #CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.FecharContrato(:Fechamento,:Contrato);
+</ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

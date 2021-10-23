@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos.Fechamentos">
+    <METHOD NAME="Contrato" DESCRIPTION="" VERSION="20" INTFTYPE="9" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Id" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
+        <PARAM NAME="Sys_Checked" FORMAT="B" SIZE="1" FLAGS="1" DEFAULT="True" PROJECTION="0" ORDER="1" FIELDLABEL="Processar" CTAB="0"/>
+        <PARAM NAME="Numero" SIZE="20" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="N&#250;mero" CTAB="0"/>
+        <PARAM NAME="Descricao" SIZE="20" FLAGS="1" PROJECTION="0" ORDER="3" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
+        <PARAM NAME="Cliente" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="4" FIELDLABEL="Cliente" CTAB="0"/>
+        <PARAM NAME="DataInicio" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="5" FIELDLABEL="Data Inicio" CTAB="0"/>
+        <PARAM NAME="DataTermino" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="6" FIELDLABEL="Data Termino" CTAB="0"/>
+        <PARAM NAME="DiaFechamento" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="7" FIELDLABEL="Dia Fechamento" CTAB="0"/>
+      </PARAMS>
+      <FIELDS/>
+      <ACTIONSCRIPT></ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

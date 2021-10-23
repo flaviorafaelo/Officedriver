@@ -1,6 +1,6 @@
 <dbdic.objects.objects>
   <ROW NAME="Apontamentos" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
-    <FIELDS NAME="Apontamento" DATATYPE="3">
+    <FIELDS NAME="Id" DATATYPE="3">
       <FLAGS> AQ==
 </FLAGS>
     </FIELDS>
@@ -11,16 +11,28 @@
     <FIELDS NAME="HoraEntrada" DATATYPE="1" SIZE="5"/>
     <FIELDS NAME="KmInicial" DATATYPE="3"/>
     <FIELDS NAME="DataSaida" DATATYPE="9"/>
-    <FIELDS NAME="HoraSaida" DATATYPE="1"/>
-    <FIELDS NAME="KmFinal" DATATYPE="1"/>
-    <FIELDS NAME="Intervalo" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="HoraSaida" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="KmFinal" DATATYPE="3" SIZE="5"/>
+    <FIELDS NAME="IntervaloDescanso" DATATYPE="1" SIZE="5"/>
     <FIELDS NAME="Viagem" DATATYPE="5"/>
-    <FIELDS NAME="Alteracao" DATATYPE="5"/>
-    <FIELDS NAME="Observacao" DATATYPE="1" SIZE="1000"/>
+    <FIELDS NAME="Observacao" DATATYPE="16"/>
+    <FIELDS NAME="Cooperado" DATATYPE="3"/>
     <INDEXES>
-      <FIELDS>Apontamento</FIELDS>
+      <FIELDS>Id</FIELDS>
       <FLAGS> AQ==
 </FLAGS>
+    </INDEXES>
+    <INDEXES>
+      <FIELDS>Contrato</FIELDS>
+    </INDEXES>
+    <INDEXES>
+      <FIELDS>Cooperado</FIELDS>
+    </INDEXES>
+    <INDEXES>
+      <FIELDS>Veiculo</FIELDS>
+    </INDEXES>
+    <INDEXES>
+      <FIELDS>DataEntrada</FIELDS>
     </INDEXES>
   </ROW>
 </dbdic.objects.objects>

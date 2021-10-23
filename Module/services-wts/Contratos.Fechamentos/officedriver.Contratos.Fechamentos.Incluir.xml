@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos.Fechamentos">
+    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="78" INTFTYPE="1" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+          <GROUP NAME="Contratos" STYLE="2"/>
+        </GROUPS>
+        <PARAM NAME="Descricao" SIZE="100" FLAGS="17" PROJECTION="0" ORDER="1" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
+        <PARAM NAME="DataBaseFechamento" FORMAT="D" SIZE="10" FLAGS="27" DEFAULT="Today" PROJECTION="0" ORDER="3" FIELDLABEL="Data Base Fechamento" CTAB="0"/>
+        <PARAM NAME="Cliente" FORMAT="N" SIZE="8" FLAGS="27" PROJECTION="0" ORDER="2" LOOKUP="Clientes.Listar" LOOKUPKEY="Id" LOOKUPDISPLAY="Nome" LOOKUPCODE="CNPJCPF" FIELDLABEL="Cliente" CTAB="0"/>
+        <PARAM NAME="Contratos" FORMAT="R" FLAGS="17" STYLE="3" PROJECTION="0" ORDER="5" LOOKUP="OFFICEDRIVER.CONTRATOS.FECHAMENTOS.LISTARCONTRATOS" FIELDLABEL="Contratos" NESTEDNAME="OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CONTRATO" GROUPNAME="Contratos" CTAB="0"/>
+      </PARAMS>
+      <FIELDS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <FIELD NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
+      </FIELDS>
+      <ACTIONSCRIPT>INSERT:MAIN INTO Fechamentos( Descricao,Cliente, DataBaseFechamento, Status)
+                     VALUES ( :Descricao,:Cliente, :DataBaseFechamento, 0)
+                    #RETURN (Id);
+                    
+#EACH() Contratos
+#BEGIN
+  #IF (:Contratos.Sys_Checked = TRUE)
+     INSERT INTO FechamentosContratos (Fechamento, Contrato) VALUES (:MAIN.Id, :Contratos.Id) #RETURN (Id);
+
+#END;
+
+#CHECK("SELECT COUNT(*) AS N FROM FechamentosContratos WHERE Fechamento=:MAIN.ID",N=0,"Necess&#225;rio selecionar ao menos um contrato.");
+
+#CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.PROCESSAR(:MAIN.ID);
+</ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>
