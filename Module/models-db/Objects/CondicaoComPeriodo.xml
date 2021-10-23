@@ -10,6 +10,7 @@
     <FIELDS NAME="Fim" DATATYPE="1" SIZE="5"/>
     <FIELDS NAME="ValorNormal" DATATYPE="7" SIZE="17" PRECISION="4"/>
     <FIELDS NAME="ValorExcedente" DATATYPE="7" SIZE="17" PRECISION="4"/>
+    <FIELDS NAME="Tipo" DATATYPE="3"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>
       <FLAGS> AQ==

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos">
-    <METHOD NAME="Consultar" DESCRIPTION="" VERSION="27" INTFTYPE="6" THREADSAFE="0">
+    <METHOD NAME="Consultar" DESCRIPTION="" VERSION="48" INTFTYPE="6" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -14,6 +14,7 @@
           <GROUP NAME="Vig&#234;ncia"/>
           <GROUP NAME="Fechamento"/>
           <GROUP NAME="Cooperados" STYLE="1"/>
+          <GROUP NAME="Veiculos" STYLE="1"/>
           <GROUP NAME="Condi&#231;&#245;es Comerciais" STYLE="1"/>
         </GROUPS>
         <FIELD NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
@@ -25,13 +26,14 @@
         <FIELD NAME="DataTermino" FORMAT="D" SIZE="10" FLAGS="17" PROJECTION="0" ORDER="10" FIELDLABEL="Data T&#233;rmino" GROUPNAME="Vig&#234;ncia" CTAB="0"/>
         <FIELD NAME="DiaFechamento" FORMAT="N" SIZE="8" FLAGS="17" PROJECTION="0" ORDER="12" LOOKUP="list:'1','1';'2','2';'3','3';'4','4';'5','5';'6','6';'7','7';'8','8';'9','9';'10','10';'11','11';'12','12';'13','13';'14','14';'15','15';'16','16';'17','17';'18','18';'19','19';'20','20';'21','21';'22','22';'23','23';'24','24';'25','25';'26','26';'27','27';'28','28';'29','29';'30','30';'31','31';" FIELDLABEL="Dia de Fechamento" GROUPNAME="Fechamento" CTAB="0"/>
         <FIELD NAME="IntervaloDiaCooperado" SIZE="5" FLAGS="17" MASK="##:##" PROJECTION="0" ORDER="13" FIELDLABEL="Intervalo Cooperado (Horas)" GROUPNAME="Fechamento" CTAB="0"/>
-        <FIELD NAME="Cooperados" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="15" FIELDLABEL="Cooperados" NESTEDNAME="OfficeDriver.Contratos.Cooperado" GROUPNAME="Cooperados" CTAB="0"/>
-        <FIELD NAME="Valor" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="17" FIELDLABEL="Valor do Contrato" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
+        <FIELD NAME="Cooperados" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="15" FIELDLABEL="Cooperados" NESTEDNAME="OfficeDriver.Contratos.Cooperado" GROUPNAME="Cooperados" CTAB="0"/>
+        <FIELD NAME="Valor" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="19" FIELDLABEL="Valor do Contrato" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
         <FIELD NAME="AdiantamentoProducao" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="5" FIELDLABEL="Adiantamento de Produ&#231;&#227;o" CTAB="0"/>
         <FIELD NAME="BaseCalculo" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="6" LOOKUP="list:'M','Mensal';'D','Di&#225;rio';'H','Hora';" FIELDLABEL="Base de C&#225;lculo" CTAB="0"/>
         <FIELD NAME="MinimoHoras" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="7" FIELDLABEL="M&#237;nimo de Horas Mensal" CTAB="0"/>
-        <FIELD NAME="CondComCooperado" FORMAT="R" FLAGS="1" STYLE="2" PROJECTION="0" ORDER="18" FIELDLABEL="Cooperado" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialCooperado" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
-        <FIELD NAME="CondComVeiculo" FORMAT="R" FLAGS="1" STYLE="2" PROJECTION="0" ORDER="19" FIELDLABEL="Ve&#237;culos" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialVeiculo" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
+        <FIELD NAME="CondComCooperado" FORMAT="R" FLAGS="1" STYLE="2" PROJECTION="0" ORDER="20" FIELDLABEL="Cooperado" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialCooperado" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
+        <FIELD NAME="CondComVeiculo" FORMAT="R" FLAGS="1" STYLE="2" PROJECTION="0" ORDER="21" FIELDLABEL="Ve&#237;culos" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialVeiculo" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
+        <FIELD NAME="Veiculos" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="17" FIELDLABEL="Veiculos" NESTEDNAME="officedriver.Contratos.Veiculo" GROUPNAME="Veiculos" CTAB="0"/>
       </FIELDS>
       <ACTIONSCRIPT>SELECT
   ID,
@@ -48,7 +50,16 @@
   BASECALCULO,
   MINIMOHORAS,
   #ROWSET({SELECT:COOPERADOS COOPERADO, FUNCAO FROM CONTRATOSCOOPERADOS WHERE CONTRATO = :ID}),
-  #ROWSET({SELECT:CONDCOMCOOPERADO FUNCAO, TIPO, HORAS FROM CONTRATOSCONDCOMERCIALCOOP WHERE CONTRATO = :ID}),
+  #ROWSET({SELECT:VEICULOS VEICULO FROM CONTRATOSVEICULOS WHERE CONTRATO = :ID}),
+  #ROWSET({
+            SELECT:CONDCOMCOOPERADO
+               ID,
+               FUNCAO,
+               TIPO,
+               HORAS,
+               #ROWSET({SELECT:PERIODO ID, CONDICAO, DESCRICAO, INICIO, FIM, VALORNORMAL, VALOREXCEDENTE, TIPO FROM CONDICAOCOMPERIODO WHERE CONDICAO = :CONDCOMCOOPERADO.ID })
+            FROM CONTRATOSCONDCOMERCIALCOOP
+            WHERE CONTRATO = :ID}),
   #ROWSET({SELECT:CONDCOMVEICULO TIPOVEICULO, TOTALKM, VALORKM, VALORKMEXCEDENTE FROM CONTRATOSCONDCOMERCIALVEICULO WHERE CONTRATO = :ID})
 FROM
   CONTRATOS
