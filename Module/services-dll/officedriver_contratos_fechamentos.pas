@@ -31,7 +31,7 @@ end;
 procedure CalcularContrato(Input:IwtsInput; Output:IwtsOutput;DataPool:IwtsDataPool);
 var
    C: IwtsCommand;
-   Fechamento,Contrato,Apontamentos: IwtsData;
+   Fechamento,Contrato,ContratoCooperados,ContratoCondicoesComerciais, Apontamentos: IwtsData;
 begin
   C := DataPool.Open('OFFICEDRIVER');
 
@@ -43,14 +43,25 @@ begin
   C.Execute('SELECT * FROM Contratos WHERE Contrato =:Contrato');
   Contrato := C.CreateRecordset;
 
+  C.Dim('Contrato', Input.Value['Contraro']);
+  C.Execute('SELECT * FROM ContratosCooperados WHERE Contrato =:Contrato');
+  ContratoCooperados := C.CreateRecordset;
+
+  C.Dim('Contrato', Input.Value['Contraro']);
+  C.Execute('SELECT * FROM ContratosCooperados WHERE Contrato =:Contrato');
+  ContratoCondicoesComerciais := C.CreateRecordset;
+
+
+
 
   C.Dim('Contrato', Input.Value['Contrato']);
   C.Dim('DataBaseFechamento', Fechamento.Value['DataBaseFechamento']);
-  C.Execute('SELECT * FROM Apontamentos WHERE Contrato =:Contrato AND Fechamento IS NULL and DataEntrada <= :DataBaseFechamento');
+  C.Execute('SELECT * FROM Apontamentos WHERE Contrato =:Contrato AND Fechamento IS NULL and DataEntrada <= :DataBaseFechamento ORDER BY Cooperado');
   Apontamentos := C.CreateRecordset;
 
   while not Apontamentos.EOF do
   begin
+     //Funcao :=
    // Apontamento
   //  ValorCobranca
   //  ValorRepasse
