@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos">
-    <METHOD NAME="CalcularContrato" DESCRIPTION="" VERSION="4" THREADSAFE="0">
+    <METHOD NAME="CalcularContrato" DESCRIPTION="" VERSION="9" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -13,9 +13,14 @@
         <GROUPS>
           <GROUP/>
         </GROUPS>
-        <FIELD NAME="Apontamento" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Apontamento" CTAB="0"/>
-        <FIELD NAME="ValorCobranca" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" FIELDLABEL="Valorcobranca" CTAB="0"/>
-        <FIELD NAME="ValorRepasse" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" FIELDLABEL="Valorrepasse" CTAB="0"/>
+        <FIELD NAME="Apontamento" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="1" FIELDLABEL="Apontamento" CTAB="0"/>
+        <FIELD NAME="ValorCobranca" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="2" FIELDLABEL="Valorcobranca" CTAB="0"/>
+        <FIELD NAME="ValorRepasse" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="3" FIELDLABEL="Valorrepasse" CTAB="0"/>
+        <FIELD NAME="Horario" SIZE="5" FLAGS="1" PROJECTION="0" FIELDLABEL="Horario" CTAB="0"/>
+        <FIELD NAME="PeriodoCobranca" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Peridocobranca" CTAB="0"/>
+        <FIELD NAME="PeriodoRepasse" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Peridorepasse" CTAB="0"/>
+        <FIELD NAME="Descricao" SIZE="50" FLAGS="1" PROJECTION="0" FIELDLABEL="Descricao" CTAB="0"/>
+        <FIELD NAME="ApontamentoDetalhado" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Apontamentodetalhado" CTAB="0"/>
       </FIELDS>
       <ACTIONSCRIPT>
 </ACTIONSCRIPT>
