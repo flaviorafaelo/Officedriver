@@ -14,6 +14,7 @@
     </FIELDS>
     <FIELDS NAME="ValorRepasse" DATATYPE="6"/>
     <FIELDS NAME="ValorCobranca" DATATYPE="6"/>
+    <FIELDS NAME="Horario" DATATYPE="1" SIZE="5"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>
       <FLAGS> AQ==

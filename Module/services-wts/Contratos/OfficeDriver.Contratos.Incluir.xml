@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos">
-    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="62" INTFTYPE="1" THREADSAFE="0">
+    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="64" INTFTYPE="1" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -25,7 +25,7 @@
         <PARAM NAME="BaseCalculo" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="6" LOOKUP="list:'M','Mensal';'D','Di&#225;rio';'H','Hora';" FIELDLABEL="Base de C&#225;lculo" CTAB="0"/>
         <PARAM NAME="MinimoHoras" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="7" FIELDLABEL="M&#237;nimo de Horas Mensal" CTAB="0"/>
         <PARAM NAME="CondComCooperado" FORMAT="R" FLAGS="1" STYLE="2" PROJECTION="0" ORDER="20" FIELDLABEL="Cooperado" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialCooperado" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
-        <PARAM NAME="CondComVeiculo" FORMAT="R" FLAGS="1" STYLE="2" PROJECTION="0" ORDER="21" FIELDLABEL="Ve&#237;culos" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialVeiculo" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
+        <PARAM NAME="CondComVeiculo" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="21" FIELDLABEL="Ve&#237;culos" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialVeiculo" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
         <PARAM NAME="Veiculos" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="17" FIELDLABEL="Veiculos" NESTEDNAME="officedriver.Contratos.Veiculo" GROUPNAME="Veiculos" CTAB="0"/>
       </PARAMS>
       <FIELDS>

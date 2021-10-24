@@ -8,7 +8,7 @@
       <FLAGS> AQ==
 </FLAGS>
     </FIELDS>
-    <FIELDS NAME="Horario" DATATYPE="3"/>
+    <FIELDS NAME="Horario" DATATYPE="1" SIZE="5"/>
     <FIELDS NAME="Tempo" DATATYPE="6"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>

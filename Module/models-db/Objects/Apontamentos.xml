@@ -17,6 +17,7 @@
     <FIELDS NAME="Viagem" DATATYPE="5"/>
     <FIELDS NAME="Observacao" DATATYPE="16"/>
     <FIELDS NAME="Cooperado" DATATYPE="3"/>
+    <FIELDS NAME="Fechamento" DATATYPE="3"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>
       <FLAGS> AQ==

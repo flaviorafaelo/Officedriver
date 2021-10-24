@@ -34,16 +34,26 @@ begin
 
   for I := HoraInicio to HoraFim  do
   begin
-    Output.NewRecord;
-    Output.Values['Horario'] := I;
-    Output.Values['Tempo'] := 1;
-
     if (I = HoraInicio) and (MinutoInicio <> 0) then
+    begin
+      Output.NewRecord;
+      Output.Values['Horario'] := HorarioInicial;
       Output.Values['Tempo'] := MinutoInicio/60;
-
-    if (I = HoraFim) and (MinutoFim <> 0) then
-      Output.Values['Tempo'] := MinutoFim/60;
-
+    end else
+    if (I = HoraFim) then
+    begin
+      if (MinutoFim <> 0) then
+      begin
+        Output.NewRecord;
+        Output.Values['Horario'] := HorarioFinal;
+        Output.Values['Tempo'] := MinutoFim/60;
+      end;
+    end else
+    begin
+      Output.NewRecord;
+      Output.Values['Horario'] := FormatFloat('00', I)+':00';
+      Output.Values['Tempo'] := 1;
+    end;
   end;
 end;
 

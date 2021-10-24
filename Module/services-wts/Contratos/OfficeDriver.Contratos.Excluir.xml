@@ -1,14 +1,23 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos">
-    <METHOD NAME="Excluir" DESCRIPTION="" VERSION="40" INTFTYPE="3" THREADSAFE="0">
+    <METHOD NAME="Excluir" DESCRIPTION="" VERSION="42" INTFTYPE="3" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
         </GROUPS>
         <PARAM NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
       </PARAMS>
-      <FIELDS/>
+      <FIELDS>
+        <GROUPS>
+          <GROUP/>
+          <GROUP NAME="Vig&#234;ncia"/>
+          <GROUP NAME="Fechamento"/>
+          <GROUP NAME="Cooperados" STYLE="1"/>
+          <GROUP NAME="Veiculos" STYLE="1"/>
+          <GROUP NAME="Condi&#231;&#245;es Comerciais" STYLE="1"/>
+        </GROUPS>
+      </FIELDS>
       <ACTIONSCRIPT>DELETE FROM CONTRATOS WHERE ID = :ID;
 
 DELETE FROM CONTRATOSCOOPERADOS WHERE CONTRATO = :ID;

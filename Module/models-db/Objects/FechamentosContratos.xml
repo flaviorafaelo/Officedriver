@@ -12,7 +12,10 @@
       <FLAGS> AQ==
 </FLAGS>
     </FIELDS>
-    <FIELDS NAME="ValorLiquido" DATATYPE="6">
+    <FIELDS NAME="ValorCobranca" DATATYPE="6">
+      <DEFAULT>0</DEFAULT>
+    </FIELDS>
+    <FIELDS NAME="ValorRepasse" DATATYPE="6">
       <DEFAULT>0</DEFAULT>
     </FIELDS>
     <INDEXES>

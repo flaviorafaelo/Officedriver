@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Apontamentos">
-    <METHOD NAME="Detalhar" DESCRIPTION="" VERSION="6" THREADSAFE="0">
+    <METHOD NAME="Detalhar" DESCRIPTION="" VERSION="7" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -13,7 +13,7 @@
         <GROUPS>
           <GROUP/>
         </GROUPS>
-        <FIELD NAME="Horario" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Hora" CTAB="0"/>
+        <FIELD NAME="Horario" SIZE="5" FLAGS="1" PROJECTION="0" FIELDLABEL="Hora" CTAB="0"/>
         <FIELD NAME="Tempo" FORMAT="N" SIZE="8" FLAGS="1" DECIMALS="2" PROJECTION="0" FIELDLABEL="Tempo" CTAB="0"/>
       </FIELDS>
       <ACTIONSCRIPT>
