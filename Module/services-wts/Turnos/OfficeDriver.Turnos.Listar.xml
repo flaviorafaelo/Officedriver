@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Turnos">
-    <METHOD NAME="Listar" DESCRIPTION="" VERSION="14" INTFTYPE="5" THREADSAFE="0">
+    <METHOD NAME="Listar" DESCRIPTION="" VERSION="15" INTFTYPE="5" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -13,7 +13,7 @@
           <GROUP/>
         </GROUPS>
         <FIELD NAME="Id" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
-        <FIELD NAME="Descricao" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="4" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
+        <FIELD NAME="Descricao" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="3" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
       </FIELDS>
       <ACTIONSCRIPT>SELECT
   ID,

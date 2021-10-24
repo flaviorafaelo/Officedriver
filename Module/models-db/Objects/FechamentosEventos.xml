@@ -1,5 +1,5 @@
 <dbdic.objects.objects>
-  <ROW NAME="FechamentosApontamentos" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
+  <ROW NAME="FechamentosEventos" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
     <FIELDS NAME="Id" DATATYPE="3">
       <FLAGS> AQ==
 </FLAGS>
@@ -8,15 +8,12 @@
       <FLAGS> AQ==
 </FLAGS>
     </FIELDS>
-    <FIELDS NAME="Apontamento" DATATYPE="3">
-      <FLAGS> AQ==
-</FLAGS>
-    </FIELDS>
     <FIELDS NAME="ValorRepasse" DATATYPE="6"/>
     <FIELDS NAME="ValorCobranca" DATATYPE="6"/>
-    <FIELDS NAME="Horario" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="Horario" DATATYPE="1" SIZE="6"/>
     <FIELDS NAME="PeriodoRepasse" DATATYPE="3"/>
     <FIELDS NAME="PeriodoCobranca" DATATYPE="3"/>
+    <FIELDS NAME="Descricao" DATATYPE="1" SIZE="50"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>
       <FLAGS> AQ==
@@ -24,9 +21,6 @@
     </INDEXES>
     <INDEXES>
       <FIELDS>Fechamento</FIELDS>
-    </INDEXES>
-    <INDEXES>
-      <FIELDS>Apontamento</FIELDS>
     </INDEXES>
   </ROW>
 </dbdic.objects.objects>

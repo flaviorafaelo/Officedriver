@@ -3,22 +3,23 @@ unit officedriver_apontamentos;
 interface
 
 uses
-  SysUtils, wtsServerObjs;
+  SysUtils, wtsServerObjs, officedriver_utils;
 
 implementation
 
 procedure Detalhar(Input:IwtsInput; Output:IwtsOutput;DataPool:IwtsDataPool);
 var
    HorarioInicial,HorarioFinal: string;
-
    HoraInicio,MinutoInicio,
    HoraFim,MinutoFim: Integer;
    I: Integer;
-   procedure SepararHora(AHorario: string; var AHora: Integer; var AMinutos: Integer);
-   begin
-     AHora := StrToInt(Copy(AHorario, 1,2));
-     AMinutos := StrToInt(Copy(AHorario, 4,2));
-   end;
+
+  procedure SepararHora(AHorario: string; var AHora: Integer; var AMinutos: Integer);
+  begin
+    AHora := StrToInt(Copy(AHorario, 1,2));
+    AMinutos := StrToInt(Copy(AHorario, 4,2));
+  end;
+
 begin
   HorarioInicial := Input.AsString['HorarioInicial'];
   HorarioFinal := Input.AsString['HorarioFinal'];

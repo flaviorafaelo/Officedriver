@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos">
-    <METHOD NAME="Listar" DESCRIPTION="Lista Fechamento de Contratos" VERSION="22" INTFTYPE="5" THREADSAFE="0">
+    <METHOD NAME="Listar" DESCRIPTION="Lista Fechamento de Contratos" VERSION="27" INTFTYPE="5" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -15,20 +15,23 @@
           <GROUP/>
         </GROUPS>
         <FIELD NAME="Id" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
-        <FIELD NAME="Descricao" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="6" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
-        <FIELD NAME="Cliente" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="5" FIELDLABEL="Cliente" CTAB="0"/>
-        <FIELD NAME="DataBaseFechamento" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="7" FIELDLABEL="Data Base Fechamento" CTAB="0"/>
-        <FIELD NAME="Status" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="10" FIELDLABEL="Status" CTAB="0"/>
-        <FIELD NAME="TotalCobranca" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="8" FIELDLABEL="Cobran&#231;a" CTAB="0"/>
-        <FIELD NAME="TotalRepasse" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="9" FIELDLABEL="Repasse" CTAB="0"/>
+        <FIELD NAME="Descricao" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="7" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
+        <FIELD NAME="Cliente" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="6" FIELDLABEL="Cliente" CTAB="0"/>
+        <FIELD NAME="DataBaseFechamento" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="8" FIELDLABEL="Data Base Fechamento" CTAB="0"/>
+        <FIELD NAME="Status" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="11" FIELDLABEL="Status" CTAB="0"/>
+        <FIELD NAME="TotalCobranca" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="9" FIELDLABEL="Cobran&#231;a" CTAB="0"/>
+        <FIELD NAME="TotalRepasse" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="10" FIELDLABEL="Repasse" CTAB="0"/>
+        <FIELD NAME="Contrato" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="5" FIELDLABEL="Contrato" CTAB="0"/>
       </FIELDS>
       <ACTIONSCRIPT>SELECT F.Id,
        F.Descricao,
        F.DataBaseFechamento,
        C.Nome as Cliente,
+       CN.Descricao as Contrato,
        #TRANSLATE(F.Status,"0":"Aberto", "1":"Fechado") as Status
 FROM Fechamentos F
 INNER JOIN Clientes C ON (C.Id = F.Cliente)
+INNER JOIN Contratos CN ON (CN.Cliente = C.Id)
 ORDER BY F.Id
 </ACTIONSCRIPT>
     </METHOD>

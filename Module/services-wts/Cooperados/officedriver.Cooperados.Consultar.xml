@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Cooperados">
-    <METHOD NAME="Consultar" DESCRIPTION="Consultar" VERSION="74" INTFTYPE="6" THREADSAFE="0">
+    <METHOD NAME="Consultar" DESCRIPTION="Consultar" VERSION="76" INTFTYPE="6" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -13,7 +13,7 @@
           <GROUP/>
           <GROUP NAME="Dados Pagamento"/>
           <GROUP NAME="Telefones"/>
-          <GROUP NAME="Endereco"/>
+          <GROUP NAME="Endere&#231;o"/>
           <GROUP NAME="Contatos"/>
           <GROUP NAME="Documentos" STYLE="1"/>
           <GROUP NAME="Rg"/>
@@ -30,12 +30,12 @@
         <FIELD NAME="Cnh" SIZE="20" FLAGS="1" PROJECTION="0" ORDER="28" FIELDLABEL="N&#250;mero" GROUPNAME="Carteira Nacional de Habilita&#231;&#227;o" CTAB="0"/>
         <FIELD NAME="CnhValidade" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="29" FIELDLABEL="Validade" GROUPNAME="Carteira Nacional de Habilita&#231;&#227;o" CTAB="0"/>
         <FIELD NAME="CnhCategoria" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="30" LOOKUP="list:'A','A';'B','B';'C','C';'D','D';'E','E';" FIELDLABEL="Categoria" GROUPNAME="Carteira Nacional de Habilita&#231;&#227;o" CTAB="0"/>
-        <FIELD NAME="FreeLancer" FORMAT="B" SIZE="1" FLAGS="17" PROJECTION="0" ORDER="9" FIELDLABEL="Freelancer" CTAB="0"/>
-        <FIELD NAME="Endereco" FORMAT="R" FLAGS="1" STYLE="8" PROJECTION="0" ORDER="19" FIELDLABEL="Endereco" NESTEDNAME="officedriver.Pessoas.Endereco" GROUPNAME="Endereco" CTAB="0"/>
+        <FIELD NAME="FreeLancer" FORMAT="B" SIZE="1" FLAGS="17" DEFAULT="false" PROJECTION="0" ORDER="9" FIELDLABEL="Freelancer" CTAB="0"/>
+        <FIELD NAME="Endereco" FORMAT="R" FLAGS="1" STYLE="8" PROJECTION="0" ORDER="19" FIELDLABEL="Endere&#231;o" NESTEDNAME="officedriver.Pessoas.Endereco" GROUPNAME="Endere&#231;o" CTAB="0"/>
         <FIELD NAME="DataMatricula" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="4" FIELDLABEL="Data Matr&#237;cula" CTAB="0"/>
-        <FIELD NAME="DataCadastro" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="3" FIELDLABEL="Data Cadastro" CTAB="0"/>
+        <FIELD NAME="DataCadastro" FORMAT="D" SIZE="10" FLAGS="1" DEFAULT="Today" PROJECTION="0" ORDER="3" FIELDLABEL="Data Cadastro" CTAB="0"/>
         <FIELD NAME="DataDesligamento" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="5" FIELDLABEL="Data Desligamento" CTAB="0"/>
-        <FIELD NAME="Situacao" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="6" LOOKUP="list:'0','Desligado';'1','Ativo';" FIELDLABEL="Situa&#231;&#227;o" CTAB="0"/>
+        <FIELD NAME="Situacao" FORMAT="N" SIZE="8" FLAGS="1" DEFAULT="1" PROJECTION="0" ORDER="6" LOOKUP="list:'0','Desligado';'1','Ativo';" FIELDLABEL="Situa&#231;&#227;o" CTAB="0"/>
         <FIELD NAME="Contatos" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="21" FIELDLABEL="Contatos" NESTEDNAME="officedriver.Pessoas.Contato" GROUPNAME="Contatos" CTAB="0"/>
         <FIELD NAME="Pagamento" FORMAT="R" FLAGS="1" STYLE="8" PROJECTION="0" ORDER="12" FIELDLABEL="Pagamento" NESTEDNAME="OFFICEDRIVER.COOPERADOS.PAGAMENTO" GROUPNAME="Dados Pagamento" CTAB="0"/>
         <FIELD NAME="DddResidencial" SIZE="5" FLAGS="1" PROJECTION="0" ORDER="14" FIELDLABEL="DDD Resid&#234;ncial" GROUPNAME="Telefones" CTAB="0"/>
