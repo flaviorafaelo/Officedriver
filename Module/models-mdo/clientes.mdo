@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<root>
+	<dimension>
+    
+		<tables>
+			<table name="Clientes"/>
+		</tables>
+		
+		<attributes>
+			<level name="Clientes">
+				<attribute name="Id"/>
+				<attribute name="Nome" caption="Nome"/>
+				<attribute name="TipoPessoa" caption="TipoPessoa"/>
+				<attribute name="CNPJ" caption="CNPJ"/>
+				<attribute name="CPF" caption="CPF"/>
+				<attribute name="Logo" caption="Logo"/>			
+			</level>
+		</attributes>
+		
+	</dimension>
+</root>

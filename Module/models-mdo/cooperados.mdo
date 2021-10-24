@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<root>
+	<dimension>
+    
+		<tables>
+			<table name="Cooperados"/>
+		</tables>
+		
+		<outriggers>
+			<outrigger fullname="enderecos_cooperados$enderecos_cooperados">
+				<relation cardinality="1-1">
+					<condition  left="cooperado.id" right="enderecos_cooperados$enderecos_cooperados.pessoa"/>
+				</relation>
+			</outrigger>
+			<outrigger fullname="contatos_cooperados$contatos_cooperados">
+				<relation cardinality="N-0">
+					<condition  left="cooperado.id" right="contatos_cooperados$contatos_cooperados.pessoa"/>
+				</relation>
+			</outrigger>			
+		</outriggers>		
+		
+		
+		<attributes>
+			<level name="cooperado" caption="Cooperado" tablename="Cooperados" keyattribute="Id" displayattribute="Nome" codeattribute="Matricula">
+				<attribute name="Id"/>
+				<attribute name="Matricula" caption="Matricula"/>
+				<attribute name="Foto" caption="Foto"/>
+				<attribute name="Nome" caption="Nome"/>
+				<attribute name="Nascimento" caption="Nascimento"/>
+				<attribute name="Rg" caption="Rg"/>
+				<attribute name="RgExpedicao" caption="RgExpedicao"/>
+				<attribute name="Cpf" caption="Cpf"/>
+				<attribute name="Cnh" caption="Cnh"/>
+				<attribute name="CnhValidade" caption="CnhValidade"/>
+				<attribute name="CnhCategoria" caption="CnhCategoria"/>
+				<attribute name="FreeLancer" caption="FreeLancer" datatype="boolean"/>
+				<attribute name="DataMatricula" caption="DataMatricula"/>
+				<attribute name="DataCadastro" caption="DataCadastro"/>
+				<attribute name="DataDesligamento" caption="DataDesligamento"/>
+				<attribute name="Situacao" fieldname="(#translate($.Situacao,'0','Desligado','1','Ativo'))" caption="Situacao" datatype="1" datasize="20" cangroup="1"/>
+				<attribute name="PagamentoTipo" fieldname="(#translate($.Situacao,'0','Cheque','1','Deposito Bancario'))" caption="PagamentoTipo" datatype="1" datasize="20" cangroup="1"/>
+				<attribute name="PagamentoBanco" caption="PagamentoBanco"/>
+				<attribute name="PagamentoTipoConta" caption="PagamentoTipoConta"/>
+				<attribute name="PagamentoAgencia" caption="PagamentoAgencia"/>
+				<attribute name="PagamentoNumeroConta" caption="PagamentoNumeroConta"/>			
+				<attribute name="DddResidencial" caption="DddResidencial"/>		
+				<attribute name="TelefoneResidencial" caption="TelefoneResidencial"/>		
+				<attribute name="DddCelular" caption="DddCelular"/>		
+				<attribute name="TelefoneCelular" caption="TelefoneCelular"/>		
+				<attribute name="EMail" caption="EMail"/>				
+			</level>
+		</attributes>
+		
+	</dimension>
+</root>

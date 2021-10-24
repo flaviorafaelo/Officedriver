@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<root>
+	<dimension>
+    
+		<tables>
+			<table name="Veiculos"/>
+		</tables>
+		
+		<attributes>
+			<level>
+				<attribute name="Id"/>
+				<attribute name="Modelo" caption="Modelo"/>
+				<attribute name="Fabricante" caption="Fabricante"/>
+				<attribute name="Placa" caption="Placa"/>
+				<attribute name="AnoFabricacao" caption="AnoFabricacao"/>
+				<attribute name="AnoModelo" caption="AnoModelo"/>
+				<attribute name="Tipo" caption="Tipo"/>
+				<attribute name="Potencia" caption="Potencia"/>
+				<attribute name="TipoCombustivel" caption="TipoCombustivel"/>
+				<attribute name="Cor" caption="Cor"/>
+				<attribute name="Rastreador" caption="Rastreador"/>
+				<attribute name="NumeroRastreador" caption="NumeroRastreador"/>
+				<attribute name="VencimentoAPP" caption="VencimentoAPP"/>		
+				<attribute name="TipoProprietario" caption="TipoProprietario"/>	
+				<attribute name="Cooperado" caption="Cooperado"/>	
+				<attribute name="Cliente" caption="Cliente"/>					
+			</level>
+		</attributes>
+		
+	</dimension>
+</root>

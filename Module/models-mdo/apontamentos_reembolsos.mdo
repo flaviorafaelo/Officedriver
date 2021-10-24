@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<root>
+	<fact>
+    
+		<tables>
+			<table name="ApontamentosReembolsos"/>
+		</tables>
+		
+		<attributes>
+			<level name="ApontamentosReembolsos">
+				<attribute name="Id"/>
+				<attribute name="Apontamento"/>
+				<attribute name="Tipo" fieldname="(#translate($.Tipo,'0','Pedágio','1','Estacionamento','2','Hospedagem','3','Refeição','4','Higienização','5','Manutenção','6','Outros'))" caption="Tipo" datatype="1" datasize="20" cangroup="1" degenerate="1"/>
+				<attribute name="Valor" caption="Valor"/>
+				<attribute name="Observacao" caption="Observacao" degenerate="1"/>		
+			</level>
+		</attributes>
+		
+	</fact>
+</root>

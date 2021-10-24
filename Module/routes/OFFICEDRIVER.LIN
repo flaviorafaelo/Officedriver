@@ -1,7 +1,14 @@
 <?xml version="1.0"?>
 <root>
-	<_currentid>OFFD_011</_currentid>
+	<_currentid>OFFD_012</_currentid>
 	<_name>RULES.APS</_name>
+	
+	
+	<link category="Inteligência de Negócio\Gerador de Relatórios" target="" _visible="FALSE" _id="REL_1">
+	</link>
+	
+	<link category="Inteligência de Negócio\Gerador de Informações" target="#reports_catalog" _id="138">	
+	</link>
 
 	<link category="Cadastros\Cooperados" target="standard.tdataedit" _id="OFFD_001">
 		<OBJECT>OFFICEDRIVER.COOPERADOS</OBJECT>
@@ -13,7 +20,7 @@
 		<OBJECT>OFFICEDRIVER.BANCOS</OBJECT>
 	</link>
 
-	<link category="Cadastros\VeÃ­culos" target="standard.tdataedit" _id="OFFD_003">
+	<link category="Cadastros\Veículos" target="standard.tdataedit" _id="OFFD_003">
 		<OBJECT>OFFICEDRIVER.VEICULOS</OBJECT>
 	</link>
 	
@@ -37,7 +44,7 @@
 		<OBJECT>OFFICEDRIVER.APONTAMENTOS</OBJECT>
 	</link>
 
-	<link category="Cadastros\FunÃ§Ãµes" target="standard.tdataedit" _id="OFFD_008">
+	<link category="Cadastros\Funções" target="standard.tdataedit" _id="OFFD_008">
 		<OBJECT>OFFICEDRIVER.FUNCOES</OBJECT>
 	</link>		
 	<link category="Processos\Fechamento" target="standard.tdataedit" _id="OFFD_010">

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<root>
+	<dimension>
+    
+		<tables>
+			<table name="Contatos"/>
+		</tables>
+		
+		<attributes>
+			<level name="contatos" caption="Contatos" tablename="Contatos" keyattribute="Id" displayattribute="Nome">
+				<attribute name="Id"/>
+				<attribute name="TipoPessoa"/>
+				<attribute name="Pessoa"/>
+				<attribute name="Nome" caption="Nome"/>
+				<attribute name="Tipo" caption="Tipo"/>
+				<attribute name="Ddd" caption="Ddd"/>
+				<attribute name="Telefone" caption="Telefone"/>
+				<attribute name="EMail" caption="EMail"/>
+			</level>
+		</attributes>
+		
+	</dimension>
+</root>

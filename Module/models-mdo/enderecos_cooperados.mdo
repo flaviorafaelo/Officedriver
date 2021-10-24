@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<root>
+	<dimension inheritedfrom="Enderecos">
+    
+	<conditions>
+	   (TipoPessoa = 0)
+    </conditions>
+		
+	</dimension>
+</root>

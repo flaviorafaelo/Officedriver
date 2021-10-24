@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<root>
+	<fact>
+    
+		<tables>
+			<table name="Apontamentos"/>
+			<table name="ApontamentosReembolsos"/>					
+		</tables>
+		
+		<relations>
+			<relation cardinality="N-1">
+				<condition connector="" left="ApontamentosReembolsos.Apontamento" right="Apontamentos.Id"/>
+			</relation>
+		</relations>		
+		
+		<outriggers>
+			<outrigger fullname="contratos$contratos">
+				<relation cardinality="1-1">
+					<condition  left="apontamentos.contrato" right="contratos$contratos.id"/>
+				</relation>
+			</outrigger>
+			<outrigger fullname="cooperados$cooperados">
+				<relation cardinality="N-0">
+					<condition  left="apontamentos.cooperado" right="cooperados$cooperados.id"/>
+				</relation>
+			</outrigger>		
+		</outriggers>			
+		
+		<attributes>
+			<level name="Apontamentos" main="1" tablename="Apontamentos" caption="Apontamentos" >
+				<attribute name="Id"/>
+				<attribute name="OrdemServico"/>
+				<attribute name="Contrato"/>
+				<attribute name="Veiculo" caption="Veiculo"/>
+				<attribute name="DataEntrada" caption="DataEntrada" degenerate="1"/>
+				<attribute name="HoraEntrada" caption="HoraEntrada" degenerate="1"/>
+				<attribute name="KmInicial" caption="KmInicial" degenerate="1"/>
+				<attribute name="DataSaida" caption="DataSaida" degenerate="1"/>
+				<attribute name="HoraSaida" caption="HoraSaida" degenerate="1"/>
+				<attribute name="KmFinal" caption="KmFinal" degenerate="1"/>
+				<attribute name="IntervaloDescanso" caption="IntervaloDescanso" degenerate="1"/>
+				<attribute name="Viagem" caption="Viagem" degenerate="1"/>
+				<attribute name="Observacao" caption="Observacao" degenerate="1"/>
+				<attribute name="Cooperado" caption="Cooperado"/>	
+				<attribute name="Fechamento" caption="Fechamento"/>					
+			</level>
+			
+			<level name="Reembolsos" tablename="ApontamentosReembolsos" caption="Reembolsos" >
+				<attribute name="Id"/>
+				<attribute name="Apontamento"/>
+				<attribute name="Tipo" fieldname="(#translate($.Tipo,'0','Pedágio','1','Estacionamento','2','Hospedagem','3','Refeição','4','Higienização','5','Manutenção','6','Outros'))" caption="Tipo" datatype="1" datasize="20" cangroup="1" degenerate="1"/>
+				<attribute name="Valor" caption="Valor"/>
+				<attribute name="Observacao" caption="Observacao" degenerate="1"/>		
+			</level>
+			
+		</attributes>
+		
+	</fact>
+</root>
