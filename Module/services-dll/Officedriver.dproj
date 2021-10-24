@@ -1,4 +1,5 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{1746f948-63bf-4655-9389-e0bfe448d527}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -31,6 +32,7 @@
     <DelphiCompile Include="Officedriver.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
+    <DCCReference Include="officedriver_apontamentos.pas" />
     <DCCReference Include="officedriver_contratos_fechamentos.pas" />
     <DCCReference Include="z:\wdts\server\common\wtsmemorym_intf.pas" />
     <DCCReference Include="Z:\WDTS\server\common\wtsServerObjs.pas" />

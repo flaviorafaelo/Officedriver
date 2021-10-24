@@ -94,6 +94,13 @@ begin
   C.Execute('SELECT * FROM ContratosCooperados WHERE Contrato =:Contrato');
   Cooperados := C.CreateRecordset;
 
+  C.Dim('Contrato', Input.Value['Contraro']);
+  C.Execute('SELECT * FROM ContratosCooperados WHERE Contrato =:Contrato');
+  ContratoCondicoesComerciais := C.CreateRecordset;
+
+
+
+
   C.Dim('Contrato', Input.Value['Contrato']);
   C.Execute('SELECT * '+
             ' FROM ContratosCondComercialCoop ccc '+ 

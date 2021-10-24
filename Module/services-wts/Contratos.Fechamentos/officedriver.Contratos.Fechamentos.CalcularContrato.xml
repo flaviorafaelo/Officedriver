@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos.Fechamentos">
+    <METHOD NAME="CalcularContrato" DESCRIPTION="" VERSION="4" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Fechamento" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Fechamento" CTAB="0"/>
+        <PARAM NAME="Contrato" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Contrato" CTAB="0"/>
+      </PARAMS>
+      <FIELDS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <FIELD NAME="Apontamento" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Apontamento" CTAB="0"/>
+        <FIELD NAME="ValorCobranca" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" FIELDLABEL="Valorcobranca" CTAB="0"/>
+        <FIELD NAME="ValorRepasse" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" FIELDLABEL="Valorrepasse" CTAB="0"/>
+      </FIELDS>
+      <ACTIONSCRIPT>
+</ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

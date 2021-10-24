@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Apontamentos">
-    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="29" INTFTYPE="1" THREADSAFE="0">
+    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="34" INTFTYPE="1" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -32,9 +32,11 @@
         <FIELD NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
       </FIELDS>
       <ACTIONSCRIPT>INSERT:MAIN INTO Apontamentos( OrdemServico, Contrato, Cooperado, Veiculo, DataEntrada, HoraEntrada, KmInicial, DataSaida, HoraSaida, KmFinal, IntervaloDescanso, Viagem, Observacao)
+                      VALUES ( :OrdemServico, :Contrato, :Cooperado, :Veiculo, :DataEntrada, :HoraEntrada, :KmInicial, :DataSaida, :HoraSaida, :KmFinal, :IntervaloDescanso, :Viagem, :Observacao)
+                      #RETURN(Id);
 
-                 VALUES ( :OrdemServico, :Contrato, :Cooperado, :Veiculo, :DataEntrada, :HoraEntrada, :KmInicial, :DataSaida, :HoraSaida, :KmFinal, :IntervaloDescanso, :Viagem, :Observacao)
-#RETURN(Id);
+#EACH() #CALL:DETALHES OFFICEDRIVER.APONTAMENTOS.Detalhar(:HoraEntrada,:HoraSaida);
+  INSERT INTO ApontamentosDetalhados(Apontamento,Horario,Tempo) VALUES (:MAIN.Id, :DETALHES.Horario, :DETALHES.Tempo) #RETURN(Id);
 
 #EACH() Reembolsos;
  INSERT INTO ApontamentosReembolsos (Apontamento,Tipo,Valor,Observacao) VALUES (:MAIN.Id,:Reembolsos.Tipo,:Reembolsos.Valor,:Reembolsos.Observacao) #RETURN(Id);
