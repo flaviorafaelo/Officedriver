@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <root>
-	<_currentid>OFFD_009</_currentid>
+	<_currentid>OFFD_011</_currentid>
 	<_name>RULES.APS</_name>
 
 	<link category="Cadastros\Cooperados" target="standard.tdataedit" _id="OFFD_001">
@@ -23,6 +23,10 @@
 	
 	<link category="Cadastros\Clientes" target="standard.tdataedit" _id="OFFD_005">
 		<OBJECT>OFFICEDRIVER.CLIENTES</OBJECT>
+	</link>	
+	
+	<link category="Cadastros\Feriados" target="standard.tdataedit" _id="OFFD_011">
+		<OBJECT>OFFICEDRIVER.FERIADOS</OBJECT>
 	</link>	
 
 	<link category="Processos\Contratos" target="standard.tdataedit" _id="OFFD_006">
