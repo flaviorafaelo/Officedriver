@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos">
-    <METHOD NAME="Excluir" DESCRIPTION="" VERSION="50" INTFTYPE="3" THREADSAFE="0">
+    <METHOD NAME="Excluir" DESCRIPTION="" VERSION="52" INTFTYPE="3" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -11,6 +11,8 @@
       <FIELDS/>
       <ACTIONSCRIPT>DELETE FROM Fechamentos WHERE Id=:id;
 DELETE FROM FechamentosContratos WHERE Fechamento=:Id;
+DELETE FROM FechamentosApontamentos WHERE Fechamento=:Id;
+UPDATE Apontamentos SET Fechamento = null WHERE Fechamento=:Id;
 </ACTIONSCRIPT>
     </METHOD>
   </OBJECT>
