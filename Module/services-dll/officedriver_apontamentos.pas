@@ -3,7 +3,7 @@ unit officedriver_apontamentos;
 interface
 
 uses
-  SysUtils, wtsServerObjs, officedriver_utils;
+  SysUtils, wtsServerObjs;
 
 implementation
 

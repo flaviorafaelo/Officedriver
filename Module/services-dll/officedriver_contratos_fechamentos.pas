@@ -3,7 +3,7 @@ unit officedriver_contratos_fechamentos;
 interface
 
 uses
-  wtsServerObjs, SysUtils, officedriver_utils;
+  wtsServerObjs, SysUtils;
 Type
   TValores = record
     Periodo: Integer;
@@ -92,7 +92,7 @@ var
      C.Execute('Select Nome From Cooperados where Id = :Cooperado');
      Result := C.GetFieldByName('Nome');
    end; 
-   
+
    procedure PreparaCondicao;
    var FimOriginal, RecNo: string;
        Tipo, Periodo, Funcao, Horas: Integer;
@@ -279,7 +279,9 @@ begin
      if (not Cooperados.Locate(['Cooperado'],[Apontamentos.Value['Cooperado']])) then
        Raise Exception.Create('Cooperado '+GetNomeCooperado(Apontamentos.Value['Cooperado'])+' não encontrado no contrato.');
 
-     if (TotalHoraCalculada > 0) and ((Contrato.GetFieldByName('BaseCalculo') = 'D' and  Apontamentos.value['DataEntrada'] <> DataEntrada)) or (Apontamentos.value['Cooperado'] <> Cooperado))  then
+     if (TotalHoraCalculada > 0) and
+       (((Contrato.GetFieldByName('BaseCalculo') = 'D') and
+         (Apontamentos.value['DataEntrada'] <> DataEntrada)) or (Apontamentos.value['Cooperado'] <> Cooperado))  then
      begin
        ValorCobranca := ObterValorHoraDesc(CondicoesCobranca, Cooperados.Value['Funcao'], Apontamentos.value['DataEntrada']);
        ValorRepasse  := ObterValorHoraDesc(CondicoesRepasse , Cooperados.Value['Funcao'], Apontamentos.value['DataEntrada']);
