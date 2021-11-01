@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos.Fechamentos.CALCULO">
+    <METHOD NAME="Periodo" DESCRIPTION="" VERSION="1" INTFTYPE="9" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Periodo" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Periodo" CTAB="0"/>
+        <PARAM NAME="Horas" SIZE="6" PROJECTION="0" FIELDLABEL="Horas" CTAB="0"/>
+        <PARAM NAME="Valor" FORMAT="M" SIZE="17" DECIMALS="4" PROJECTION="0" FIELDLABEL="Valor" CTAB="0"/>
+      </PARAMS>
+      <FIELDS/>
+      <ACTIONSCRIPT></ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

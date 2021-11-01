@@ -10,6 +10,7 @@
     </FIELDS>
     <FIELDS NAME="Horario" DATATYPE="1" SIZE="5"/>
     <FIELDS NAME="Tempo" DATATYPE="6"/>
+    <FIELDS NAME="Evento" DATATYPE="3"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>
       <FLAGS> AQ==

@@ -18,6 +18,8 @@
     <FIELDS NAME="Observacao" DATATYPE="16"/>
     <FIELDS NAME="Cooperado" DATATYPE="3"/>
     <FIELDS NAME="Fechamento" DATATYPE="3"/>
+    <FIELDS NAME="Entrada" DATATYPE="11"/>
+    <FIELDS NAME="Saida" DATATYPE="11"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>
       <FLAGS> AQ==

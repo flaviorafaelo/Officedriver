@@ -6,16 +6,12 @@
     </FIELDS>
     <FIELDS NAME="Numero" DATATYPE="1" SIZE="20"/>
     <FIELDS NAME="Descricao" DATATYPE="1" SIZE="100"/>
-    <FIELDS NAME="Tipo" DATATYPE="3" DESCRIPTION="0 - Fixo  1 - Vari&#225;vel"/>
     <FIELDS NAME="Cliente" DATATYPE="3"/>
     <FIELDS NAME="DataInicio" DATATYPE="9"/>
     <FIELDS NAME="DataTermino" DATATYPE="9"/>
     <FIELDS NAME="DiaFechamento" DATATYPE="3"/>
     <FIELDS NAME="IntervaloDiaCooperado" DATATYPE="1" SIZE="5"/>
-    <FIELDS NAME="Valor" DATATYPE="7" SIZE="17" PRECISION="4"/>
     <FIELDS NAME="AdiantamentoProducao" DATATYPE="7" SIZE="17" PRECISION="4"/>
-    <FIELDS NAME="BaseCalculo" DATATYPE="1" SIZE="1"/>
-    <FIELDS NAME="MinimoHoras" DATATYPE="3"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>
       <FLAGS> AQ==

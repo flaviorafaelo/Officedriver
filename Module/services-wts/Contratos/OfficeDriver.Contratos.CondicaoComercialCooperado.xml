@@ -1,16 +1,19 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos">
-    <METHOD NAME="CondicaoComercialCooperado" DESCRIPTION="" VERSION="27" INTFTYPE="9" THREADSAFE="0">
+    <METHOD NAME="CondicaoComercialCooperado" DESCRIPTION="" VERSION="57" INTFTYPE="9" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
           <GROUP NAME="Configura&#231;&#227;o de Per&#237;odos"/>
         </GROUPS>
-        <PARAM NAME="Funcao" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="1" LOOKUP="FUNCOES.LISTAR" LOOKUPKEY="Id" LOOKUPDISPLAY="Descricao" LOOKUPCODE="Id" FIELDLABEL="Fun&#231;&#227;o" CTAB="0"/>
-        <PARAM NAME="Tipo" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="3" LOOKUP="list:'R','Repasse';'C','Cobran&#231;a';" FIELDLABEL="Tipo" CTAB="0"/>
-        <PARAM NAME="Horas" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" HINT=" Informar a quantidade de horas do contrato para a fun&#231;&#227;o" ORDER="2" FIELDLABEL="Horas" CTAB="0"/>
-        <PARAM NAME="Periodo" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="5" FIELDLABEL="Per&#237;odos" NESTEDNAME="OfficeDriver.Contratos.Periodo" GROUPNAME="Configura&#231;&#227;o de Per&#237;odos" CTAB="0"/>
+        <PARAM NAME="Funcao" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="8" LOOKUP="FUNCOES.LISTAR" LOOKUPKEY="Id" LOOKUPDISPLAY="Descricao" LOOKUPCODE="Id" FIELDLABEL="Fun&#231;&#227;o" CTAB="0"/>
+        <PARAM NAME="Tipo" SIZE="1" FLAGS="1" DEFAULT="C" PROJECTION="0" ORDER="1" LOOKUP="list:'R','Repasse';'C','Cobran&#231;a';" FIELDLABEL="Tipo" CTAB="0"/>
+        <PARAM NAME="Horas" FORMAT="N" SIZE="8" FLAGS="1" VISIBILITYRULE="(TipoContrato=1)" PROJECTION="0" HINT=" Informar a quantidade de horas do contrato para a fun&#231;&#227;o" ORDER="7" FIELDLABEL="Qtde Horas M&#237;nimas" CTAB="0"/>
+        <PARAM NAME="Periodo" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="10" FIELDLABEL="Per&#237;odos" NESTEDNAME="OfficeDriver.Contratos.Periodo" GROUPNAME="Configura&#231;&#227;o de Per&#237;odos" CTAB="0"/>
+        <PARAM NAME="TipoContrato" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="2" LOOKUP="list:'0','Fixo Mensal';'1','Vari&#225;vel ';" FIELDLABEL="Tipo Cobran&#231;a" CTAB="0"/>
+        <PARAM NAME="BaseCalculo" FORMAT="N" SIZE="8" FLAGS="1" VISIBILITYRULE="(TipoContrato=1) " PROJECTION="0" ORDER="3" LOOKUP="list:'0','Mensal';'1','Di&#225;rio';'2','Hora';" FIELDLABEL="Base Calculo" CTAB="0"/>
+        <PARAM NAME="Valor" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" VISIBILITYRULE="(TipoContrato=0) " PROJECTION="0" ORDER="4" FIELDLABEL="Valor (R$)" CTAB="0"/>
       </PARAMS>
       <FIELDS/>
       <ACTIONSCRIPT></ACTIONSCRIPT>

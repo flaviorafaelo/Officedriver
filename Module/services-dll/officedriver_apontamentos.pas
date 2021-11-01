@@ -3,17 +3,15 @@ unit officedriver_apontamentos;
 interface
 
 uses
-  SysUtils, wtsServerObjs;
+  SysUtils, DateUtils, wtsServerObjs;
 
 implementation
 
 procedure Detalhar(Input:IwtsInput; Output:IwtsOutput;DataPool:IwtsDataPool);
 var
-   HorarioInicial,HorarioFinal: string;
+   Entrada, Saida, Data: TDateTime;
    HoraInicio,MinutoInicio,
-   HoraFim,MinutoFim: Integer;
-   I: Integer;
-
+   HoraFim,MinutoFim, Hora: Integer;
   procedure SepararHora(AHorario: string; var AHora: Integer; var AMinutos: Integer);
   begin
     AHora := StrToInt(Copy(AHorario, 1,2));
@@ -21,39 +19,35 @@ var
   end;
 
 begin
-  HorarioInicial := Input.AsString['HorarioInicial'];
-  HorarioFinal := Input.AsString['HorarioFinal'];
+  Entrada := Input.Value['Entrada'];
+  Saida := Input.Value['Saida'];
 
-  if Length(HorarioInicial) < 5 then
-    raise Exception.Create('Horario Inicial não está no formato esperado. 00:00');
+  SepararHora(FormatDateTime('hh:nn',Entrada), HoraInicio, MinutoInicio);
+  SepararHora(FormatDateTime('hh:nn',Saida)  , HoraFim, MinutoFim);
 
-  if Length(HorarioFinal) < 5 then
-    raise Exception.Create('Horario Final não está no formato esperado. 00:00');
-
-  SepararHora(HorarioInicial, HoraInicio, MinutoInicio);
-  SepararHora(HorarioFinal, HoraFim, MinutoFim);
-
-  for I := HoraInicio to HoraFim  do
+  Data := Entrada;
+  while (Data < Saida) do
   begin
-    if (I = HoraInicio) and (MinutoInicio <> 0) then
+    Hora := StrToInt(FormatDateTime('hh', Data));
+    if (Hora = HoraInicio) and (MinutoInicio <> 0) then
     begin
       Output.NewRecord;
-      Output.Values['Horario'] := HorarioInicial;
+      Output.Values['Horario'] := FormatDateTime('hh:nn',Entrada);
       Output.Values['Tempo'] := MinutoInicio/60;
+      Data := IncMinute(Data, MinutoInicio);
     end else
-    if (I = HoraFim) then
+    if (Hora = HoraFim) and (MinutoFim <> 0) then
     begin
-      if (MinutoFim <> 0) then
-      begin
         Output.NewRecord;
-        Output.Values['Horario'] := HorarioFinal;
+        Output.Values['Horario'] := FormatDateTime('hh:nn',Saida);
         Output.Values['Tempo'] := MinutoFim/60;
-      end;
+        Data :=  Saida;
     end else
     begin
       Output.NewRecord;
-      Output.Values['Horario'] := FormatFloat('00', I)+':00';
+      Output.Values['Horario'] := FormatDateTime('hh:nn',Data);
       Output.Values['Tempo'] := 1;
+      Data := IncHour(Data, 1);
     end;
   end;
 end;

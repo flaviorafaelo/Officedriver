@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos">
-    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="64" INTFTYPE="1" THREADSAFE="0">
+    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="85" INTFTYPE="1" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -9,24 +9,21 @@
           <GROUP NAME="Fechamento"/>
           <GROUP NAME="Cooperados" STYLE="1"/>
           <GROUP NAME="Veiculos" STYLE="1"/>
-          <GROUP NAME="Condi&#231;&#245;es Comerciais" STYLE="1"/>
+          <GROUP NAME="Condi&#231;&#245;es Comerciais Cooperados" STYLE="1"/>
+          <GROUP NAME="Condi&#231;&#245;es Comerciais Ve&#237;culos" STYLE="1"/>
         </GROUPS>
         <PARAM NAME="Numero" SIZE="20" FLAGS="17" PROJECTION="0" ORDER="1" FIELDLABEL="N&#186; Contrato" CTAB="0"/>
         <PARAM NAME="Descricao" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
-        <PARAM NAME="Tipo" FORMAT="N" SIZE="8" FLAGS="17" DEFAULT="0" PROJECTION="0" ORDER="3" LOOKUP="list:'0','Fixo';'1','Vari&#225;vel';" FIELDLABEL="Tipo" CTAB="0"/>
-        <PARAM NAME="Cliente" FORMAT="N" SIZE="8" FLAGS="17" STYLE="5" PROJECTION="0" ORDER="4" LOOKUP="CLIENTES.LISTAR" LOOKUPKEY="Id" LOOKUPDISPLAY="Nome" FIELDLABEL="Cliente" CTAB="0"/>
-        <PARAM NAME="DataInicio" FORMAT="D" SIZE="10" FLAGS="17" PROJECTION="0" ORDER="9" FIELDLABEL="Data Inicio" GROUPNAME="Vig&#234;ncia" CTAB="0"/>
-        <PARAM NAME="DataTermino" FORMAT="D" SIZE="10" FLAGS="17" PROJECTION="0" ORDER="10" FIELDLABEL="Data T&#233;rmino" GROUPNAME="Vig&#234;ncia" CTAB="0"/>
-        <PARAM NAME="DiaFechamento" FORMAT="N" SIZE="8" FLAGS="17" PROJECTION="0" ORDER="12" LOOKUP="list:'1','1';'2','2';'3','3';'4','4';'5','5';'6','6';'7','7';'8','8';'9','9';'10','10';'11','11';'12','12';'13','13';'14','14';'15','15';'16','16';'17','17';'18','18';'19','19';'20','20';'21','21';'22','22';'23','23';'24','24';'25','25';'26','26';'27','27';'28','28';'29','29';'30','30';'31','31';" FIELDLABEL="Dia de Fechamento" GROUPNAME="Fechamento" CTAB="0"/>
-        <PARAM NAME="IntervaloDiaCooperado" SIZE="5" FLAGS="17" MASK="##:##" PROJECTION="0" ORDER="13" FIELDLABEL="Intervalo Cooperado (Horas)" GROUPNAME="Fechamento" CTAB="0"/>
-        <PARAM NAME="Cooperados" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="15" FIELDLABEL="Cooperados" NESTEDNAME="OfficeDriver.Contratos.Cooperado" GROUPNAME="Cooperados" CTAB="0"/>
-        <PARAM NAME="Valor" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" VISIBILITYRULE="(Tipo=0)" PROJECTION="0" ORDER="19" FIELDLABEL="Valor do Contrato" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
-        <PARAM NAME="AdiantamentoProducao" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="5" FIELDLABEL="Adiantamento de Produ&#231;&#227;o" CTAB="0"/>
-        <PARAM NAME="BaseCalculo" SIZE="1" FLAGS="1" PROJECTION="0" ORDER="6" LOOKUP="list:'M','Mensal';'D','Di&#225;rio';'H','Hora';" FIELDLABEL="Base de C&#225;lculo" CTAB="0"/>
-        <PARAM NAME="MinimoHoras" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="7" FIELDLABEL="M&#237;nimo de Horas Mensal" CTAB="0"/>
-        <PARAM NAME="CondComCooperado" FORMAT="R" FLAGS="1" STYLE="2" PROJECTION="0" ORDER="20" FIELDLABEL="Cooperado" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialCooperado" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
-        <PARAM NAME="CondComVeiculo" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="21" FIELDLABEL="Ve&#237;culos" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialVeiculo" GROUPNAME="Condi&#231;&#245;es Comerciais" CTAB="0"/>
-        <PARAM NAME="Veiculos" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="17" FIELDLABEL="Veiculos" NESTEDNAME="officedriver.Contratos.Veiculo" GROUPNAME="Veiculos" CTAB="0"/>
+        <PARAM NAME="Cliente" FORMAT="N" SIZE="8" FLAGS="17" STYLE="5" PROJECTION="0" ORDER="3" LOOKUP="CLIENTES.LISTAR" LOOKUPKEY="Id" LOOKUPDISPLAY="Nome" FIELDLABEL="Cliente" CTAB="0"/>
+        <PARAM NAME="DataInicio" FORMAT="D" SIZE="10" FLAGS="17" PROJECTION="0" ORDER="6" FIELDLABEL="Data Inicio" GROUPNAME="Vig&#234;ncia" CTAB="0"/>
+        <PARAM NAME="DataTermino" FORMAT="D" SIZE="10" FLAGS="17" PROJECTION="0" ORDER="7" FIELDLABEL="Data T&#233;rmino" GROUPNAME="Vig&#234;ncia" CTAB="0"/>
+        <PARAM NAME="DiaFechamento" FORMAT="N" SIZE="8" FLAGS="17" PROJECTION="0" ORDER="9" LOOKUP="list:'1','1';'2','2';'3','3';'4','4';'5','5';'6','6';'7','7';'8','8';'9','9';'10','10';'11','11';'12','12';'13','13';'14','14';'15','15';'16','16';'17','17';'18','18';'19','19';'20','20';'21','21';'22','22';'23','23';'24','24';'25','25';'26','26';'27','27';'28','28';'29','29';'30','30';'31','31';" FIELDLABEL="Dia de Fechamento" GROUPNAME="Fechamento" CTAB="0"/>
+        <PARAM NAME="IntervaloDiaCooperado" SIZE="5" FLAGS="17" MASK="##:##" PROJECTION="0" ORDER="10" FIELDLABEL="Intervalo Cooperado (Horas)" GROUPNAME="Fechamento" CTAB="0"/>
+        <PARAM NAME="Cooperados" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="12" FIELDLABEL="Cooperados" NESTEDNAME="OfficeDriver.Contratos.Cooperado" GROUPNAME="Cooperados" CTAB="0"/>
+        <PARAM NAME="AdiantamentoProducao" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="4" FIELDLABEL="Adiantamento de Produ&#231;&#227;o" CTAB="0"/>
+        <PARAM NAME="CondComCooperado" FORMAT="R" FLAGS="1" STYLE="2" PROJECTION="0" ORDER="16" FIELDLABEL="Cooperado" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialCooperado" GROUPNAME="Condi&#231;&#245;es Comerciais Cooperados" CTAB="0"/>
+        <PARAM NAME="CondComVeiculo" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="18" FIELDLABEL="Ve&#237;culos" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialVeiculo" GROUPNAME="Condi&#231;&#245;es Comerciais Ve&#237;culos" CTAB="0"/>
+        <PARAM NAME="Veiculos" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="14" FIELDLABEL="Veiculos" NESTEDNAME="officedriver.Contratos.Veiculo" GROUPNAME="Veiculos" CTAB="0"/>
       </PARAMS>
       <FIELDS>
         <GROUPS>
@@ -37,15 +34,15 @@
       <ACTIONSCRIPT>#CHECK("SELECT COUNT(NUMERO) AS N FROM CONTRATOS WHERE NUMERO=:NUMERO", N>0, const.COD_DUPL);
 
 
-INSERT:CONTR INTO CONTRATOS( NUMERO, DESCRICAO, TIPO, CLIENTE, DATAINICIO, DATATERMINO, DIAFECHAMENTO, INTERVALODIACOOPERADO, VALOR,
-                             ADIANTAMENTOPRODUCAO, MINIMOHORAS, BASECALCULO )
-                    VALUES ( :NUMERO, :DESCRICAO, :TIPO, :CLIENTE, :DATAINICIO, :DATATERMINO, :DIAFECHAMENTO, :INTERVALODIACOOPERADO, :VALOR,
-                             :ADIANTAMENTOPRODUCAO, :MINIMOHORAS, :BASECALCULO)
+INSERT:CONTR INTO CONTRATOS( NUMERO, DESCRICAO, CLIENTE, DATAINICIO, DATATERMINO, DIAFECHAMENTO, INTERVALODIACOOPERADO,
+                             ADIANTAMENTOPRODUCAO )
+                    VALUES ( :NUMERO, :DESCRICAO, :CLIENTE, :DATAINICIO, :DATATERMINO, :DIAFECHAMENTO, :INTERVALODIACOOPERADO,
+                             :ADIANTAMENTOPRODUCAO)
                     #RETURN (ID);
 
 #EACH() COOPERADOS;
-  INSERT INTO CONTRATOSCOOPERADOS ( CONTRATO, COOPERADO, FUNCAO)
-                 VALUES (:CONTR.ID, :COOPERADOS.COOPERADO, :COOPERADOS.FUNCAO)
+  INSERT INTO CONTRATOSCOOPERADOS ( CONTRATO, COOPERADO, FUNCAO, INTERVALO)
+                 VALUES (:CONTR.ID, :COOPERADOS.COOPERADO, :COOPERADOS.FUNCAO, :COOPERADOS.INTERVALO)
                  #RETURN(ID);
 
 #EACH() VEICULOS;
@@ -55,8 +52,9 @@ INSERT:CONTR INTO CONTRATOS( NUMERO, DESCRICAO, TIPO, CLIENTE, DATAINICIO, DATAT
 
 #EACH() CONDCOMCOOPERADO
 #BEGIN
-  INSERT:COND INTO CONTRATOSCONDCOMERCIALCOOP ( CONTRATO, FUNCAO, TIPO, HORAS)
-                 VALUES (:CONTR.ID, :CONDCOMCOOPERADO.FUNCAO, :CONDCOMCOOPERADO.TIPO, :CONDCOMCOOPERADO.HORAS)
+  INSERT:COND INTO CONTRATOSCONDCOMERCIALCOOP ( CONTRATO, FUNCAO, TIPO, HORAS,VALOR, BASECALCULO, TIPOCONTRATO)
+                 VALUES (:CONTR.ID, :CONDCOMCOOPERADO.FUNCAO, :CONDCOMCOOPERADO.TIPO, :CONDCOMCOOPERADO.HORAS,
+                         :CONDCOMCOOPERADO.VALOR, :CONDCOMCOOPERADO.BASECALCULO,:CONDCOMCOOPERADO.TIPOCONTRATO )
                  #RETURN(ID);
   #EACH() :CONDCOMCOOPERADO.PERIODO AS RPERIODO
   #BEGIN

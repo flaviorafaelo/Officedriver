@@ -8,6 +8,9 @@
     <FIELDS NAME="Funcao" DATATYPE="3"/>
     <FIELDS NAME="Tipo" DATATYPE="1" SIZE="1"/>
     <FIELDS NAME="Horas" DATATYPE="3"/>
+    <FIELDS NAME="TipoContrato" DATATYPE="3"/>
+    <FIELDS NAME="Valor" DATATYPE="6"/>
+    <FIELDS NAME="BaseCalculo" DATATYPE="3"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>
       <FLAGS> AQ==

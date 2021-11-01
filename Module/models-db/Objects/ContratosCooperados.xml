@@ -4,5 +4,6 @@
     <FIELDS NAME="Contrato" DATATYPE="3"/>
     <FIELDS NAME="Cooperado" DATATYPE="3"/>
     <FIELDS NAME="Funcao" DATATYPE="3"/>
+    <FIELDS NAME="Intervalo" DATATYPE="1" SIZE="5"/>
   </ROW>
 </dbdic.objects.objects>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos">
-    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="78" INTFTYPE="1" THREADSAFE="0">
+    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="79" INTFTYPE="1" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -25,9 +25,13 @@
 #EACH() Contratos
 #BEGIN
   #IF (:Contratos.Sys_Checked = TRUE)
+  #BEGIN
      INSERT INTO FechamentosContratos (Fechamento, Contrato) VALUES (:MAIN.Id, :Contratos.Id) #RETURN (Id);
-
+     UPDATE Apontamentos set Fechamento = :MAIN.ID
+     WHERE Contrato =:Contratos.Id AND Fechamento IS NULL and DataEntrada &lt;= :DataBaseFechamento;
+  #END
 #END;
+
 
 #CHECK("SELECT COUNT(*) AS N FROM FechamentosContratos WHERE Fechamento=:MAIN.ID",N=0,"Necess&#225;rio selecionar ao menos um contrato.");
 

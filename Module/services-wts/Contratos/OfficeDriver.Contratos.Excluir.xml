@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos">
-    <METHOD NAME="Excluir" DESCRIPTION="" VERSION="42" INTFTYPE="3" THREADSAFE="0">
+    <METHOD NAME="Excluir" DESCRIPTION="" VERSION="54" INTFTYPE="3" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -15,7 +15,8 @@
           <GROUP NAME="Fechamento"/>
           <GROUP NAME="Cooperados" STYLE="1"/>
           <GROUP NAME="Veiculos" STYLE="1"/>
-          <GROUP NAME="Condi&#231;&#245;es Comerciais" STYLE="1"/>
+          <GROUP NAME="Condi&#231;&#245;es Comerciais Cooperados" STYLE="1"/>
+          <GROUP NAME="Condi&#231;&#245;es Comerciais Ve&#237;culos" STYLE="1"/>
         </GROUPS>
       </FIELDS>
       <ACTIONSCRIPT>DELETE FROM CONTRATOS WHERE ID = :ID;
