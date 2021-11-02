@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Apontamentos">
-    <METHOD NAME="Alterar" DESCRIPTION="" VERSION="34" INTFTYPE="2" THREADSAFE="0">
+    <METHOD NAME="Alterar" DESCRIPTION="" VERSION="35" INTFTYPE="2" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -44,7 +44,10 @@ UPDATE Apontamentos SET  OrdemServico=:OrdemServico,
                          KmFinal=:KmFinal,
                          IntervaloDescanso=:IntervaloDescanso,
                          Viagem=:Viagem,
-                         Observacao=:Observacao
+                         Observacao=:Observacao,
+                         Entrada = :DataEntrada || ' ' ||:HoraEntrada,
+                         Saida = :DataSaida || ' ' ||:HoraSaida
+                         
 WHERE (Id=:Id);
 
 DELETE FROM ApontamentosDetalhados WHERE Apontamento =:MAIN.Id;

@@ -1,0 +1,24 @@
+<dbdic.objects.objects>
+  <ROW NAME="FechamentoExtrato" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
+    <FIELDS NAME="Fechamento_Extrato" DATATYPE="3">
+      <FLAGS> AQ==
+</FLAGS>
+    </FIELDS>
+    <FIELDS NAME="Fechamento" DATATYPE="3"/>
+    <FIELDS NAME="Cooperado" DATATYPE="3"/>
+    <FIELDS NAME="DataEntrada" DATATYPE="9"/>
+    <FIELDS NAME="DiaSemanaEntrada" DATATYPE="1" SIZE="15"/>
+    <FIELDS NAME="HoraEntrada" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="DataSaida" DATATYPE="9"/>
+    <FIELDS NAME="DiaSemanaSaida" DATATYPE="1" SIZE="15"/>
+    <FIELDS NAME="HoraSaida" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="Trabalhada" DATATYPE="1" SIZE="6"/>
+    <FIELDS NAME="Intervado" DATATYPE="1" SIZE="5"/>
+    <FIELDS NAME="Total" DATATYPE="1" SIZE="6"/>
+    <INDEXES>
+      <FIELDS>Fechamento_Extrato</FIELDS>
+      <FLAGS> AQ==
+</FLAGS>
+    </INDEXES>
+  </ROW>
+</dbdic.objects.objects>

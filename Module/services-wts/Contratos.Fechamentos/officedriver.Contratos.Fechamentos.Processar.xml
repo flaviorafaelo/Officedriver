@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos">
-    <METHOD NAME="Processar" DESCRIPTION="" VERSION="11" THREADSAFE="0">
+    <METHOD NAME="Processar" DESCRIPTION="" VERSION="22" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -9,9 +9,14 @@
         <PARAM NAME="Fechamento" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Fechamento" CTAB="0"/>
       </PARAMS>
       <FIELDS/>
-      <ACTIONSCRIPT>#EACH() SELECT:MAIN Contrato FROM FechamentosContratos FC
-        WHERE FC.Fechamento=:Fechamento;
-  #CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.FecharContrato(:Fechamento,:MAIN.Contrato);
+      <ACTIONSCRIPT>#EACH() SELECT:MAIN FC.Contrato, F.DataBaseFechamento
+        FROM Fechamentos F
+        INNER JOIN FechamentosContratos FC
+                ON FC.Fechamento = F.Id
+        WHERE F.Id=:Fechamento
+#BEGIN
+  #CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.FecharContrato(Fechamento=:Fechamento, Contrato=:MAIN.Contrato, DataBaseFechamento=:MAIN.DataBaseFechamento);
+#END
 </ACTIONSCRIPT>
     </METHOD>
   </OBJECT>
