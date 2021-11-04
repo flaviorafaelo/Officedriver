@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos">
-    <METHOD NAME="CalcularContratoMes" DESCRIPTION="" VERSION="14" THREADSAFE="0">
+    <METHOD NAME="CalcularContratoMes" DESCRIPTION="" VERSION="17" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
         </GROUPS>
         <PARAM NAME="Contrato" FORMAT="R" PROJECTION="0" FIELDLABEL="Contrato" NESTEDNAME="OFFICEDRIVER.CONTRATOS.CONTRATO" CTAB="0"/>
         <PARAM NAME="CondicaoComercialCooperado" FORMAT="R" PROJECTION="0" FIELDLABEL="D" NESTEDNAME="OFFICEDRIVER.CONTRATOS.CONDICAOCOMERCIALCOOPERADO" CTAB="0"/>
-        <PARAM NAME="Apontamentos" FORMAT="R" PROJECTION="0" FIELDLABEL="Apontamentos" NESTEDNAME="OFFICEDRIVER.CONTRATOS.FECHAMENTOS.APONTAMENTO" CTAB="0"/>
+        <PARAM NAME="Cooperados" FORMAT="R" PROJECTION="0" FIELDLABEL="Apontamentos" NESTEDNAME="officedriver.Contratos.Fechamentos.CALCULO.Cooperado" CTAB="0"/>
       </PARAMS>
       <FIELDS>
         <GROUPS>

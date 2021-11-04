@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos">
-    <METHOD NAME="ListarApontamentos" DESCRIPTION="" VERSION="14" THREADSAFE="0">
+    <METHOD NAME="ListarApontamentos" DESCRIPTION="" VERSION="21" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -17,23 +17,19 @@
         <FIELD NAME="Fechamento" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Fechamento" CTAB="0"/>
         <FIELD NAME="Apontamentos" FORMAT="R" FLAGS="1" PROJECTION="0" FIELDLABEL="Apontamentos" NESTEDNAME="OFFICEDRIVER.CONTRATOS.FECHAMENTOS.APONTAMENTO" CTAB="0"/>
       </FIELDS>
-      <ACTIONSCRIPT>SELECT F.Fechamento
+      <ACTIONSCRIPT>SELECT F.Id as Fechamento
        #ROWSET({SELECT:Apontamentos Ap.*
-                      #ROWSET({SELECT Ad.Id,
-                                      Ad.Apontamento,
-                                      Ad.Horario,
-                                      Ad.Tempo
-                               FROM ApontamentosDetalhados Ad})
                 FROM FechamentosContratos Fc
-                INNER JOIN ContratosCooperado Cp ON (Cp.Contrato = Fc.Contrado) AND
+                INNER JOIN ContratosCooperados Cp ON (Cp.Contrato = Fc.Contrato) AND
                                                     (Cp.Funcao = :Funcao)
                 INNER JOIN Apontamentos AP ON (Ap.Fechamento = Fc.Fechamento) AND
                                               (Ap.Contrato = Fc.Contrato) AND
                                               (Ap.Cooperado = Cp.Cooperado)
                 Where Fc.Fechamento=:Fechamento AND
-                      Fc.Contrato=:Contrato=})
+                      Fc.Contrato=:Contrato
+                Order by Ap.DataEntrada      })
 FROM Fechamentos F
-WHERE Fechamento=:Fechamento;
+WHERE Id=:Fechamento;
 
 
 
