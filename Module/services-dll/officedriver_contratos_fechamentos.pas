@@ -3,7 +3,7 @@ unit officedriver_contratos_fechamentos;
 interface
 
 uses
-  wtsServerObjs, SysUtils, DateUtils, logfiles;
+  wtsServerObjs, SysUtils, DateUtils, logfiles, windows;
 
 type
   TTipo = (tRepasse, tCobranca);
@@ -27,6 +27,13 @@ implementation
 procedure Log(msg: string);
 begin
   AddLog(0,msg, 'Calculo');
+end;
+
+procedure LogDebug(msg: string);
+begin
+  {$IFDEF MSWINDOWS}
+  if Length(msg) > 0 then OutputDebugString(PChar('libssh2:> ' + msg));
+  {$ENDIF}
 end;
 
 function HoraToDecimal(AHorario: string): Double;
@@ -83,6 +90,9 @@ var
       HoraFim := StrToDateTime('31/12/1988 ' + AData.Value['Fim']);
       Hora := StrToDateTime('31/12/1988 '+ AHora);
 
+      if HoraFim < HoraInicio then
+        HoraFim := IncDay(HoraFim,1);
+
       if (Hora >= HoraInicio) and (Hora <= HoraFim) and
          ((AData.Value['Tipo'] = Tipo) or (AData.Value['Tipo'] = tpNormal)) then
       begin
@@ -103,7 +113,7 @@ begin
   Periodo := Input.AsData['Periodo'];
   Entrada := Input.Value['Entrada'];
   Saida := Input.Value['Saida'];
-  Log(Periodo.Value['Descricao'] + ' - ' + FormatDateTime('dd/mm/yyyy hh:nn:ss',Entrada) + ' - '+FormatDateTime('dd/mm/yyyy hh:nn:ss',Saida));
+  LogDebug(Periodo.Value['Descricao'] + ' - ' + FormatDateTime('dd/mm/yyyy hh:nn:ss',Entrada) + ' - '+FormatDateTime('dd/mm/yyyy hh:nn:ss',Saida));
 
   C.Dim('AnoInicio', YearOf(Entrada));
   C.Dim('AnoFim', YearOf(Saida));
@@ -117,9 +127,11 @@ begin
   Valor := 0;
   Horas := 0;
   Detalhe.First;
-  Descricao := FormatDateTime('dd/mm/yyyy hh:nn:ss',Entrada);
+
   while not Detalhe.EOF do
   begin
+      LogDebug(Detalhe.Value['Horario']);
+
      ValorPeriodo := ObterValorPeriodo(Periodo,Detalhe.Value['Horario'], Entrada);
      if ValorPeriodo.Econtrado then
      begin
@@ -133,13 +145,17 @@ begin
 
      Detalhe.Next;
   end;
-  Output.NewRecord;
-  Output.SetFieldByName('Descricao',Descricao);
-  Output.SetFieldByName('Horas',DecimalToHora(Horas));
-  Output.SetFieldByName('Valor',Valor);
-  Output.SetFieldByName('Tipo',Tipo);
-  Output.SetFieldByName('ValorHora',ValorHora);
-  Output.SetFieldByName('ValorHoraExcedente',ValorHoraExcedente);
+  if Descricao <> EmptyStr then
+  begin
+    LogDebug(Descricao + ' - '+DecimalToHora(Horas));
+    Output.NewRecord;
+    Output.SetFieldByName('Descricao',Descricao);
+    Output.SetFieldByName('Horas',DecimalToHora(Horas));
+    Output.SetFieldByName('Valor',Valor);
+    Output.SetFieldByName('Tipo',Tipo);
+    Output.SetFieldByName('ValorHora',ValorHora);
+    Output.SetFieldByName('ValorHoraExcedente',ValorHoraExcedente);
+  end;
 end;
 
 procedure FecharContrato(Input:IwtsInput; Output:IwtsOutput;DataPool:IwtsDataPool);
@@ -392,24 +408,29 @@ begin
       begin
         Periodo.Clear;
         Periodo.New;
+        Coop := Periodos.Value['Descricao'];
         Periodo.Value['Descricao']      := Periodos.Value['Descricao'];
         Periodo.Value['Inicio']         := Periodos.Value['Inicio'];
         Periodo.Value['Fim']            := Periodos.Value['Fim'];
         Periodo.Value['ValorNormal']    := Periodos.Value['ValorNormal'];
         Periodo.Value['ValorExcedente'] := Periodos.Value['ValorExcedente'];
         Periodo.Value['Tipo']           := Periodos.Value['Tipo'];
+        Periodo.Add;
 
         C.Dim('Entrada', Extrato.Value['Entrada']);
         C.Dim('Saida', Extrato.Value['Saida']);
         C.DimAsData('Periodo', Periodo);
         C.Execute('#CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.CALCULARPERIODO(:Entrada,:Saida,:Periodo);');
 
-        PeriodosOut.New;
-        PeriodosOut.Value['Descricao'] := C.Value['Descricao'];
-        PeriodosOut.Value['Horas']     := C.Value['Horas'];
-        PeriodosOut.Value['Valor']     := C.Value['Valor'];
-        PeriodosOut.Value['Tipo']      := C.Value['Tipo'];
-        PeriodosOut.Add;
+        if (C.Value['Descricao'] <> EmptyStr) then
+        begin
+          PeriodosOut.New;
+          PeriodosOut.Value['Descricao'] := C.Value['Descricao'];
+          PeriodosOut.Value['Horas']     := C.Value['Horas'];
+          PeriodosOut.Value['Valor']     := C.Value['Valor'];
+          PeriodosOut.Value['Tipo']      := C.Value['Tipo'];
+          PeriodosOut.Add;
+        end;
         Periodos.Next;
       end;
       Extrato.Value['Periodos'] := PeriodosOut.Data;

@@ -35,6 +35,7 @@ begin
       Output.Values['Horario'] := FormatDateTime('hh:nn',Entrada);
       Output.Values['Tempo'] := MinutoInicio/60;
       Data := IncMinute(Data, MinutoInicio);
+      Data := IncHour(Data, 1);
     end else
     if (Hora = HoraFim) and (MinutoFim <> 0) then
     begin
