@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos.CALCULO">
-    <METHOD NAME="Cooperado" DESCRIPTION="" VERSION="4" INTFTYPE="9" THREADSAFE="0">
+    <METHOD NAME="Cooperado" DESCRIPTION="" VERSION="7" INTFTYPE="9" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
         </GROUPS>
         <PARAM NAME="Cooperado" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Cooperado" CTAB="0"/>
         <PARAM NAME="Extrato" FORMAT="R" PROJECTION="0" FIELDLABEL="Extrato" NESTEDNAME="OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.EXTRATO" CTAB="0"/>
+        <PARAM NAME="Total" FORMAT="R" PROJECTION="0" FIELDLABEL="Total" NESTEDNAME="officedriver.Contratos.Fechamentos.CALCULO.Total" CTAB="0"/>
       </PARAMS>
       <FIELDS/>
       <ACTIONSCRIPT></ACTIONSCRIPT>

@@ -1,6 +1,6 @@
 <dbdic.objects.objects>
-  <ROW NAME="FechamentoExtratoPeriodo" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
-    <FIELDS NAME="Fechamento_Extrato_Periodo" DATATYPE="3">
+  <ROW NAME="FechamentosExtratosPeriodos" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
+    <FIELDS NAME="Id" DATATYPE="3">
       <FLAGS> AQ==
 </FLAGS>
     </FIELDS>
@@ -10,9 +10,9 @@
     <FIELDS NAME="Valor" DATATYPE="6"/>
     <FIELDS NAME="Tipo" DATATYPE="3"/>
     <FIELDS NAME="ValorHora" DATATYPE="6"/>
-    <FIELDS NAME="ValorHoraExtra" DATATYPE="6"/>
+    <FIELDS NAME="ValorHoraExcedente" DATATYPE="6"/>
     <INDEXES>
-      <FIELDS>Fechamento_Extrato_Periodo</FIELDS>
+      <FIELDS>Id</FIELDS>
       <FLAGS> AQ==
 </FLAGS>
     </INDEXES>

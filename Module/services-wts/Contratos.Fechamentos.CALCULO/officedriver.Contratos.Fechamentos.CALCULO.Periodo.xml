@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos.CALCULO">
-    <METHOD NAME="Periodo" DESCRIPTION="" VERSION="5" INTFTYPE="9" THREADSAFE="0">
+    <METHOD NAME="Periodo" DESCRIPTION="" VERSION="7" INTFTYPE="9" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
