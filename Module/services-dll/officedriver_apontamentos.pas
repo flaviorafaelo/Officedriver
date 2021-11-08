@@ -33,10 +33,9 @@ begin
     begin
       Output.NewRecord;
       Output.Values['Horario'] := FormatDateTime('hh:nn',Entrada);
-      Output.Values['Tempo'] :=  1 + MinutoInicio/60;
+      Output.Values['Tempo'] :=  MinutoInicio/60;
       Data := IncMinute(Data, MinutoInicio);
       Data := IncHour(Data, 1);
-
     end else
     if (Hora = HoraFim) and (MinutoFim <> 0) then
     begin
@@ -50,6 +49,9 @@ begin
       Output.Values['Horario'] := FormatDateTime('hh:nn',Data);
       Output.Values['Tempo'] := 1;
       Data := IncHour(Data, 1);
+      if (Hora = HoraInicio) then
+        Data := IncHour(Data, 1);
+      
     end;
   end;
 end;

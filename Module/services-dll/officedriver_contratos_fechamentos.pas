@@ -178,8 +178,6 @@ var
 begin
   C := DataPool.Open('MILLENIUM');
   DataFechamento := IncDay(Input['DataBaseFechamento'],-1);
-  Data := IncMonth(DataFechamento, -1);
-  Data := IncDay(Data, 1);
 
   Contrato := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.CONTRATO');
   Cooperados := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.COOPERADO');
@@ -206,19 +204,20 @@ begin
     C.Dim('Contrato',Input.Value['Contrato']);
     C.Dim('Funcao',CondicaoComercial.Value['Funcao']);
     C.Execute('#CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.ListarApontamentos(:Fechamento,:Contrato,:Funcao);');
-    Apontamentos := C.AsData['Apontamentos'] as IwtsWriteData; 
+    Apontamentos := C.AsData['Apontamentos'] as IwtsWriteData;
 
     CooperadosContratos := Contrato.AsData['Cooperados'] as IwtsWriteData;
     CooperadosContratos.Filter := 'FUNCAO='+CondicoesComerciaisCooperado.GetFieldAsString('Funcao');
     while not CooperadosContratos.EOF do
     begin
+      Data := IncMonth(DataFechamento, -1);
+      Data := IncDay(Data, 1);
+      Extrato.Clear;
       while Data <= DataFechamento do
       begin
-        Apontamentos.Filter := 'Cooperado='+CooperadosContratos.GetFieldAsString('Cooperado');
-
-        if Apontamentos.Locate(['DataEntrada'],[Data]) then
+        if Apontamentos.Locate(['Cooperado', 'DataEntrada'],[CooperadosContratos.Value['Cooperado'], Data]) then
         begin
-
+          Log(CooperadosContratos.GetFieldAsString('Cooperado') + ' - '+FormatDateTime('dd/mm/yyyy hh:nn',Apontamentos.Value['Entrada']));
           Extrato.New;
           Extrato.Value['Entrada']          := Apontamentos.Value['Entrada'];
           Extrato.Value['Saida']            := Apontamentos.Value['Saida'];
@@ -256,7 +255,6 @@ begin
       Cooperados.Add;
       CooperadosContratos.Next;
     end;
-
 
     case BaseCalculo of
       bcMensal:
