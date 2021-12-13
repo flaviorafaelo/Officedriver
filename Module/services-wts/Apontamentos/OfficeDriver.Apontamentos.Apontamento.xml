@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Apontamentos">
-    <METHOD NAME="Apontamento" DESCRIPTION="" VERSION="43" INTFTYPE="10" THREADSAFE="0">
+    <METHOD NAME="Apontamento" DESCRIPTION="" VERSION="47" INTFTYPE="10" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
           <GROUP NAME="Entrada"/>
+          <GROUP NAME="Intervalo"/>
           <GROUP NAME="Saida"/>
           <GROUP NAME="Reembolsos" STYLE="1"/>
         </GROUPS>
@@ -17,14 +18,16 @@
         <PARAM NAME="DataEntrada" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="8" FIELDLABEL="Data" GROUPNAME="Entrada" CTAB="0"/>
         <PARAM NAME="HoraEntrada" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="9" FIELDLABEL="Hora" GROUPNAME="Entrada" CTAB="0"/>
         <PARAM NAME="KmInicial" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="10" FIELDLABEL="Km" GROUPNAME="Entrada" CTAB="0"/>
-        <PARAM NAME="DataSaida" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="12" FIELDLABEL="Data" GROUPNAME="Saida" CTAB="0"/>
-        <PARAM NAME="HoraSaida" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="13" FIELDLABEL="Hora" GROUPNAME="Saida" CTAB="0"/>
-        <PARAM NAME="KmFinal" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="14" FIELDLABEL="Km" GROUPNAME="Saida" CTAB="0"/>
+        <PARAM NAME="DataSaida" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" ORDER="15" FIELDLABEL="Data" GROUPNAME="Saida" CTAB="0"/>
+        <PARAM NAME="HoraSaida" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="16" FIELDLABEL="Hora" GROUPNAME="Saida" CTAB="0"/>
+        <PARAM NAME="KmFinal" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="17" FIELDLABEL="Km" GROUPNAME="Saida" CTAB="0"/>
         <PARAM NAME="IntervaloDescanso" SIZE="5" MASK="##:##" PROJECTION="0" ORDER="15" FIELDLABEL="Intervalo de Descan&#231;o" GROUPNAME="Saida" CTAB="0"/>
         <PARAM NAME="Viagem" FORMAT="B" SIZE="1" FLAGS="17" DEFAULT="FALSE" PROJECTION="0" ORDER="5" FIELDLABEL="Viagem" CTAB="0"/>
         <PARAM NAME="Observacao" FLAGS="1" PROJECTION="0" ORDER="6" FIELDLABEL="Observacao" CTAB="0"/>
-        <PARAM NAME="Reembolsos" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="17" FIELDLABEL="Reembolsos" NESTEDNAME="OfficeDriver.Apontamentos.Reembolso" GROUPNAME="Reembolsos" CTAB="0"/>
+        <PARAM NAME="Reembolsos" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="19" FIELDLABEL="Reembolsos" NESTEDNAME="OfficeDriver.Apontamentos.Reembolso" GROUPNAME="Reembolsos" CTAB="0"/>
         <PARAM NAME="Fechamento" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Fechamento" CTAB="0"/>
+        <PARAM NAME="InicioIntervalo" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="12" FIELDLABEL="Inicio" GROUPNAME="Intervalo" CTAB="0"/>
+        <PARAM NAME="FinalIntervalo" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="13" FIELDLABEL="Final" GROUPNAME="Intervalo" CTAB="0"/>
       </PARAMS>
       <FIELDS/>
       <ACTIONSCRIPT></ACTIONSCRIPT>

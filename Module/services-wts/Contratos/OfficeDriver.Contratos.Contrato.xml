@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos">
-    <METHOD NAME="Contrato" DESCRIPTION="" VERSION="84" INTFTYPE="10" THREADSAFE="0">
+    <METHOD NAME="Contrato" DESCRIPTION="" VERSION="88" INTFTYPE="10" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -19,7 +19,7 @@
         <PARAM NAME="DataInicio" FORMAT="D" SIZE="10" FLAGS="17" PROJECTION="0" ORDER="6" FIELDLABEL="Data Inicio" GROUPNAME="Vig&#234;ncia" CTAB="0"/>
         <PARAM NAME="DataTermino" FORMAT="D" SIZE="10" FLAGS="17" PROJECTION="0" ORDER="7" FIELDLABEL="Data T&#233;rmino" GROUPNAME="Vig&#234;ncia" CTAB="0"/>
         <PARAM NAME="DiaFechamento" FORMAT="N" SIZE="8" FLAGS="17" PROJECTION="0" ORDER="9" LOOKUP="list:'1','1';'2','2';'3','3';'4','4';'5','5';'6','6';'7','7';'8','8';'9','9';'10','10';'11','11';'12','12';'13','13';'14','14';'15','15';'16','16';'17','17';'18','18';'19','19';'20','20';'21','21';'22','22';'23','23';'24','24';'25','25';'26','26';'27','27';'28','28';'29','29';'30','30';'31','31';" FIELDLABEL="Dia de Fechamento" GROUPNAME="Fechamento" CTAB="0"/>
-        <PARAM NAME="IntervaloDiaCooperado" SIZE="5" FLAGS="17" MASK="##:##" PROJECTION="0" ORDER="10" FIELDLABEL="Intervalo Cooperado (Horas)" GROUPNAME="Fechamento" CTAB="0"/>
+        <PARAM NAME="DescontarIntervalo" FORMAT="B" SIZE="1" FLAGS="17" DEFAULT="F" PROJECTION="0" ORDER="10" FIELDLABEL="Descontar Intervalo" GROUPNAME="Fechamento" CTAB="0"/>
         <PARAM NAME="Cooperados" FORMAT="R" FLAGS="1" STYLE="3" PROJECTION="0" ORDER="12" FIELDLABEL="Cooperados" NESTEDNAME="OfficeDriver.Contratos.Cooperado" GROUPNAME="Cooperados" CTAB="0"/>
         <PARAM NAME="AdiantamentoProducao" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="4" FIELDLABEL="Adiantamento de Produ&#231;&#227;o" CTAB="0"/>
         <PARAM NAME="CondComCooperado" FORMAT="R" FLAGS="1" STYLE="2" PROJECTION="0" ORDER="16" FIELDLABEL="Cooperado" NESTEDNAME="OfficeDriver.Contratos.CondicaoComercialCooperado" GROUPNAME="Condi&#231;&#245;es Comerciais Cooperados" CTAB="0"/>

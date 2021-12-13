@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Apontamentos">
-    <METHOD NAME="Excluir" DESCRIPTION="" VERSION="30" INTFTYPE="3" THREADSAFE="0">
+    <METHOD NAME="Excluir" DESCRIPTION="" VERSION="33" INTFTYPE="3" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -12,6 +12,7 @@
         <GROUPS>
           <GROUP/>
           <GROUP NAME="Entrada"/>
+          <GROUP NAME="Intervalo"/>
           <GROUP NAME="Saida"/>
           <GROUP NAME="Reembolsos" STYLE="1"/>
         </GROUPS>
