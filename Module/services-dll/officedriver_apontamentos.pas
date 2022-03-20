@@ -3,9 +3,18 @@ unit officedriver_apontamentos;
 interface
 
 uses
-  SysUtils, DateUtils, wtsServerObjs;
+  SysUtils, DateUtils, wtsServerObjs,windows,logfiles;
 
 implementation
+
+
+procedure LogDebug(msg: string);
+begin
+  {$IFDEF MSWINDOWS}
+  if Length(msg) > 0 then OutputDebugString(PChar('Calculo:> ' + msg));
+ // Log(msg);
+  {$ENDIF}
+end;
 
 procedure Detalhar(Input:IwtsInput; Output:IwtsOutput;DataPool:IwtsDataPool);
 var
@@ -22,6 +31,9 @@ begin
   Entrada := Input.Value['Entrada'];
   Saida := Input.Value['Saida'];
 
+  if Saida < Entrada then
+    Saida := IncDay(Saida);
+
   SepararHora(FormatDateTime('hh:nn',Entrada), HoraInicio, MinutoInicio);
   SepararHora(FormatDateTime('hh:nn',Saida)  , HoraFim, MinutoFim);
 
@@ -33,15 +45,14 @@ begin
     begin
       Output.NewRecord;
       Output.Values['Horario'] := FormatDateTime('hh:nn',Entrada);
-      Output.Values['Tempo'] :=  MinutoInicio/60;
-      Data := IncMinute(Data, MinutoInicio);
-      Data := IncHour(Data, 1);
+      Output.Values['Tempo'] := (60 - MinutoInicio)/60;
+      Data := IncMinute(Data, 60 - MinutoInicio);
     end else
     if (Hora = HoraFim) and (MinutoFim <> 0) then
     begin
         Output.NewRecord;
         Output.Values['Horario'] := FormatDateTime('hh:nn',Saida);
-        Output.Values['Tempo'] := 1 + (MinutoFim/60);
+        Output.Values['Tempo'] := MinutoFim/60;
         Data :=  Saida;
     end else
     begin
@@ -49,9 +60,6 @@ begin
       Output.Values['Horario'] := FormatDateTime('hh:nn',Data);
       Output.Values['Tempo'] := 1;
       Data := IncHour(Data, 1);
-      if (Hora = HoraInicio) then
-        Data := IncHour(Data, 1);
-      
     end;
   end;
 end;

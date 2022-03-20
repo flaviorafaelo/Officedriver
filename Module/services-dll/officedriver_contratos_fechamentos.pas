@@ -3,7 +3,7 @@ unit officedriver_contratos_fechamentos;
 interface
 
 uses
-  wtsServerObjs, SysUtils, DateUtils, logfiles, windows;
+  wtsServerObjs, SysUtils, DateUtils, logfiles, windows, Variants;
 
 type
   TTipo = (tRepasse, tCobranca);
@@ -37,38 +37,44 @@ begin
   {$ENDIF}
 end;
 
-function HoraToDecimal(AHorario: string): Double;
+function HoraToDecimal(AHorario: string): Real;
 begin
   Result := StrToIntDef(Copy(AHorario, 1,2),0) + (StrToIntDef(Copy(AHorario, 4,2),0) / 60);
 end;
 
-function DecimalToHora(Valor: Double): string;
+function DecimalToHora(Valor: Real): string;
 var
-  Aux: Double;
+  AuxM, AuxH : Real;
   Hora, Minuto: String;
 begin
-  Aux := Trunc(Valor);
-  Hora := FormatFloat('00',Aux);
-  Aux := (Valor - Aux) * 60;
-  Minuto := FormatFloat('00',Aux);
+  AuxH := Trunc(Valor);
+  Hora := FormatFloat('00',AuxH);
+  AuxM := (Valor - AuxH) * 60;
+  Minuto := FormatFloat('00',AuxM);
+  if Round(AuxM) = 60 then
+  begin
+    Hora := FormatFloat('00',AuxH+1);
+    Minuto := '00';
+  end;
+
   Result := Hora + ':' + Minuto;
 end;
 
 procedure CalcularPeriodo(Input:IwtsInput; Output:IwtsOutput;DataPool:IwtsDataPool);
 var
   C: IwtsCommand;
-  Periodo, Detalhe, Feriados: IwtsWriteData;
-  Entrada, Saida, HoraPeriodo : TDateTime;
+  Periodo, Detalhe, Detalhe1, Detalhe2, Feriados: IwtsWriteData;
+  Entrada, Saida, InicioIntervalo, FimIntervalo, HoraPeriodo : TDateTime;
 
   ValorPeriodo: TValorPeriodo;
   Horas, Valor, ValorHora, ValorHoraExcedente :Double;
   Tipo: Integer;
-  Descricao: string;
+  Descricao,InicioIntervaloS,FimIntervaloS: string;
 
   function ObterValorPeriodo(const AData: IwtsWriteData; const AHora: TDateTime;
      AEntrada: TDateTime): TValorPeriodo;
   var Tipo: TTipoPeriodo;
-      HoraInicio, HoraFim: TDateTime;
+      HoraInicio, HoraFim, Hora: TDateTime;
   begin
      Tipo := tpNormal;
 
@@ -90,11 +96,17 @@ var
     begin
       HoraInicio := StrToDateTime('31/12/1988 ' + AData.Value['Inicio']);
       HoraFim := StrToDateTime('31/12/1988 ' + AData.Value['Fim']);
+      Hora := AHora;
 
-      if HoraFim < HoraInicio then
+      LogDebug('Hora: '+ FormatDateTime('dd/mm/yyyy hh:mm', aHora)+' Inicio: '+AData.Value['Inicio'] + ' Fim: ' + AData.Value['Fim']);
+
+      if (HoraFim < HoraInicio)  then
         HoraFim := IncDay(HoraFim,1);
 
-      if (AHora >= HoraInicio) and (AHora <= HoraFim) and
+      if Hora < HoraInicio then
+        Hora := IncDay(aHora,1);
+
+      if (Hora >= HoraInicio) and (Hora < HoraFim) and
          ((AData.Value['Tipo'] = Tipo) or (AData.Value['Tipo'] = tpNormal)) then
       begin
        Result.Descricao      := AData.Value['Descricao'];
@@ -114,6 +126,17 @@ begin
   Periodo := Input.AsData['Periodo'];
   Entrada := Input.Value['Entrada'];
   Saida := Input.Value['Saida'];
+  InicioIntervaloS := Input.Value['InicioIntervalo'];
+  FimIntervaloS := Input.Value['FimIntervalo'];
+
+  LogDebug(Periodo.Value['Descricao']);
+
+  if InicioIntervaloS <> FimIntervaloS then
+  begin
+    InicioIntervalo := StrToDateTime(FormatDateTime('dd/mm/yyyy',Entrada) + InicioIntervaloS);
+    FimIntervalo := StrToDateTime(FormatDateTime('dd/mm/yyyy',Entrada) + FimIntervaloS);
+  end;
+
   LogDebug(Periodo.Value['Descricao'] + ' - ' + FormatDateTime('dd/mm/yyyy hh:nn:ss',Entrada) + ' - '+FormatDateTime('dd/mm/yyyy hh:nn:ss',Saida));
 
   C.Dim('AnoInicio', YearOf(Entrada));
@@ -121,10 +144,36 @@ begin
   C.Execute('SELECT Data FROM Feriados where #YEAR(Data) between :AnoInicio and :AnoFim');
   Feriados := C.CreateRecordset;
 
-  C.Dim('Entrada',Entrada);
-  C.Dim('Saida',Saida);
-  C.Execute('#CALL OFFICEDRIVER.APONTAMENTOS.Detalhar(:Entrada,:Saida);');
-  Detalhe := C.CreateRecordset;
+  if InicioIntervaloS <> FimIntervaloS then
+  begin
+    C.Dim('Entrada',FormatDateTime('hh:nn',Entrada));
+    C.Dim('Saida',FormatDateTime('hh:nn',InicioIntervalo));
+    C.Execute('#CALL OFFICEDRIVER.APONTAMENTOS.Detalhar(:Entrada,:Saida);');
+    Detalhe1 := C.CreateRecordset;
+
+    C.Dim('Entrada',FormatDateTime('hh:nn',FimIntervalo));
+    C.Dim('Saida',FormatDateTime('hh:nn',Saida));
+    C.Execute('#CALL OFFICEDRIVER.APONTAMENTOS.Detalhar(:Entrada,:Saida);');
+    Detalhe2 := C.CreateRecordset;
+
+    Detalhe := DataPool.CreateRecordset('OFFICEDRIVER.APONTAMENTOS.Detalhar',True);
+    Detalhe.CopyFrom(Detalhe1);
+    Detalhe.CopyFrom(Detalhe2);
+  end else
+  begin
+    C.Dim('Entrada',FormatDateTime('hh:nn',Entrada));
+    C.Dim('Saida',FormatDateTime('hh:nn',Saida));
+    C.Execute('#CALL OFFICEDRIVER.APONTAMENTOS.Detalhar(:Entrada,:Saida);');
+    Detalhe := C.CreateRecordset;
+  end;
+  Detalhe.First;
+  while not Detalhe.EOF  do
+  begin
+    LogDebug(Detalhe.Value['Horario']);
+    Detalhe.Next;
+
+  end;
+
   Valor := 0;
   Horas := 0;
   HoraPeriodo := 0;
@@ -132,26 +181,28 @@ begin
 
   while not Detalhe.EOF do
   begin
-      if StrToDateTime('31/12/1988 '+ Detalhe.Value['Horario']) < HoraPeriodo then
-        HoraPeriodo := IncDay(StrToDateTime('31/12/1988 '+ Detalhe.Value['Horario']))
-      else
-        HoraPeriodo := StrToDateTime('31/12/1988 '+ Detalhe.Value['Horario']);
+    LogDebug(Detalhe.Value['Horario']);
+    if StrToDateTime('31/12/1988 '+ Detalhe.Value['Horario']) < HoraPeriodo then
+      HoraPeriodo := IncDay(StrToDateTime('31/12/1988 '+ Detalhe.Value['Horario']))
+    else
+      HoraPeriodo := StrToDateTime('31/12/1988 '+ Detalhe.Value['Horario']);
 
-     ValorPeriodo := ObterValorPeriodo(Periodo, HoraPeriodo, Entrada);
-     if ValorPeriodo.Econtrado then
-     begin
-       LogDebug(Detalhe.Value['Horario'] + ' - ' + Detalhe.GetFieldAsString('Tempo'));
+    ValorPeriodo := ObterValorPeriodo(Periodo, HoraPeriodo, Entrada);
+    if ValorPeriodo.Econtrado then
+    begin
+     LogDebug(Detalhe.Value['Horario'] + ' - ' + Detalhe.GetFieldAsString('Tempo'));
 
-       Descricao := ValorPeriodo.Descricao;
-       Horas     := Horas + Detalhe.Value['Tempo'];
-       Valor     := Valor + Detalhe.Value['Tempo'] * ValorPeriodo.Normal;
-       Tipo      := ValorPeriodo.Tipo;
-       ValorHora := ValorPeriodo.Normal;
-       ValorHoraExcedente := ValorPeriodo.Excedente;
-     end;
+     Descricao := ValorPeriodo.Descricao;
+     Horas     := Horas + Detalhe.Value['Tempo'];
+     Valor     := Valor + Detalhe.Value['Tempo'] * ValorPeriodo.Normal;
+     Tipo      := ValorPeriodo.Tipo;
+     ValorHora := ValorPeriodo.Normal;
+     ValorHoraExcedente := ValorPeriodo.Excedente;
+    end;
 
-     Detalhe.Next;
+    Detalhe.Next;
   end;
+  
   if Descricao <> EmptyStr then
   begin
     Output.NewRecord;
@@ -174,6 +225,7 @@ var
    Contrato, CondicoesComerciaisCooperado, CondicaoComercial,Apontamentos,DetalheApontamento,
    CooperadosContratos, CalculoContratos, Cooperados, CooperadosOut, Extrato, ExtratosOut, PeriodosOut: IwtsWriteData;
    i, IdContrato, IdFechamentoExtrato: Integer;
+   Intervalo: Double;
    Total :String;
 begin
   C := DataPool.Open('MILLENIUM');
@@ -189,7 +241,8 @@ begin
   Contrato.CopyFrom(C);
 
   CondicoesComerciaisCooperado := Contrato.AsData['CondComCooperado'] as IwtsWriteData;
-
+  LogDebug(CondicoesComerciaisCooperado.IntfName);
+  LogDebug(CondicaoComercial.IntfName);
   while not CondicoesComerciaisCooperado.EOF do
   begin
     BaseCalculo := CondicoesComerciaisCooperado.Value['BASECALCULO'];
@@ -206,6 +259,7 @@ begin
     C.Execute('#CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.ListarApontamentos(:Fechamento,:Contrato,:Funcao);');
     Apontamentos := C.AsData['Apontamentos'] as IwtsWriteData;
 
+    //Montagem do Extrado
     CooperadosContratos := Contrato.AsData['Cooperados'] as IwtsWriteData;
     CooperadosContratos.Filter := 'FUNCAO='+CondicoesComerciaisCooperado.GetFieldAsString('Funcao');
     while not CooperadosContratos.EOF do
@@ -215,9 +269,9 @@ begin
       Extrato.Clear;
       while Data <= DataFechamento do
       begin
+         Log(CooperadosContratos.GetFieldAsString('Cooperado') + ' - '+FormatDateTime('dd/mm/yyyy hh:nn',Data));
         if Apontamentos.Locate(['Cooperado', 'DataEntrada'],[CooperadosContratos.Value['Cooperado'], Data]) then
         begin
-          Log(CooperadosContratos.GetFieldAsString('Cooperado') + ' - '+FormatDateTime('dd/mm/yyyy hh:nn',Apontamentos.Value['Entrada']));
           Extrato.New;
           Extrato.Value['Entrada']          := Apontamentos.Value['Entrada'];
           Extrato.Value['Saida']            := Apontamentos.Value['Saida'];
@@ -228,24 +282,26 @@ begin
           Extrato.Value['DiaSemanaSaida']   := FormatDateTime('dddd',Apontamentos.Value['Saida']);
           Extrato.Value['HoraSaida']        := FormatDateTime('hh:nn',Apontamentos.Value['Saida']);
           Extrato.Value['Trabalhada']       := FormatDateTime('hh:nn',Apontamentos.Value['Saida'] - Apontamentos.Value['Entrada']);
-          Extrato.Value['Intervalo']        := CooperadosContratos.Value['Intervalo'];
-          Extrato.Value['Total']            := DecimalToHora(HoraToDecimal(Extrato.Value['Trabalhada']) - HoraToDecimal(CooperadosContratos.Value['Intervalo']));
+          Extrato.Value['InicioIntervalo']  := Apontamentos.Value['InicioIntervalo'];
+          Extrato.Value['FimIntervalo']     := Apontamentos.Value['FimIntervalo'];
+          Extrato.Value['Total']            := Extrato.Value['Trabalhada'];
           Extrato.Add;
         end else
         begin
-          Extrato.New;
-          Extrato.Value['Entrada']          := 0;
-          Extrato.Value['Saida']            := 0;
-          Extrato.Value['DataEntrada']      := Data;
-          Extrato.Value['DiaSemanaEntrada'] := FormatDateTime('dddd',Data);
-          Extrato.Value['HoraEntrada']      := '00:00';
-          Extrato.Value['DataSaida']        := FormatDateTime('dd/mm/yyyy',Data);
-          Extrato.Value['DiaSemanaSaida']   := FormatDateTime('dddd',Data);
-          Extrato.Value['HoraSaida']        := '00:00';
-          Extrato.Value['Trabalhada']       := '00:00';
-          Extrato.Value['Intervalo']        := '00:00';
-          Extrato.Value['Total']            := '00:00';
-          Extrato.Add;
+//          Extrato.New;
+//          Extrato.Value['Entrada']          := 0;
+//          Extrato.Value['Saida']            := 0;
+//          Extrato.Value['DataEntrada']      := Data;
+//          Extrato.Value['DiaSemanaEntrada'] := FormatDateTime('dddd',Data);
+//          Extrato.Value['HoraEntrada']      := '00:00';
+//          Extrato.Value['DataSaida']        := FormatDateTime('dd/mm/yyyy',Data);
+//          Extrato.Value['DiaSemanaSaida']   := FormatDateTime('dddd',Data);
+//          Extrato.Value['HoraSaida']        := '00:00';
+//          Extrato.Value['Trabalhada']       := '00:00';
+//          Extrato.Value['InicioIntervalo']  := '00:00';
+//          Extrato.Value['FimIntervalo']     := '00:00';
+//          Extrato.Value['Total']            := '00:00';
+//          Extrato.Add;
         end;
         Data := IncDay(Data,1);
       end;
@@ -273,6 +329,8 @@ begin
           ExtratosOut.First;
           while not ExtratosOut.EOF do
           begin
+            Intervalo := HoraToDecimal(ExtratosOut.Value['FimIntervalo']) - HoraToDecimal(ExtratosOut.Value['InicioIntervalo']);
+            LogDebug(FormatDateTime('dd/mm/yyyy',ExtratosOut.Value['DataEntrada']));
             PeriodosOut := ExtratosOut.AsData['Periodos'] as IwtsWriteData;
             C.Dim('Fechamento', Input.Value['Fechamento']);
             C.Dim('Cooperado', CooperadosOut.Value['Cooperado']);
@@ -283,8 +341,8 @@ begin
             C.Dim('DiaSemanaSaida',ExtratosOut.Value['DiaSemanaSaida']);
             C.Dim('HoraSaida',ExtratosOut.Value['HoraSaida']);
             C.Dim('Trabalhada',ExtratosOut.Value['Trabalhada']);
-            C.Dim('Intervalo',ExtratosOut.Value['Intervalo']);
-            C.Dim('Total',ExtratosOut.Value['Total']);
+            C.Dim('Intervalo', DecimalToHora(Intervalo));
+            C.Dim('Total',DecimalToHora(HoraToDecimal(ExtratosOut.Value['Total']) - Intervalo));
             C.Dim('CondComCoop',CondicoesComerciaisCooperado.Value['Id']);
             C.Execute('Insert into FechamentosExtratos (Fechamento, Cooperado, DataEntrada, ' +
                        'DiaSemanaEntrada, HoraEntrada, DataSaida, DiaSemanaSaida, HoraSaida, '+
@@ -384,13 +442,13 @@ procedure CalcularContratoMes(Input:IwtsInput; Output:IwtsOutput;DataPool:IwtsDa
 var
   C: IwtsCommand;
   Contrato, CondicaoComercial, Cooperados,
-  Fechamento,Extrato, Periodos, PeriodosOut, Periodo, Total: IwtsWriteData;
+  Fechamento,Extrato, Periodos, PeriodosOut, ExtratoPeriodo, Periodo, Total: IwtsWriteData;
   TotalHoras, TotalHorasGeral, TotalHorasExcedente, TotalValor,TotalValorExcedente,
-  TotalIntervalos: Double;
+  TotalIntervalos, Intervalo: Double;
 begin
   C := DataPool.Open('MILLENIUM');
-  Periodo := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.PERIODO');
   PeriodosOut := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.PERIODO');
+  Periodo := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.PERIODO');
   Total := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.TOTAL');
   Contrato := Input.AsData['Contrato'];
   CondicaoComercial := Input.AsData['CondicaoComercialCooperado'];
@@ -425,10 +483,12 @@ begin
 
         C.Dim('Entrada', Extrato.Value['Entrada']);
         C.Dim('Saida', Extrato.Value['Saida']);
+        C.Dim('InicioIntervalo', Extrato.Value['InicioIntervalo']);
+        C.Dim('FimIntervalo', Extrato.Value['FimIntervalo']);
         C.DimAsData('Periodo', Periodo);
-        C.Execute('#CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.CALCULARPERIODO(:Entrada,:Saida,:Periodo);');
+        C.Execute('#CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.CALCULARPERIODO(Entrada=:Entrada,Saida=:Saida,InicioIntervalo=:InicioIntervalo,FimIntervalo=:FimIntervalo,Periodo=:Periodo);');
 
-        if (C.Value['Descricao'] <> EmptyStr) then
+        if (VarToStr(C.Value['Descricao']) <> '') then
         begin
           PeriodosOut.New;
           PeriodosOut.Value['Descricao']          := C.Value['Descricao'];
@@ -445,44 +505,52 @@ begin
       Extrato.Update;
       Extrato.Next;
     end;
+
     Cooperados.Value['Extrato'] := Extrato.Data;
+
     TotalHorasGeral:= 0;
     TotalIntervalos := 0;
     PeriodosOut.Clear;
+
+    Periodos.First;
     //Totalizandio
     while not Periodos.EOF do
     begin
       TotalHoras := 0;
       TotalValor := 0;
       TotalHorasExcedente := 0;
+      Extrato.First;
+
       while not Extrato.EOF do
       begin
-        Periodo := Extrato.AsData['Periodos'] as IwtsWriteData;
-        if Periodo.Locate(['Descricao'],[Periodos.Value['Descricao']]) then
+        ExtratoPeriodo := Extrato.AsData['Periodos'] as IwtsWriteData;
+        if ExtratoPeriodo.Locate(['Descricao'],[Periodos.Value['Descricao']]) then
         begin
+          Intervalo := HoraToDecimal(Extrato.Value['FimIntervalo']) - HoraToDecimal(Extrato.Value['InicioIntervalo']);
           if TotalHoras > HoraToDecimal(CondicaoComercial.Value['Horas']) then
           begin
             TotalHorasExcedente := TotalHorasExcedente + HoraToDecimal(CondicaoComercial.Value['Horas']);
-            TotalValorExcedente := TotalValorExcedente * (HoraToDecimal(CondicaoComercial.Value['Horas']) * Periodo.Value['ValorHoraExcedente']);
+            TotalValorExcedente := TotalValorExcedente * (HoraToDecimal(CondicaoComercial.Value['Horas']) * ExtratoPeriodo.Value['ValorHoraExcedente']);
           end else
           begin
-            TotalHoras := TotalHoras + HoraToDecimal(Periodo.Value['Horas']);
-            TotalValor := TotalValor + Periodo.Value['Valor'];
+            TotalHoras := TotalHoras + HoraToDecimal(ExtratoPeriodo.Value['Horas']);
+            TotalValor := TotalValor + ExtratoPeriodo.Value['Valor'];
           end;
-          TotalHorasGeral := TotalHoras + HoraToDecimal(Periodo.Value['Horas']);
-          TotalIntervalos := TotalIntervalos +  HoraToDecimal(Cooperados.Value['Intervalo']);
+          TotalHorasGeral := TotalHoras + HoraToDecimal(ExtratoPeriodo.Value['Horas']);
+          TotalIntervalos := TotalIntervalos +  Intervalo;
         end;
         Extrato.Next;
       end;
       if TotalHoras > 0 then
       begin
         PeriodosOut.New;
-        PeriodosOut.Value['Descricao'] := Periodo.Value['Descricao'];
+        PeriodosOut.Value['Descricao'] := ExtratoPeriodo.Value['Descricao'];
         PeriodosOut.Value['Horas'] := DecimalToHora(TotalHoras);
         PeriodosOut.Value['Valor'] := TotalValor;
-        PeriodosOut.Value['Tipo'] := Periodo.Value['Tipo'];
-        PeriodosOut.Value['ValorHora'] := Periodo.Value['ValorHora'];
-        PeriodosOut.Value['ValorHoraExcedente'] := Periodo.Value['ValorHoraExcedente'];
+        PeriodosOut.Value['Tipo'] := ExtratoPeriodo.Value['Tipo'];
+        PeriodosOut.Value['ValorHora'] := ExtratoPeriodo.Value['ValorHora'];
+        PeriodosOut.Value['ValorHoraExcedente'] := ExtratoPeriodo.Value['ValorHoraExcedente'];
+        PeriodosOut.Add;
       end;
       Periodos.Next;
     end;
@@ -496,10 +564,10 @@ begin
 
     Cooperados.Value['Total'] :=  Total.Data;
     Cooperados.Update;
-    Output.NewRecord;
-    Output.Values['Cooperados'] := Cooperados.Data;
     Cooperados.Next;
   end;
+  Output.NewRecord;
+  Output.Values['Cooperados'] := Cooperados.Data;
 end;
 
 procedure CalcularContratoDia(Input:IwtsInput; Output:IwtsOutput;DataPool:IwtsDataPool);
