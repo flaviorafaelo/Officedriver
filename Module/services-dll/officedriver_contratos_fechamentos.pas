@@ -3,7 +3,7 @@ unit officedriver_contratos_fechamentos;
 interface
 
 uses
-  wtsServerObjs, SysUtils, DateUtils, logfiles, windows, Variants;
+  wtsServerObjs, SysUtils, DateUtils, Windows, logfiles, Variants;
 
 type
   TTipo = (tRepasse, tCobranca);
@@ -24,12 +24,12 @@ Type
 
 implementation
 
-procedure Log(msg: string);
+procedure Log(msg: string; prefix: string = 'Calculo');
 begin
   AddLog(0,msg, 'Calculo');
 end;
 
-procedure LogDebug(msg: string);
+procedure LogDebug(msg: string; prefix: string = 'Calculo');
 begin
   {$IFDEF MSWINDOWS}
   if Length(msg) > 0 then OutputDebugString(PChar('Calculo:> ' + msg));
@@ -98,7 +98,7 @@ var
       HoraFim := StrToDateTime('31/12/1988 ' + AData.Value['Fim']);
       Hora := AHora;
 
-      LogDebug('Hora: '+ FormatDateTime('dd/mm/yyyy hh:mm', aHora)+' Inicio: '+AData.Value['Inicio'] + ' Fim: ' + AData.Value['Fim']);
+      LogDebug('Hora: '+ FormatDateTime('dd/mm/yyyy hh:mm', aHora)+' Inicio: '+AData.Value['Inicio'] + ' Fim: ' + AData.Value['Fim'],'');
 
       if (HoraFim < HoraInicio)  then
         HoraFim := IncDay(HoraFim,1);
