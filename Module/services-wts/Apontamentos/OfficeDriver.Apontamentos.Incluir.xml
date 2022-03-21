@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Apontamentos">
-    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="44" INTFTYPE="1" THREADSAFE="0">
+    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="46" INTFTYPE="1" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -26,7 +26,7 @@
         <PARAM NAME="Reembolsos" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="19" FIELDLABEL="Reembolsos" NESTEDNAME="OfficeDriver.Apontamentos.Reembolso" GROUPNAME="Reembolsos" CTAB="0"/>
         <PARAM NAME="Fechamento" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Fechamento" CTAB="0"/>
         <PARAM NAME="InicioIntervalo" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="12" FIELDLABEL="Inicio" GROUPNAME="Intervalo" CTAB="0"/>
-        <PARAM NAME="FinalIntervalo" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="13" FIELDLABEL="Final" GROUPNAME="Intervalo" CTAB="0"/>
+        <PARAM NAME="FimIntervalo" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="13" FIELDLABEL="Final" GROUPNAME="Intervalo" CTAB="0"/>
       </PARAMS>
       <FIELDS>
         <GROUPS>

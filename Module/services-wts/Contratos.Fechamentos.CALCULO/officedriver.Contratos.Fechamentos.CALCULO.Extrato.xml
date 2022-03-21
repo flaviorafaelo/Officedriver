@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos.CALCULO">
-    <METHOD NAME="Extrato" DESCRIPTION="" VERSION="5" INTFTYPE="9" THREADSAFE="0">
+    <METHOD NAME="Extrato" DESCRIPTION="" VERSION="6" INTFTYPE="9" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -15,7 +15,8 @@
         <PARAM NAME="DiaSemanaSaida" SIZE="10" FLAGS="1" PROJECTION="0" FIELDLABEL="Diasemanasaida" CTAB="0"/>
         <PARAM NAME="HoraSaida" SIZE="5" FLAGS="1" PROJECTION="0" FIELDLABEL="Horasaida" CTAB="0"/>
         <PARAM NAME="Trabalhada" SIZE="5" FLAGS="1" PROJECTION="0" FIELDLABEL="Trabalhada" CTAB="0"/>
-        <PARAM NAME="Intervalo" SIZE="5" FLAGS="1" PROJECTION="0" FIELDLABEL="Intervalo" CTAB="0"/>
+        <PARAM NAME="InicioIntervalo" SIZE="5" FLAGS="1" PROJECTION="0" FIELDLABEL="Intervalo" CTAB="0"/>
+        <PARAM NAME="FimIntervalo" SIZE="5" FLAGS="1" PROJECTION="0" FIELDLABEL="Fimintervalo" CTAB="0"/>
         <PARAM NAME="Total" SIZE="5" FLAGS="1" PROJECTION="0" FIELDLABEL="Total" CTAB="0"/>
         <PARAM NAME="Periodos" FORMAT="R" FLAGS="1" PROJECTION="0" FIELDLABEL="Periodos" NESTEDNAME="OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.PERIODO" CTAB="0"/>
       </PARAMS>

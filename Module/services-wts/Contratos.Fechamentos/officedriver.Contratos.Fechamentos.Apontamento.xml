@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos">
-    <METHOD NAME="Apontamento" DESCRIPTION="" VERSION="13" INTFTYPE="9" THREADSAFE="0">
+    <METHOD NAME="Apontamento" DESCRIPTION="" VERSION="14" INTFTYPE="9" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -10,7 +10,8 @@
         <PARAM NAME="Cooperado" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="1" FIELDLABEL="Cooperado" CTAB="0"/>
         <PARAM NAME="Entrada" FORMAT="H" SIZE="18" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="Dataentrada" CTAB="0"/>
         <PARAM NAME="Saida" FORMAT="H" SIZE="18" FLAGS="1" PROJECTION="0" ORDER="3" FIELDLABEL="Datasaida" CTAB="0"/>
-        <PARAM NAME="IntervaloDescanso" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="7" FIELDLABEL="Intervalo" CTAB="0"/>
+        <PARAM NAME="InicioIntervalo" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="7" FIELDLABEL="Intervalo" CTAB="0"/>
+        <PARAM NAME="FimIntervalo" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" FIELDLABEL="Fimintervalo" CTAB="0"/>
         <PARAM NAME="Detalhado" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Detalhado" CTAB="0"/>
         <PARAM NAME="DataEntrada" FORMAT="D" SIZE="10" FLAGS="1" PROJECTION="0" FIELDLABEL="Dataentrada" CTAB="0"/>
       </PARAMS>
