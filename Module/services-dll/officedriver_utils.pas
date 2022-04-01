@@ -35,7 +35,7 @@ end;
 
 function HourToDecimal(Value: string): Real;
 begin
-  Result := StrToIntDef(Copy(Value, 1,2),0) + (StrToIntDef(Copy(Value, 4,2),0) / 60);
+  Result := StrToIntDef(Copy(Value, 1,Pos(':',Value)-1),0) + (StrToIntDef(Copy(Value, Pos(':',Value)+1,2),0) / 60);
 end;
 
 function DecimalToHour(Value: Real): string;
