@@ -27,20 +27,18 @@ implementation
 procedure CalcularPeriodo(Input:IwtsInput; Output:IwtsOutput;DataPool:IwtsDataPool);
 var
   C: IwtsCommand;
-  Periodo, Detalhe, Detalhe1, Detalhe2, Feriados: IwtsWriteData;
+  Periodos, Detalhe, Detalhe1, Detalhe2, Feriados: IwtsWriteData;
   Entrada, Saida, EntradaAux, SaidaAux, InicioIntervalo, FimIntervalo, HoraPeriodo : TDateTime;
 
   ValorPeriodo: TValorPeriodo;
-  Horas, Valor, ValorHora, ValorHoraExcedente :Double;
-  Tipo: Integer;
-  Descricao,InicioIntervaloS,FimIntervaloS: string;
+  InicioIntervaloS,FimIntervaloS: string;
 
   function ObterValorPeriodo(const AData: IwtsWriteData; const AHora: TDateTime;
      AEntrada, ASaida: TDateTime): TValorPeriodo;
   var Tipo: TTipoPeriodo;
       HoraInicio, HoraFim, Hora: TDateTime;
   begin
-     Tipo := tpNormal;
+    Tipo := tpNormal;
 
     if Feriados.Locate(['Data'],[AEntrada]) then
      Tipo := tpFeriado
@@ -84,13 +82,11 @@ var
   end;
 begin
   C := DataPool.Open('MILLENIUM');
-  Periodo := Input.AsData['Periodo'];
+  Periodos := Input.AsData['Periodos'];
   Entrada := Input.Value['Entrada'];
   Saida := Input.Value['Saida'];
   InicioIntervaloS := Input.Value['InicioIntervalo'];
   FimIntervaloS := Input.Value['FimIntervalo'];
-
-  LogDebug(Periodo.Value['Descricao']);
 
   if InicioIntervaloS <> FimIntervaloS then
   begin
@@ -102,8 +98,6 @@ begin
     if FimIntervalo < InicioIntervalo  then
       FimIntervalo := IncDay(FimIntervalo);
   end;
-
-  LogDebug(Periodo.Value['Descricao'] + ' - ' + FormatDateTime('dd/mm/yyyy hh:nn:ss',Entrada) + ' - '+FormatDateTime('dd/mm/yyyy hh:nn:ss',Saida));
 
   C.Dim('AnoInicio', YearOf(Entrada));
   C.Dim('AnoFim', YearOf(Saida));
@@ -132,16 +126,7 @@ begin
     C.Execute('#CALL OFFICEDRIVER.APONTAMENTOS.Detalhar(:Entrada,:Saida);');
     Detalhe := C.CreateRecordset;
   end;
-  Detalhe.First;
-  while not Detalhe.EOF  do
-  begin
-    LogDebug(FormatDateTime('dd/mm/yyyy hh:nn',Detalhe.Value['Horario']));
-    Detalhe.Next;
 
-  end;
-
-  Valor := 0;
-  Horas := 0;
   EntradaAux := 0;
   SaidaAux := 0;
   Detalhe.First;
@@ -159,17 +144,17 @@ begin
       LogDebug(Detalhe.Value['Horario']);
       HoraPeriodo := Detalhe.Value['Horario'];
 
-      ValorPeriodo := ObterValorPeriodo(Periodo, HoraPeriodo, Entrada, Saida);
+      ValorPeriodo := ObterValorPeriodo(Periodos, HoraPeriodo, Entrada, Saida);
       if ValorPeriodo.Econtrado then
       begin
-       Descricao := ValorPeriodo.Descricao;
-       Horas     := Horas + Detalhe.Value['Tempo'];
-       Valor     := Valor + Detalhe.Value['Tempo'] * ValorPeriodo.Normal;
-       Tipo      := ValorPeriodo.Tipo;
-       ValorHora := ValorPeriodo.Normal;
-       ValorHoraExcedente := ValorPeriodo.Excedente;
+       Output.NewRecord;
+       Output.SetFieldByName('Descricao',ValorPeriodo.Descricao);
+       Output.SetFieldByName('Horas',DecimalToHour(Detalhe.Value['Tempo']));
+       Output.SetFieldByName('Valor',Detalhe.Value['Tempo'] * ValorPeriodo.Normal);
+       Output.SetFieldByName('Tipo',ValorPeriodo.Tipo);
+       Output.SetFieldByName('ValorHora',ValorPeriodo.Normal);
+       Output.SetFieldByName('ValorHoraExcedente',ValorPeriodo.Excedente);
       end;
-
       Detalhe.Next;
     end;
   end else
@@ -179,17 +164,17 @@ begin
       LogDebug(Detalhe.Value['Horario']);
       HoraPeriodo := Detalhe.Value['Horario'];
 
-      ValorPeriodo := ObterValorPeriodo(Periodo, HoraPeriodo, Entrada, SaidaAux);
+      ValorPeriodo := ObterValorPeriodo(Periodos, HoraPeriodo, Entrada, SaidaAux);
       if ValorPeriodo.Econtrado then
       begin
-       Descricao := ValorPeriodo.Descricao;
-       Horas     := Horas + Detalhe.Value['Tempo'];
-       Valor     := Valor + Detalhe.Value['Tempo'] * ValorPeriodo.Normal;
-       Tipo      := ValorPeriodo.Tipo;
-       ValorHora := ValorPeriodo.Normal;
-       ValorHoraExcedente := ValorPeriodo.Excedente;
+       Output.NewRecord;
+       Output.SetFieldByName('Descricao',ValorPeriodo.Descricao);
+       Output.SetFieldByName('Horas',DecimalToHour(Detalhe.Value['Tempo']));
+       Output.SetFieldByName('Valor',Detalhe.Value['Tempo'] * ValorPeriodo.Normal);
+       Output.SetFieldByName('Tipo',ValorPeriodo.Tipo);
+       Output.SetFieldByName('ValorHora',ValorPeriodo.Normal);
+       Output.SetFieldByName('ValorHoraExcedente',ValorPeriodo.Excedente);
       end;
-
       Detalhe.Next;
     end;
     Detalhe.First;
@@ -198,30 +183,19 @@ begin
       LogDebug(Detalhe.Value['Horario']);
       HoraPeriodo := Detalhe.Value['Horario'];
 
-      ValorPeriodo := ObterValorPeriodo(Periodo, HoraPeriodo, EntradaAux, Saida);
+      ValorPeriodo := ObterValorPeriodo(Periodos, HoraPeriodo, EntradaAux, Saida);
       if ValorPeriodo.Econtrado then
       begin
-       Descricao := ValorPeriodo.Descricao;
-       Horas     := Horas + Detalhe.Value['Tempo'];
-       Valor     := Valor + Detalhe.Value['Tempo'] * ValorPeriodo.Normal;
-       Tipo      := ValorPeriodo.Tipo;
-       ValorHora := ValorPeriodo.Normal;
-       ValorHoraExcedente := ValorPeriodo.Excedente;
+       Output.NewRecord;
+       Output.SetFieldByName('Descricao',ValorPeriodo.Descricao);
+       Output.SetFieldByName('Horas',DecimalToHour(Detalhe.Value['Tempo']));
+       Output.SetFieldByName('Valor',Detalhe.Value['Tempo'] * ValorPeriodo.Normal);
+       Output.SetFieldByName('Tipo',ValorPeriodo.Tipo);
+       Output.SetFieldByName('ValorHora',ValorPeriodo.Normal);
+       Output.SetFieldByName('ValorHoraExcedente',ValorPeriodo.Excedente);
       end;
-
       Detalhe.Next;
     end;
-  end;
-
-  if Descricao <> EmptyStr then
-  begin
-    Output.NewRecord;
-    Output.SetFieldByName('Descricao',Descricao);
-    Output.SetFieldByName('Horas',DecimalToHour(Horas));
-    Output.SetFieldByName('Valor',Valor);
-    Output.SetFieldByName('Tipo',Tipo);
-    Output.SetFieldByName('ValorHora',ValorHora);
-    Output.SetFieldByName('ValorHoraExcedente',ValorHoraExcedente);
   end;
 end;
 
@@ -369,6 +343,7 @@ begin
             IdFechamentoExtrato := C.Value['Id'];
 
             PeriodosOut.First;
+            PeriodosOut.Order('Descricao');
             while not PeriodosOut.EOF do
             begin
               C.Dim('Fechamento_Extrato',IdFechamentoExtrato);
@@ -381,7 +356,7 @@ begin
               C.Execute('Insert into FechamentosExtratosPeriodos (Fechamento_Extrato, Descricao, Horas, Valor, Tipo, ValorHora, ValorHoraExcedente) values ' +
               ' (:Fechamento_Extrato, :Descricao, :Horas, :Valor, :Tipo, :ValorHora, :ValorHoraExcedente) #RETURN(Id); ');
               PeriodosOut.Next;
-            end;
+          end;
             ExtratosOut.Next;
           end;
 
@@ -484,9 +459,10 @@ var
   Fechamento,Extrato, Periodos, PeriodosOut, ExtratoPeriodo, Periodo, Total: IwtsWriteData;
   TotalHoras, TotalHorasGeral, TotalHorasExcedente, TotalValor,TotalValorExcedente,
   TotalIntervalos, Intervalo, PacoteHoras, Horas, ValorHoraExcedente, ValorHora: Double;
+  LogStr: String;
 begin
   C := DataPool.Open('MILLENIUM');
-  PeriodosOut := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.PERIODO');
+  PeriodosOut := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.PERIODOS');
   Periodo := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.PERIODO');
   Total := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.TOTAL');
   Contrato := Input.AsData['Contrato'];
@@ -506,39 +482,25 @@ begin
     Log('Calcular Periodo');
     while not Extrato.EOF do
     begin
-      Periodos.First;
+      C.Dim('Entrada', Extrato.Value['Entrada']);
+      C.Dim('Saida', Extrato.Value['Saida']);
+      C.Dim('InicioIntervalo', Extrato.Value['InicioIntervalo']);
+      C.Dim('FimIntervalo', Extrato.Value['FimIntervalo']);
+      C.DimAsData('Periodos', Periodos);
+      C.Execute('#CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.CALCULARPERIODO(Entrada=:Entrada,Saida=:Saida,InicioIntervalo=:InicioIntervalo,FimIntervalo=:FimIntervalo,Periodos=:Periodos);');
       PeriodosOut.Clear;
-      while not Periodos.EOF do
+      while not C.EOF do
       begin
-        Periodo.Clear;
-        Periodo.New;
-        Periodo.Value['Descricao']      := Periodos.Value['Descricao'];
-        Periodo.Value['Inicio']         := Periodos.Value['Inicio'];
-        Periodo.Value['Fim']            := Periodos.Value['Fim'];
-        Periodo.Value['ValorNormal']    := Periodos.Value['ValorNormal'];
-        Periodo.Value['ValorExcedente'] := Periodos.Value['ValorExcedente'];
-        Periodo.Value['Tipo']           := Periodos.Value['Tipo'];
-        Periodo.Add;
-
-        C.Dim('Entrada', Extrato.Value['Entrada']);
-        C.Dim('Saida', Extrato.Value['Saida']);
-        C.Dim('InicioIntervalo', Extrato.Value['InicioIntervalo']);
-        C.Dim('FimIntervalo', Extrato.Value['FimIntervalo']);
-        C.DimAsData('Periodo', Periodo);
-        C.Execute('#CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.CALCULARPERIODO(Entrada=:Entrada,Saida=:Saida,InicioIntervalo=:InicioIntervalo,FimIntervalo=:FimIntervalo,Periodo=:Periodo);');
-
-        if (VarToStr(C.Value['Descricao']) <> '') then
-        begin
-          PeriodosOut.New;
-          PeriodosOut.Value['Descricao']          := C.Value['Descricao'];
-          PeriodosOut.Value['Horas']              := C.Value['Horas'];
-          PeriodosOut.Value['Valor']              := C.Value['Valor'];
-          PeriodosOut.Value['Tipo']               := C.Value['Tipo'];
-          PeriodosOut.Value['ValorHora']          := C.Value['ValorHora'];
-          PeriodosOut.Value['ValorHoraExcedente'] := C.Value['ValorHoraExcedente'];
-          PeriodosOut.Add;
-        end;
-        Periodos.Next;
+        LogDebug('Descrição: '+C.Value['Descricao'] + ' - Total: ' + C.Value['Horas']);
+        PeriodosOut.New;
+        PeriodosOut.Value['Descricao']          := C.Value['Descricao'];
+        PeriodosOut.Value['Horas']              := C.Value['Horas'];
+        PeriodosOut.Value['Valor']              := C.Value['Valor'];
+        PeriodosOut.Value['Tipo']               := C.Value['Tipo'];
+        PeriodosOut.Value['ValorHora']          := C.Value['ValorHora'];
+        PeriodosOut.Value['ValorHoraExcedente'] := C.Value['ValorHoraExcedente'];
+        PeriodosOut.Add;
+        C.Next;
       end;
       Extrato.Value['Periodos'] := PeriodosOut.Data;
       Extrato.Update;
@@ -563,30 +525,34 @@ begin
       ExtratoPeriodo := Extrato.AsData['Periodos'] as IwtsWriteData;
       ExtratoPeriodo.First;
       Intervalo := HourToDecimal(Extrato.Value['FimIntervalo']) - HourToDecimal(Extrato.Value['InicioIntervalo']);
-      LogDebug(FloatToStr(PacoteHoras));
       while not ExtratoPeriodo.Eof do
       begin
         Horas := HourToDecimal(ExtratoPeriodo.Value['Horas']);
         ValorHora :=  ExtratoPeriodo.Value['Valor'];
         ValorHoraExcedente := ExtratoPeriodo.Value['ValorHoraExcedente'];
 
-        LogDebug(FloatToStr(TotalHoras + Horas));
+        LogStr := ExtratoPeriodo.Value['Descricao'];
         if (TotalHoras < PacoteHoras) and ((TotalHoras + Horas) >= PacoteHoras) then
         begin
+
           TotalHorasExcedente := TotalHorasExcedente + ((TotalHoras + Horas) - PacoteHoras);
           TotalValorExcedente := TotalValorExcedente + (((TotalHoras + Horas) - PacoteHoras) * ValorHoraExcedente);
           TotalValor :=  TotalValor + ((PacoteHoras - TotalHoras) *  ValorHora);
           TotalHoras := PacoteHoras;
+          LogStr := LogStr + ';' + FloatToStr((TotalHoras + Horas) - PacoteHoras) + ';' + FloatToStr(((TotalHoras + Horas) - PacoteHoras) * ValorHoraExcedente) + ';Excedente';
         end else
         if TotalHoras  >= PacoteHoras then
         begin
           TotalHorasExcedente := TotalHorasExcedente + Horas;
           TotalValorExcedente := TotalValorExcedente + (Horas * ValorHoraExcedente);
+          LogStr := LogStr + ';' + FloatToStr(Horas) + ';' + FloatToStr(Horas * ValorHoraExcedente) + ';Excedente';
         end else
         begin
           TotalHoras := TotalHoras + Horas;
           TotalValor := TotalValor + ValorHora;
+          LogStr := LogStr + ';' + FloatToStr(Horas) + ';' + FloatToStr(Horas * ValorHora) + ';Normal';
         end;
+        LogDebug(LogStr);
         ExtratoPeriodo.Next;
       end;
       TotalIntervalos := TotalIntervalos +  Intervalo;
