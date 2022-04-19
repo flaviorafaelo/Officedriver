@@ -11,6 +11,7 @@
     <FIELDS NAME="Tipo" DATATYPE="3"/>
     <FIELDS NAME="ValorHora" DATATYPE="6"/>
     <FIELDS NAME="ValorHoraExcedente" DATATYPE="6"/>
+    <FIELDS NAME="Excedente" DATATYPE="5"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>
       <FLAGS> AQ==
