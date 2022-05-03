@@ -223,6 +223,7 @@ begin
 
   C.Execute('#CALL OFFICEDRIVER.CONTRATOS.Consultar(:Contrato)');
   Contrato.CopyFrom(C);
+  CooperadosContratos := Contrato.AsData['Cooperados'] as IwtsWriteData;
 
   CondicoesComerciaisCooperado := Contrato.AsData['CondComCooperado'] as IwtsWriteData;
   LogDebug(CondicoesComerciaisCooperado.IntfName);
@@ -244,8 +245,9 @@ begin
     Apontamentos := C.AsData['Apontamentos'] as IwtsWriteData;
 
     //Montagem do Extrado
-    CooperadosContratos := Contrato.AsData['Cooperados'] as IwtsWriteData;
+    CooperadosContratos.First;
     CooperadosContratos.Filter := 'FUNCAO='+CondicoesComerciaisCooperado.GetFieldAsString('Funcao');
+    Cooperados.Clear;
     while not CooperadosContratos.EOF do
     begin
       Data := IncMonth(DataFechamento, -1);
@@ -304,6 +306,7 @@ begin
         C.DimAsData('Cooperados',Cooperados);
         C.Execute('#CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CalcularContratoMes(:Contrato,:CondicaoComercialCooperado,:Cooperados)');
 
+        CalculoContratos.Clear;
         CalculoContratos.CopyFrom(C);
 
         TotalGeralIntervalo := 0;
@@ -312,6 +315,7 @@ begin
         ValorTotalGeral := 0;
         ValorTotalGeralExcedente := 0;
 
+        CooperadosOut := nil;
         CooperadosOut := CalculoContratos.AsData['Cooperados'] as IwtsWriteData;
         CooperadosOut.First;
         while not CooperadosOut.EOF do
@@ -383,7 +387,7 @@ begin
         C.Dim('ValorTotalGeral',ValorTotalGeral);
         C.Dim('ValorTotalGeralExcedente',ValorTotalGeralExcedente);
         C.Execute('Update Fechamentos set TotalIntervalo = :TotalIntervalo, TotalGeral = :TotalGeral, TotalGeralExcedente = :TotalGeralExcedente, '+
-                  ' ValorTotalGeral = :ValorTotalGeral, ValorTotalGeralExcedente = :ValorTotalGeralExcedente '+
+                  ' ValorTotalGeral = :ValorTotalGeral, ValorTotalGeralExcedente = :ValorTotalGeralExcedente, Status = 1'+
                   ' where Id = :Fechamento');
      end;
 
