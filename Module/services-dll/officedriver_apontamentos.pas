@@ -45,8 +45,20 @@ begin
     if (Hora = HoraInicio) and (MinutoInicio <> 0) then
     begin
       Horario := Entrada;
-      Tempo := (60 - MinutoInicio)/60;
-      Data := IncMinute(Data, 60 - MinutoInicio);
+
+     if (Round(Diferenca) >= 60) then
+      begin
+        Data := IncMinute(Data, 60 - MinutoInicio);
+        Tempo := (60 - MinutoInicio)/60;
+      end else if (Round(Diferenca) >= MinutoInicio) and (Hora <> HoraFim) then
+      begin
+        Data := IncMinute(Data, 60 - MinutoInicio);
+        Tempo := (60 - MinutoInicio)/60;
+      end else
+      begin
+        Data := IncMinute(Data, Round(Diferenca));
+        Tempo := Round(Diferenca)/60;
+      end
     end else
     if (Hora = HoraFim) and (MinutoFim <> 0) then
     begin

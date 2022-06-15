@@ -63,19 +63,19 @@ var
       if (HoraFim < HoraInicio) then
         HoraFim := IncDay(HoraFim);
 
-      LogDebug('Hora: '+ FormatDateTime('dd/mm/yyyy hh:mm', aHora)+' Inicio: '+FormatDateTime('dd/mm/yyyy hh:nn', HoraInicio) + ' Fim: ' + FormatDateTime('dd/mm/yyyy hh:nn', HoraFim),'');
+      LogDebug('Hora: '+ FormatDateTime('dd/mm/yyyy hh:mm', Hora)+' Inicio: '+FormatDateTime('dd/mm/yyyy hh:nn', HoraInicio) + ' Fim: ' + FormatDateTime('dd/mm/yyyy hh:nn', HoraFim),'');
 
       if (Hora >= HoraInicio) and (Hora < HoraFim) and
          ((AData.Value['Tipo'] = Tipo) or (AData.Value['Tipo'] = tpNormal)) then
       begin
-       Result.Descricao      := AData.Value['Descricao'];
-       Result.Normal         := AData.Value['ValorNormal'];
-       Result.Excedente      := AData.Value['ValorExcedente'];
-       Result.Tipo           := AData.Value['Tipo'];
-       Result.ValorHoraNormal:= AData.Value['ValorHora'];
-       Result.ValorHoraExcedente:= AData.Value['ValorHoraExcedente'];
-       Result.Econtrado := True;
-       Exit;
+        Result.Descricao      := AData.Value['Descricao'];
+        Result.Normal         := AData.Value['ValorNormal'];
+        Result.Excedente      := AData.Value['ValorExcedente'];
+        Result.Tipo           := AData.Value['Tipo'];
+        Result.ValorHoraNormal:= AData.Value['ValorHora'];
+        Result.ValorHoraExcedente:= AData.Value['ValorHoraExcedente'];
+        Result.Econtrado := True;
+        Exit;
       end;
       AData.Next;
     end;
@@ -130,7 +130,6 @@ begin
   EntradaAux := 0;
   SaidaAux := 0;
   Detalhe.First;
-
   if DayOf(Saida) <> DayOf(Entrada) then
   begin
     EntradaAux := StrToDateTime(FormatDateTime('dd/mm/yyyy', Saida) + '00:00');

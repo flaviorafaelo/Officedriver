@@ -33,6 +33,7 @@
     </DelphiCompile>
     <DCCReference Include="officedriver_apontamentos.pas" />
     <DCCReference Include="officedriver_contratos_fechamentos.pas" />
+    <DCCReference Include="officedriver_utils.pas" />
     <DCCReference Include="z:\wdts\server\common\wtsmemorym_intf.pas" />
     <DCCReference Include="Z:\WDTS\server\common\wtsServerObjs.pas" />
     <None Include="ModelSupport_Officedriver\default.txaPackage" />
