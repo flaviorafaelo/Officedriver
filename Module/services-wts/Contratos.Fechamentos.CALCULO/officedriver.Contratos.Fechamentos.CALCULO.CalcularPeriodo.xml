@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos.CALCULO">
-    <METHOD NAME="CalcularPeriodo" DESCRIPTION="" VERSION="15" THREADSAFE="0">
+    <METHOD NAME="CalcularPeriodo" DESCRIPTION="" VERSION="16" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -10,7 +10,7 @@
         <PARAM NAME="Saida" FORMAT="H" SIZE="18" PROJECTION="0" FIELDLABEL="Saida" CTAB="0"/>
         <PARAM NAME="InicioIntervalo" SIZE="5" PROJECTION="0" FIELDLABEL="Iniciointervalo" CTAB="0"/>
         <PARAM NAME="FimIntervalo" SIZE="5" PROJECTION="0" FIELDLABEL="Fimintervalo" CTAB="0"/>
-        <PARAM NAME="Periodo" FORMAT="R" PROJECTION="0" FIELDLABEL="Periodos" NESTEDNAME="OFFICEDRIVER.CONTRATOS.PERIODO" CTAB="0"/>
+        <PARAM NAME="Periodos" FORMAT="R" PROJECTION="0" FIELDLABEL="Periodos" NESTEDNAME="OFFICEDRIVER.CONTRATOS.PERIODO" CTAB="0"/>
       </PARAMS>
       <FIELDS>
         <GROUPS>

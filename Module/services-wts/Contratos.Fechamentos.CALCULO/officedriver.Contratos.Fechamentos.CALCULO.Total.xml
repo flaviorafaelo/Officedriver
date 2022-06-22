@@ -1,16 +1,17 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos.CALCULO">
-    <METHOD NAME="Total" DESCRIPTION="" VERSION="8" INTFTYPE="9" THREADSAFE="0">
+    <METHOD NAME="Total" DESCRIPTION="" VERSION="13" INTFTYPE="9" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
         </GROUPS>
-        <PARAM NAME="TotalPeriodo" FORMAT="R" PROJECTION="0" FIELDLABEL="Periodos" NESTEDNAME="officedriver.Contratos.Fechamentos.CALCULO.Periodo" CTAB="0"/>
-        <PARAM NAME="TotalIntervalo" SIZE="6" PROJECTION="0" FIELDLABEL="Intervalo" CTAB="0"/>
-        <PARAM NAME="TotalExcedente" SIZE="6" PROJECTION="0" FIELDLABEL="Totalextras" CTAB="0"/>
-        <PARAM NAME="TotalGeral" SIZE="6" PROJECTION="0" FIELDLABEL="Totalgeral" CTAB="0"/>
+        <PARAM NAME="TotalPeriodo" FORMAT="R" PROJECTION="0" FIELDLABEL="Periodos" NESTEDNAME="OfficeDriver.Contratos.Fechamentos.CALCULO.Periodos" CTAB="0"/>
+        <PARAM NAME="TotalIntervalo" SIZE="10" PROJECTION="0" FIELDLABEL="Intervalo" CTAB="0"/>
+        <PARAM NAME="TotalExcedente" SIZE="10" PROJECTION="0" FIELDLABEL="Totalextras" CTAB="0"/>
+        <PARAM NAME="TotalGeral" SIZE="10" PROJECTION="0" FIELDLABEL="Totalgeral" CTAB="0"/>
         <PARAM NAME="TotalValorExcedente" FORMAT="M" SIZE="17" DECIMALS="4" PROJECTION="0" FIELDLABEL="Totalvalorexcedente" CTAB="0"/>
+        <PARAM NAME="TotalValor" FORMAT="M" SIZE="17" DECIMALS="4" PROJECTION="0" FIELDLABEL="Totalvalor" CTAB="0"/>
       </PARAMS>
       <FIELDS/>
       <ACTIONSCRIPT></ACTIONSCRIPT>

@@ -36,7 +36,7 @@ var
   function ObterValorPeriodo(const AData: IwtsWriteData; const AHora: TDateTime;
      AEntrada, ASaida: TDateTime): TValorPeriodo;
   var Tipo: TTipoPeriodo;
-      HoraInicio, HoraFim, Hora: TDateTime;
+     DetalhePeriodo: IwtsWriteData;
   begin
     Tipo := tpNormal;
 
@@ -56,16 +56,13 @@ var
 
     while not AData.Eof do
     begin
-      HoraInicio := StrToDateTime(DateToStr(AEntrada) +' ' + AData.Value['Inicio']);
-      HoraFim := StrToDateTime(DateToStr(ASaida)+' ' +AData.Value['Fim']);
-      Hora := AHora;
+      C.Dim('Inicio',AData.Value['Inicio']);
+      C.Dim('Fim',AData.Value['Fim']);
+      C.Execute('#CALL OFFICEDRIVER.APONTAMENTOS.DetalharPeriodo(:Inicio,:Fim);');
+      DetalhePeriodo := C.CreateRecordset;
+      LogDebug('Hora: '+ FormatDateTime('hh:mm', AHora)+' Inicio: '+AData.Value['Inicio'] + ' Fim: ' + AData.Value['Fim'],'');
 
-      if (HoraFim < HoraInicio) then
-        HoraFim := IncDay(HoraFim);
-
-      LogDebug('Hora: '+ FormatDateTime('dd/mm/yyyy hh:mm', Hora)+' Inicio: '+FormatDateTime('dd/mm/yyyy hh:nn', HoraInicio) + ' Fim: ' + FormatDateTime('dd/mm/yyyy hh:nn', HoraFim),'');
-
-      if (Hora >= HoraInicio) and (Hora < HoraFim) and
+      if DetalhePeriodo.Locate(['Hora'], [FormatDateTime('hh:mm', AHora)]) and
          ((AData.Value['Tipo'] = Tipo) or (AData.Value['Tipo'] = tpNormal)) then
       begin
         Result.Descricao      := AData.Value['Descricao'];
@@ -130,71 +127,23 @@ begin
   EntradaAux := 0;
   SaidaAux := 0;
   Detalhe.First;
-  if DayOf(Saida) <> DayOf(Entrada) then
+  while not Detalhe.EOF do
   begin
-    EntradaAux := StrToDateTime(FormatDateTime('dd/mm/yyyy', Saida) + '00:00');
-    SaidaAux := StrToDateTime(FormatDateTime('dd/mm/yyyy', Entrada) + '23:59:59');
-  end;
+    LogDebug(Detalhe.Value['Horario']);
+    HoraPeriodo := Detalhe.Value['Horario'];
 
-  if EntradaAux = 0 then
-  begin
-    while not Detalhe.EOF do
+    ValorPeriodo := ObterValorPeriodo(Periodos, HoraPeriodo, Entrada, Saida);
+    if ValorPeriodo.Econtrado then
     begin
-      LogDebug(Detalhe.Value['Horario']);
-      HoraPeriodo := Detalhe.Value['Horario'];
-
-      ValorPeriodo := ObterValorPeriodo(Periodos, HoraPeriodo, Entrada, Saida);
-      if ValorPeriodo.Econtrado then
-      begin
-       Output.NewRecord;
-       Output.SetFieldByName('Descricao',ValorPeriodo.Descricao);
-       Output.SetFieldByName('Horas',DecimalToHour(Detalhe.Value['Tempo']));
-       Output.SetFieldByName('Valor',Detalhe.Value['Tempo'] * ValorPeriodo.Normal);
-       Output.SetFieldByName('Tipo',ValorPeriodo.Tipo);
-       Output.SetFieldByName('ValorHora',ValorPeriodo.Normal);
-       Output.SetFieldByName('ValorHoraExcedente',ValorPeriodo.Excedente);
-      end;
-      Detalhe.Next;
+     Output.NewRecord;
+     Output.SetFieldByName('Descricao',ValorPeriodo.Descricao);
+     Output.SetFieldByName('Horas',DecimalToHour(Detalhe.Value['Tempo']));
+     Output.SetFieldByName('Valor',Detalhe.Value['Tempo'] * ValorPeriodo.Normal);
+     Output.SetFieldByName('Tipo',ValorPeriodo.Tipo);
+     Output.SetFieldByName('ValorHora',ValorPeriodo.Normal);
+     Output.SetFieldByName('ValorHoraExcedente',ValorPeriodo.Excedente);
     end;
-  end else
-  begin
-    while not Detalhe.EOF do
-    begin
-      LogDebug(Detalhe.Value['Horario']);
-      HoraPeriodo := Detalhe.Value['Horario'];
-
-      ValorPeriodo := ObterValorPeriodo(Periodos, HoraPeriodo, Entrada, SaidaAux);
-      if ValorPeriodo.Econtrado then
-      begin
-       Output.NewRecord;
-       Output.SetFieldByName('Descricao',ValorPeriodo.Descricao);
-       Output.SetFieldByName('Horas',DecimalToHour(Detalhe.Value['Tempo']));
-       Output.SetFieldByName('Valor',Detalhe.Value['Tempo'] * ValorPeriodo.Normal);
-       Output.SetFieldByName('Tipo',ValorPeriodo.Tipo);
-       Output.SetFieldByName('ValorHora',ValorPeriodo.Normal);
-       Output.SetFieldByName('ValorHoraExcedente',ValorPeriodo.Excedente);
-      end;
-      Detalhe.Next;
-    end;
-    Detalhe.First;
-    while not Detalhe.EOF do
-    begin
-      LogDebug(Detalhe.Value['Horario']);
-      HoraPeriodo := Detalhe.Value['Horario'];
-
-      ValorPeriodo := ObterValorPeriodo(Periodos, HoraPeriodo, EntradaAux, Saida);
-      if ValorPeriodo.Econtrado then
-      begin
-       Output.NewRecord;
-       Output.SetFieldByName('Descricao',ValorPeriodo.Descricao);
-       Output.SetFieldByName('Horas',DecimalToHour(Detalhe.Value['Tempo']));
-       Output.SetFieldByName('Valor',Detalhe.Value['Tempo'] * ValorPeriodo.Normal);
-       Output.SetFieldByName('Tipo',ValorPeriodo.Tipo);
-       Output.SetFieldByName('ValorHora',ValorPeriodo.Normal);
-       Output.SetFieldByName('ValorHoraExcedente',ValorPeriodo.Excedente);
-      end;
-      Detalhe.Next;
-    end;
+    Detalhe.Next;
   end;
 end;
 
@@ -273,20 +222,20 @@ begin
           Extrato.Add;
         end else
         begin
-//          Extrato.New;
-//          Extrato.Value['Entrada']          := 0;
-//          Extrato.Value['Saida']            := 0;
-//          Extrato.Value['DataEntrada']      := Data;
-//          Extrato.Value['DiaSemanaEntrada'] := FormatDateTime('dddd',Data);
-//          Extrato.Value['HoraEntrada']      := '00:00';
-//          Extrato.Value['DataSaida']        := FormatDateTime('dd/mm/yyyy',Data);
-//          Extrato.Value['DiaSemanaSaida']   := FormatDateTime('dddd',Data);
-//          Extrato.Value['HoraSaida']        := '00:00';
-//          Extrato.Value['Trabalhada']       := '00:00';
-//          Extrato.Value['InicioIntervalo']  := '00:00';
-//          Extrato.Value['FimIntervalo']     := '00:00';
-//          Extrato.Value['Total']            := '00:00';
-//          Extrato.Add;
+          Extrato.New;
+          Extrato.Value['Entrada']          := 0;
+          Extrato.Value['Saida']            := 0;
+          Extrato.Value['DataEntrada']      := Data;
+          Extrato.Value['DiaSemanaEntrada'] := FormatDateTime('dddd',Data);
+          Extrato.Value['HoraEntrada']      := '00:00';
+          Extrato.Value['DataSaida']        := FormatDateTime('dd/mm/yyyy',Data);
+          Extrato.Value['DiaSemanaSaida']   := FormatDateTime('dddd',Data);
+          Extrato.Value['HoraSaida']        := '00:00';
+          Extrato.Value['Trabalhada']       := '00:00';
+          Extrato.Value['InicioIntervalo']  := '00:00';
+          Extrato.Value['FimIntervalo']     := '00:00';
+          Extrato.Value['Total']            := '00:00';
+          Extrato.Add;
         end;
         Data := IncDay(Data,1);
       end;
@@ -377,7 +326,6 @@ begin
           end;
           CooperadosOut.Next;
         end;
-
 
         C.Dim('Fechamento',Input.Value['Fechamento']);
         C.Dim('TotalIntervalo',DecimalToHour(TotalGeralIntervalo));

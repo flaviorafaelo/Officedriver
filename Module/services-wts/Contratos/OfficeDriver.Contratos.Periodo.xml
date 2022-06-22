@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos">
-    <METHOD NAME="Periodo" DESCRIPTION="" VERSION="22" INTFTYPE="9" THREADSAFE="0">
+    <METHOD NAME="Periodo" DESCRIPTION="" VERSION="23" INTFTYPE="9" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
         </GROUPS>
         <PARAM NAME="Id" FORMAT="N" SIZE="8" PROJECTION="0" ORDER="2" LOOKUP="list:'0','Normal';'1','Fim de Semana';'2','Feriado';" FIELDLABEL="Tipo" CTAB="0"/>
-        <PARAM NAME="Descricao" SIZE="50" FLAGS="1" PROJECTION="0" ORDER="1" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
+        <PARAM NAME="Descricao" SIZE="50" FLAGS="1" PROJECTION="0" ORDER="2" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
         <PARAM NAME="Inicio" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="3" FIELDLABEL="Inicio" CTAB="0"/>
         <PARAM NAME="Fim" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="4" FIELDLABEL="Fim" CTAB="0"/>
-        <PARAM NAME="ValorNormal" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="5" FIELDLABEL="Normal" CTAB="0"/>
-        <PARAM NAME="ValorExcedente" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="6" FIELDLABEL="Excedente" CTAB="0"/>
-        <PARAM NAME="Tipo" FORMAT="N" SIZE="8" FLAGS="17" DEFAULT="1" PROJECTION="0" LOOKUP="list:'0','Normal';'1','Fim de semana';'2','Feriado';" FIELDLABEL="Tipo" CTAB="0"/>
+        <PARAM NAME="ValorNormal" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="5" FIELDLABEL="Valor" CTAB="0"/>
+        <PARAM NAME="ValorExcedente" FORMAT="M" SIZE="17" FLAGS="1" DECIMALS="4" PROJECTION="0" ORDER="6" FIELDLABEL="Valor Excedente" CTAB="0"/>
+        <PARAM NAME="Tipo" FORMAT="N" SIZE="8" FLAGS="17" DEFAULT="1" PROJECTION="0" ORDER="1" LOOKUP="list:'0','Normal';'1','Fim de semana';'2','Feriado';" FIELDLABEL="Tipo" CTAB="0"/>
         <PARAM NAME="ValorHora" FORMAT="M" SIZE="17" DECIMALS="4" PROJECTION="0" FIELDLABEL="Valorhora" CTAB="0"/>
         <PARAM NAME="ValorHoraExcedente" FORMAT="M" SIZE="17" DECIMALS="4" PROJECTION="0" FIELDLABEL="Valorhoraexcedente" CTAB="0"/>
       </PARAMS>

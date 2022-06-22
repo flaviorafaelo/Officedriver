@@ -81,7 +81,19 @@ begin
 end;
 
 
+procedure DetalharPeriodo(Input:IwtsInput; Output:IwtsOutput;DataPool:IwtsDataPool);
+var
+  Inicio: TDateTime;
+begin
+  Inicio := IncMinute(StrToDateTime('01/01/2000 ' + Input.Value['Inicio']),-1);
+  repeat
+    Inicio := IncMinute(Inicio);
+    Output.NewRecord;
+    Output.Values['Hora'] := FormatDateTime('hh:mm', Inicio);
+  until (FormatDateTime('hh:mm', Inicio) = Input.Value['Fim']);
+end;
+
 initialization
   wtsRegisterProc('APONTAMENTOS.Detalhar', Detalhar);
-
+  wtsRegisterProc('APONTAMENTOS.DetalharPeriodo', DetalharPeriodo);
 end.
