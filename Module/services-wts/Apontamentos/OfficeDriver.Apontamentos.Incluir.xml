@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Apontamentos">
-    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="46" INTFTYPE="1" THREADSAFE="0">
+    <METHOD NAME="Incluir" DESCRIPTION="" VERSION="57" INTFTYPE="1" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -46,6 +46,8 @@ INSERT:MAIN INTO Apontamentos( OrdemServico, Contrato, Cooperado, Veiculo, DataE
 #EACH() Reembolsos;
  INSERT INTO ApontamentosReembolsos (Apontamento,Tipo,Valor,Observacao) VALUES (:MAIN.Id,:Reembolsos.Tipo,:Reembolsos.Valor,:Reembolsos.Observacao) #RETURN(Id);
 
+#CHECK("SELECT COUNT(*) AS N FROM Apontamentos WHERE Id=:MAIN.ID AND Saida &lt; Entrada",N>0,"A Data e Hora de Saida n&#227;o pode ser menor Data e Hora de Entrada");
+#CHECK("SELECT COUNT(*) AS N FROM Apontamentos WHERE Id=:MAIN.ID AND KmFinal &lt; KmInicial",N>0,"O KM Final n&#227;o pode ser menor que o KM Inicial");
 
 </ACTIONSCRIPT>
     </METHOD>

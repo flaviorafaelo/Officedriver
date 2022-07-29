@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Apontamentos">
-    <METHOD NAME="Consultar" DESCRIPTION="" VERSION="34" INTFTYPE="6" THREADSAFE="0">
+    <METHOD NAME="Consultar" DESCRIPTION="" VERSION="35" INTFTYPE="6" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -28,7 +28,7 @@
         <FIELD NAME="HoraSaida" SIZE="5" FLAGS="1" MASK="##:##" PROJECTION="0" ORDER="16" FIELDLABEL="Hora" GROUPNAME="Saida" CTAB="0"/>
         <FIELD NAME="KmFinal" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="17" FIELDLABEL="Km" GROUPNAME="Saida" CTAB="0"/>
         <FIELD NAME="IntervaloDescanso" SIZE="5" MASK="##:##" PROJECTION="0" ORDER="15" FIELDLABEL="Intervalo de Descan&#231;o" GROUPNAME="Saida" CTAB="0"/>
-        <FIELD NAME="Viagem" FORMAT="B" SIZE="1" FLAGS="17" PROJECTION="0" ORDER="5" FIELDLABEL="Viagem" CTAB="0"/>
+        <FIELD NAME="Viagem" FORMAT="B" SIZE="1" FLAGS="17" DEFAULT="FALSE" PROJECTION="0" ORDER="5" FIELDLABEL="Viagem" CTAB="0"/>
         <FIELD NAME="Observacao" FLAGS="1" PROJECTION="0" ORDER="6" FIELDLABEL="Observacao" CTAB="0"/>
         <FIELD NAME="Reembolsos" FORMAT="R" FLAGS="1" PROJECTION="0" ORDER="19" FIELDLABEL="Reembolsos" NESTEDNAME="OfficeDriver.Apontamentos.Reembolso" GROUPNAME="Reembolsos" CTAB="0"/>
         <FIELD NAME="Fechamento" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Fechamento" CTAB="0"/>
