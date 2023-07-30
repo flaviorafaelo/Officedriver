@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos">
-    <METHOD NAME="ListarApontamentos" DESCRIPTION="" VERSION="29" THREADSAFE="0">
+    <METHOD NAME="ListarApontamentos" DESCRIPTION="" VERSION="30" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
         </GROUPS>
         <PARAM NAME="Fechamento" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Fechamento" CTAB="0"/>
         <PARAM NAME="Contrato" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Contrato" CTAB="0"/>
-        <PARAM NAME="Funcao" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Funcao" CTAB="0"/>
+        <PARAM NAME="Produto" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Funcao" CTAB="0"/>
       </PARAMS>
       <FIELDS>
         <GROUPS>
@@ -21,7 +21,7 @@
        #ROWSET({SELECT:Apontamentos Ap.*
                 FROM FechamentosContratos Fc
                 INNER JOIN ContratosCooperados Cp ON (Cp.Contrato = Fc.Contrato) AND
-                                                    (Cp.Funcao = :Funcao)
+                                                    (Cp.Produto = :Produto)
                 INNER JOIN Apontamentos AP ON (Ap.Fechamento = Fc.Fechamento) AND
                                               (Ap.Contrato = Fc.Contrato) AND
                                               (Ap.Cooperado = Cp.Cooperado)

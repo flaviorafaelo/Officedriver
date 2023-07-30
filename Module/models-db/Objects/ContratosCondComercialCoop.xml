@@ -5,7 +5,7 @@
 </FLAGS>
     </FIELDS>
     <FIELDS NAME="Contrato" DATATYPE="3"/>
-    <FIELDS NAME="Funcao" DATATYPE="3"/>
+    <FIELDS NAME="Produto" DATATYPE="3"/>
     <FIELDS NAME="Tipo" DATATYPE="1" SIZE="1"/>
     <FIELDS NAME="Horas" DATATYPE="3"/>
     <FIELDS NAME="TipoContrato" DATATYPE="3"/>

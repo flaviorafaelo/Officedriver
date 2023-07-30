@@ -44,10 +44,11 @@
 		<OBJECT>OFFICEDRIVER.APONTAMENTOS</OBJECT>
 	</link>
 
-	<link category="Cadastros\Funções" target="standard.tdataedit" _id="OFFD_008">
-		<OBJECT>OFFICEDRIVER.FUNCOES</OBJECT>
+	<link category="Cadastros\Produtos" target="standard.tdataedit" _id="OFFD_008">
+		<OBJECT>OFFICEDRIVER.PRODUTOS</OBJECT>
 	</link>		
 	<link category="Processos\Fechamento" target="standard.tdataedit" _id="OFFD_010">
 		<OBJECT>OFFICEDRIVER.CONTRATOS.FECHAMENTOS</OBJECT>
 	</link>	
+	<link category="Utilitários\Administrador\Acessa telas campos personalizado" target="" id="436" _visible="false" />
 </root>

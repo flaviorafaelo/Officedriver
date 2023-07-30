@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Produtos">
+    <METHOD NAME="Listar" DESCRIPTION="" VERSION="22" INTFTYPE="5" THREADSAFE="0">
+      <PARAMS/>
+      <FIELDS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <FIELD NAME="Id" FORMAT="+" SIZE="8" FLAGS="1024" PROJECTION="0" FIELDLABEL="Id" CTAB="0"/>
+        <FIELD NAME="Descricao" SIZE="100" FLAGS="1" PROJECTION="0" ORDER="1" FIELDLABEL="Descri&#231;&#227;o" CTAB="0"/>
+      </FIELDS>
+      <ACTIONSCRIPT>SELECT ID, DESCRICAO FROM PRODUTOS
+</ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

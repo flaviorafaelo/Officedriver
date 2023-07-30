@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos">
+    <METHOD NAME="ListaSimples" DESCRIPTION="" VERSION="2" THREADSAFE="0">
+      <PARAMS/>
+      <FIELDS/>
+      <ACTIONSCRIPT>SELECT
+  CN.ID,
+  CN.DESCRICAO,
+  CN.NUMERO,
+FROM CONTRATOS CN
+ORDER BY CN.DESCRICAO
+</ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>

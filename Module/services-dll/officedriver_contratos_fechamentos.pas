@@ -188,13 +188,13 @@ begin
 
     C.Dim('Fechamento',Input.Value['Fechamento']);
     C.Dim('Contrato',Input.Value['Contrato']);
-    C.Dim('Funcao',CondicaoComercial.Value['Funcao']);
-    C.Execute('#CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.ListarApontamentos(:Fechamento,:Contrato,:Funcao);');
+    C.Dim('Produto',CondicaoComercial.Value['Produto']);
+    C.Execute('#CALL OFFICEDRIVER.CONTRATOS.FECHAMENTOS.ListarApontamentos(:Fechamento,:Contrato,:Produto);');
     Apontamentos := C.AsData['Apontamentos'] as IwtsWriteData;
 
     //Montagem do Extrado
     CooperadosContratos.First;
-    CooperadosContratos.Filter := 'FUNCAO='+CondicoesComerciaisCooperado.GetFieldAsString('Funcao');
+    CooperadosContratos.Filter := 'PRODUTO='+CondicoesComerciaisCooperado.GetFieldAsString('Produto');
     Cooperados.Clear;
     while not CooperadosContratos.EOF do
     begin
@@ -610,7 +610,7 @@ end;
 //
 //   procedure PreparaCondicao;
 //   var FimOriginal, RecNo: string;
-//       Tipo, Periodo, Funcao, Horas: Integer;
+//       Tipo, Periodo, Produto, Horas: Integer;
 //       ValorNormal, ValorExcedente: Double;
 //   begin
 //     CondicoesRepasse.First;
@@ -624,7 +624,7 @@ end;
 //         ValorExcedente := CondicoesRepasse.Value['ValorExcedente'];
 //         Horas          := CondicoesCobranca.Value['Horas'];
 //         Periodo        := CondicoesRepasse.Value['Periodo'];
-//         Funcao         := CondicoesRepasse.Value['Funcao'];
+//         Produto        := CondicoesRepasse.Value['Produto'];
 //         RecNo          := CondicoesRepasse.GetBookmark;
 //         CondicoesRepasse.Value['Fim'] := '23:59';
 //         CondicoesRepasse.Update;
@@ -636,7 +636,7 @@ end;
 //         CondicoesRepasse.Value['ValorExcedente'] := ValorExcedente;
 //         CondicoesRepasse.Value['Periodo']        := Periodo;
 //         CondicoesRepasse.Value['Horas']          := Horas;
-//         CondicoesRepasse.Value['Funcao']         := Funcao;
+//         CondicoesRepasse.Value['Produto']        := Produto;
 //         CondicoesRepasse.Add;
 //         CondicoesRepasse.SetBookmark(RecNo);
 //       end;
@@ -655,7 +655,7 @@ end;
 //         ValorExcedente := CondicoesCobranca.Value['ValorExcedente'];
 //         Horas          := CondicoesCobranca.Value['Horas'];
 //         Periodo        := CondicoesCobranca.Value['Periodo'];
-//         Funcao         := CondicoesCobranca.Value['Funcao'];
+//         Produto         := CondicoesCobranca.Value['Produto'];
 //         RecNo          := CondicoesCobranca.GetBookmark;
 //
 //         CondicoesCobranca.Value['Fim'] := '23:59';
@@ -668,7 +668,7 @@ end;
 //         CondicoesCobranca.Value['ValorExcedente'] := ValorExcedente;
 //         CondicoesCobranca.Value['Periodo']        := Periodo;
 //         CondicoesCobranca.Value['Horas']          := Horas;
-//         CondicoesCobranca.Value['Funcao']         := Funcao;
+//         CondicoesCobranca.Value['Produto']         := Produto;
 //         CondicoesCobranca.Add;
 //         CondicoesCobranca.SetBookmark(RecNo);
 //       end;
@@ -678,7 +678,7 @@ end;
 //   end;
 //
 //   function ObterValorHoraDesc(const AData: IwtsWriteData;
-//     AFuncao: Integer; AEntrada: TDateTime): TValores;
+//     AProduto: Integer; AEntrada: TDateTime): TValores;
 //   var Tipo: Integer;
 //   begin
 //     Tipo := 1;
@@ -695,7 +695,7 @@ end;
 //     Result.Periodo                := 0;
 //     while not AData.Eof do
 //     begin
-//       if (AData.Value['Funcao'] = AFuncao) and
+//       if (AData.Value['Produto'] = AProduto) and
 //         ((AData.Value['Tipo'] = Tipo) or (AData.Value['Tipo'] = 1)) then
 //       begin
 //         Result.Normal                 := AData.Value['ValorNormal'];
@@ -709,7 +709,7 @@ end;
 //   end;
 //
 //   function ObterValorHora(const AData: IwtsWriteData; const AHora: string;
-//     AFuncao: Integer; AEntrada: TDateTime): TValores;
+//     AProduto: Integer; AEntrada: TDateTime): TValores;
 //   var Tipo: Integer;
 //   begin
 //     Tipo := 1;
@@ -726,7 +726,7 @@ end;
 //     Result.Periodo                := 0;
 //     while not AData.Eof do
 //     begin
-//       if (AData.Value['Funcao'] = AFuncao) and
+//       if (AData.Value['Produto'] = AProduto) and
 //          (AHora >= AData.Value['Inicio']) and (AHora <= AData.Value['Fim']) and
 //          ((AData.Value['Tipo'] = Tipo) or (AData.Value['Tipo'] = 1)) then
 //       begin
@@ -755,7 +755,7 @@ end;
 //  Cooperados := C.CreateRecordset;
 //
 //  C.Dim('Contrato', Input.Value['Contrato']);
-//  C.Execute('SELECT ccc.Funcao, ccc.Horas, ccp.Id as Periodo, ccp.Descricao, ccp.Inicio, ccp.Fim, '+
+//  C.Execute('SELECT ccc.Produto, ccc.Horas, ccp.Id as Periodo, ccp.Descricao, ccp.Inicio, ccp.Fim, '+
 //            'ccp.ValorNormal, ccp.ValorExcedente, ccp.Tipo '+
 //            ' FROM ContratosCondComercialCoop ccc '+ 
 //            ' INNER JOIN CondicaoComPeriodo ccp ' +
@@ -764,7 +764,7 @@ end;
 //  CondicoesCobranca := C.CreateRecordset;
 //
 //  C.Dim('Contrato', Input.Value['Contrato']);
-//  C.Execute('SELECT ccc.Funcao, ccc.Horas, ccp.Id as Periodo, ccp.Descricao, ccp.Inicio, ccp.Fim, '+
+//  C.Execute('SELECT ccc.Produto, ccc.Horas, ccp.Id as Periodo, ccp.Descricao, ccp.Inicio, ccp.Fim, '+
 //            'ccp.ValorNormal, ccp.ValorExcedente, ccp.Tipo '+
 //            ' FROM ContratosCondComercialCoop ccc '+ 
 //            ' INNER JOIN CondicaoComPeriodo ccp ' +
@@ -798,8 +798,8 @@ end;
 //       (((Contrato.GetFieldByName('BaseCalculo') = 'D') and
 //         (Apontamentos.value['DataEntrada'] <> DataEntrada)) or (Apontamentos.value['Cooperado'] <> Cooperado))  then
 //     begin
-//       ValorCobranca := ObterValorHoraDesc(CondicoesCobranca, Cooperados.Value['Funcao'], Apontamentos.value['DataEntrada']);
-//       ValorRepasse  := ObterValorHoraDesc(CondicoesRepasse , Cooperados.Value['Funcao'], Apontamentos.value['DataEntrada']);
+//       ValorCobranca := ObterValorHoraDesc(CondicoesCobranca, Cooperados.Value['Produto'], Apontamentos.value['DataEntrada']);
+//       ValorRepasse  := ObterValorHoraDesc(CondicoesRepasse , Cooperados.Value['Produto'], Apontamentos.value['DataEntrada']);
 //
 //       Output.NewRecord;
 //       Output.SetFieldByName('Apontamento',Apontamentos.Value['Apontamento']);
@@ -813,8 +813,8 @@ end;
 //     end;
 //     
 //     TotalHoraCalculada := TotalHoraCalculada + Apontamentos.Value['Tempo'];
-//     ValorCobranca := ObterValorHora(CondicoesCobranca, Apontamentos.Value['Horario'], Cooperados.Value['Funcao'], Apontamentos.value['DataEntrada']);
-//     ValorRepasse  := ObterValorHora(CondicoesRepasse , Apontamentos.Value['Horario'], Cooperados.Value['Funcao'], Apontamentos.value['DataEntrada']);
+//     ValorCobranca := ObterValorHora(CondicoesCobranca, Apontamentos.Value['Horario'], Cooperados.Value['Produto'], Apontamentos.value['DataEntrada']);
+//     ValorRepasse  := ObterValorHora(CondicoesRepasse , Apontamentos.Value['Horario'], Cooperados.Value['Produto'], Apontamentos.value['DataEntrada']);
 //     Output.NewRecord;
 //     Output.SetFieldByName('Apontamento',Apontamentos.Value['Apontamento']);
 //     Output.SetFieldByName('ApontamentoDetalhado',Apontamentos.Value['ApontamentoDetalhado']);
