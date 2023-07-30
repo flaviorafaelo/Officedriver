@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Apontamentos">
-    <METHOD NAME="Listar" DESCRIPTION="Lista de Apontamentos" VERSION="53" INTFTYPE="5" THREADSAFE="0">
+    <METHOD NAME="Listar" DESCRIPTION="Lista de Apontamentos" VERSION="54" INTFTYPE="5" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>

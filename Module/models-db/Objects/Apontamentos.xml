@@ -20,6 +20,7 @@
     <FIELDS NAME="Fechamento" DATATYPE="3"/>
     <FIELDS NAME="Entrada" DATATYPE="11"/>
     <FIELDS NAME="Saida" DATATYPE="11"/>
+    <FIELDS NAME="Produto" DATATYPE="3"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>
       <FLAGS> AQ==

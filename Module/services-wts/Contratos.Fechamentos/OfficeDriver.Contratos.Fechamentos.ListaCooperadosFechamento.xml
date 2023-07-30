@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<root>
+  <OBJECT NAME="Contratos.Fechamentos">
+    <METHOD NAME="ListaCooperadosFechamento" DESCRIPTION="" VERSION="3" THREADSAFE="0">
+      <PARAMS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <PARAM NAME="Contrato" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Contrato" CTAB="0"/>
+        <PARAM NAME="DataInicial" FORMAT="D" SIZE="10" PROJECTION="0" FIELDLABEL="Datainicial" CTAB="0"/>
+        <PARAM NAME="DataFinal" FORMAT="D" SIZE="10" PROJECTION="0" FIELDLABEL="Datafinal" CTAB="0"/>
+      </PARAMS>
+      <FIELDS>
+        <GROUPS>
+          <GROUP/>
+        </GROUPS>
+        <FIELD NAME="Cooperado" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Contrato" CTAB="0"/>
+      </FIELDS>
+      <ACTIONSCRIPT>Select distinct Cooperado
+from Apontamentos
+where Contrato = :Contrato and
+      DataEntrada between :DataInicial and :DataFinal
+
+</ACTIONSCRIPT>
+    </METHOD>
+  </OBJECT>
+</root>
