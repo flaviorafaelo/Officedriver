@@ -163,33 +163,34 @@ var
    Total :String;
 begin
   C := DataPool.Open('MILLENIUM');
-  DataFechamento := IncDay(Input['DataBaseFechamento'],-1);
 
   Contrato := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.CONTRATO');
   Cooperados := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.COOPERADO');
   CalculoContratos := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULARCONTRATOMES');
   CondicaoComercial := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.CONDICAOCOMERCIALCOOPERADO');
-  CooperadosContratos := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.COOPERADO');
   Extrato := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.EXTRATO');
 
   C.Execute('#CALL OFFICEDRIVER.CONTRATOS.Consultar(:Contrato)');
   Contrato.CopyFrom(C);
 
-  DataInicio := IncMonth(DataFechamento, -1);
+  DataFechamento := IncDay(Input['DataBaseFechamento'],-1);
+  DataInicio := IncMonth(Input['DataBaseFechamento'], -1);
+
   C.Dim('Contrato', Input.Value['Contrato']);
   C.Dim('DataInicial', DataInicio);
   C.Dim('DataFinal', DataFechamento);
-  C.Execute('Select distinct cooperado, produto '+
+  C.Dim('Fechamento', Input.Value['Fechamento']);
+
+  C.Execute('Select distinct Cooperado, Produto '+
             'from Apontamentos   '+
-            'where Contrato = 191276   '+
-          //  '      and DataEntrada between "2023-10-07" and "2023-10-08" '+
-           // '      and fechamento is null  '+
+            'where Contrato = :Contrato   '+
+            '      and DataEntrada between :DataInicial and :DataFinal '+
+            '      and fechamento = :Fechamento and Cooperado = 75  and Cooperado is not null '+
             'order by cooperado');
-  CooperadosContratos.CopyFrom(C);
+
+  CooperadosContratos := C.CreateRecordset;
   i := CooperadosContratos.RecordCount;
   CondicoesComerciaisCooperado := Contrato.AsData['CondComCooperado'] as IwtsWriteData;
-  LogDebug(CondicoesComerciaisCooperado.IntfName);
-  LogDebug(CondicaoComercial.IntfName);
   while not CondicoesComerciaisCooperado.EOF do
   begin
     BaseCalculo := CondicoesComerciaisCooperado.Value['BASECALCULO'];
@@ -207,20 +208,21 @@ begin
     Apontamentos := C.AsData['Apontamentos'] as IwtsWriteData;
 
     //Montagem do Extrado
+    Log('Cooperdo: '+CooperadosContratos.AsString['Cooperado'] + ' Produto: '+CooperadosContratos.AsString['Produto']);
     CooperadosContratos.First;
-    CooperadosContratos.Filter := 'PRODUTO='+CondicoesComerciaisCooperado.GetFieldAsString('Produto');
+    CooperadosContratos.Filter := 'Produto='+CondicoesComerciaisCooperado.GetFieldAsString('Produto');
     Cooperados.Clear;
-
+    Log('Cooperdo: '+CooperadosContratos.AsString['Cooperado'] + ' Produto: '+CooperadosContratos.AsString['Produto']);
 
     while not CooperadosContratos.EOF do
     begin
-      Data := IncMonth(DataFechamento, -1);
-      Data := IncDay(Data, 1);
+      Data := IncDay(IncMonth(DataFechamento, -1), 1);
+      Log(FormatDateTime('dd/mm/yyyy',Data));
       Extrato.Clear;
       while Data <= DataFechamento do
       begin
-         Log(CooperadosContratos.GetFieldAsString('Cooperado') + ' - '+FormatDateTime('dd/mm/yyyy hh:nn',Data));
-        if Apontamentos.Locate(['Cooperado', 'DataEntrada'],[CooperadosContratos.Value['Cooperado'], Data]) then
+         Log(CooperadosContratos.AsString['cooperado'] + ' - '+FormatDateTime('dd/mm/yyyy hh:nn',Data));
+        if Apontamentos.Locate(['Cooperado', 'DataEntrada'],[CooperadosContratos.Value['cooperado'], Data]) then
         begin
           Extrato.New;
           Extrato.Value['Entrada']          := Apontamentos.Value['Entrada'];
@@ -238,7 +240,7 @@ begin
           Extrato.Add;
         end else
         begin
-          Extrato.New;
+           Extrato.New;
           Extrato.Value['Entrada']          := 0;
           Extrato.Value['Saida']            := 0;
           Extrato.Value['DataEntrada']      := Data;

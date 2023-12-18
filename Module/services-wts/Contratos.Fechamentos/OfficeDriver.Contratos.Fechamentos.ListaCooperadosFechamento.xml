@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos.Fechamentos">
-    <METHOD NAME="ListaCooperadosFechamento" DESCRIPTION="" VERSION="3" THREADSAFE="0">
+    <METHOD NAME="ListaCooperadosFechamento" DESCRIPTION="" VERSION="9" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -14,12 +14,16 @@
         <GROUPS>
           <GROUP/>
         </GROUPS>
-        <FIELD NAME="Cooperado" FORMAT="N" SIZE="8" PROJECTION="0" FIELDLABEL="Contrato" CTAB="0"/>
+        <FIELD NAME="Cooperado" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" ORDER="1" FIELDLABEL="Cooperado" CTAB="0"/>
+        <FIELD NAME="Produto" FORMAT="N" SIZE="8" FLAGS="1" PROJECTION="0" FIELDLABEL="Produto" CTAB="0"/>
       </FIELDS>
-      <ACTIONSCRIPT>Select distinct Cooperado
+      <ACTIONSCRIPT>Select distinct cooperado, produto
 from Apontamentos
+
 where Contrato = :Contrato and
       DataEntrada between :DataInicial and :DataFinal
+      and fechamento is null
+order by cooperado
 
 </ACTIONSCRIPT>
     </METHOD>
