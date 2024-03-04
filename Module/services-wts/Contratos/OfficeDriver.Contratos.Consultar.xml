@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
   <OBJECT NAME="Contratos">
-    <METHOD NAME="Consultar" DESCRIPTION="" VERSION="96" INTFTYPE="6" THREADSAFE="0">
+    <METHOD NAME="Consultar" DESCRIPTION="" VERSION="97" INTFTYPE="6" THREADSAFE="0">
       <PARAMS>
         <GROUPS>
           <GROUP/>
@@ -51,7 +51,8 @@
                HORAS,
                VALOR,
                BASECALCULO,
-               TIPOCONTRATO
+               TIPOCONTRATO,
+               DIARIA
                #ROWSET({SELECT:PERIODO ID, CONDICAO, DESCRICAO, INICIO, FIM, VALORNORMAL, VALOREXCEDENTE, TIPO FROM CONDICAOCOMPERIODO WHERE CONDICAO = :CONDCOMCOOPERADO.ID })
             FROM CONTRATOSCONDCOMERCIALCOOP
             WHERE CONTRATO = :MAIN.ID})

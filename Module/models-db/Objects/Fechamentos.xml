@@ -16,9 +16,9 @@
     <FIELDS NAME="Status" DATATYPE="3">
       <CONSTRAINT>0-Aberto</CONSTRAINT>
     </FIELDS>
-    <FIELDS NAME="TotalIntervalo" DATATYPE="1" SIZE="7"/>
-    <FIELDS NAME="TotalGeral" DATATYPE="1" SIZE="7"/>
-    <FIELDS NAME="TotalGeralExcedente" DATATYPE="1" SIZE="7"/>
+    <FIELDS NAME="TotalIntervalo" DATATYPE="1" SIZE="20"/>
+    <FIELDS NAME="TotalGeral" DATATYPE="1" SIZE="20"/>
+    <FIELDS NAME="TotalGeralExcedente" DATATYPE="1" SIZE="20"/>
     <FIELDS NAME="ValorTotalGeral" DATATYPE="6"/>
     <FIELDS NAME="ValorTotalGeralExcedente" DATATYPE="6"/>
   </ROW>

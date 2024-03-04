@@ -3,7 +3,7 @@
 	<_currentid>OFFD_012</_currentid>
 	<_name>RULES.APS</_name>
 	
-	
+	<link category="Utilitários\Administrador\Acessa telas campos personalizado" target="" id="436" _visible="FALSE" />
 	<link category="Inteligência de Negócio\Gerador de Relatórios" target="" _visible="FALSE" _id="REL_1">
 	</link>
 	
@@ -18,37 +18,48 @@
 	
 	<link category="Cadastros\Bancos" target="standard.tdataedit" _id="OFFD_002">
 		<OBJECT>OFFICEDRIVER.BANCOS</OBJECT>
+		<option>AutoRefresh</option>		
 	</link>
 
 	<link category="Cadastros\Veículos" target="standard.tdataedit" _id="OFFD_003">
 		<OBJECT>OFFICEDRIVER.VEICULOS</OBJECT>
+		
+		<option>AutoRefresh</option>		
 	</link>
 	
 	<link category="Cadastros\Fabricantes" target="standard.tdataedit" _id="OFFD_004">
 		<OBJECT>OFFICEDRIVER.FABRICANTES</OBJECT>
+		<option>AutoRefresh</option>
 	</link>	
 	
 	<link category="Cadastros\Clientes" target="standard.tdataedit" _id="OFFD_005">
 		<OBJECT>OFFICEDRIVER.CLIENTES</OBJECT>
+		<option>AutoRefresh</option>
 	</link>	
 	
 	<link category="Cadastros\Feriados" target="standard.tdataedit" _id="OFFD_011">
 		<OBJECT>OFFICEDRIVER.FERIADOS</OBJECT>
+		<option>AutoRefresh</option>
 	</link>	
 
 	<link category="Processos\Contratos" target="standard.tdataedit" _id="OFFD_006">
 		<OBJECT>OFFICEDRIVER.CONTRATOS</OBJECT>
+		<option>AutoSubmit</option>		
+		<option>AutoRefresh</option>			
 	</link>		
 	
 	<link category="Processos\Apontamentos" target="standard.tdataedit" _id="OFFD_007">
 		<OBJECT>OFFICEDRIVER.APONTAMENTOS</OBJECT>
+		<option>AutoRefresh</option>
 	</link>
 
 	<link category="Cadastros\Produtos" target="standard.tdataedit" _id="OFFD_008">
 		<OBJECT>OFFICEDRIVER.PRODUTOS</OBJECT>
+		<option>AutoRefresh</option>		
 	</link>		
 	<link category="Processos\Fechamento" target="standard.tdataedit" _id="OFFD_010">
 		<OBJECT>OFFICEDRIVER.CONTRATOS.FECHAMENTOS</OBJECT>
+		<option>AutoRefresh</option>		
 	</link>	
-	<link category="Utilitários\Administrador\Acessa telas campos personalizado" target="" id="436" _visible="false" />
+
 </root>

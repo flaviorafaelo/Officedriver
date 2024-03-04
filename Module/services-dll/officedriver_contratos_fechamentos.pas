@@ -175,6 +175,7 @@ begin
 
   DataFechamento := IncDay(Input['DataBaseFechamento'],-1);
   DataInicio := IncMonth(Input['DataBaseFechamento'], -1);
+  LogDebug('Intervalo '+FormatDateTime('DD/MM/YYYY',DataInicio) + ' a ' + FormatDateTime('DD/MM/YYYY',DataFechamento));
 
   C.Dim('Contrato', Input.Value['Contrato']);
   C.Dim('DataInicial', DataInicio);
@@ -185,7 +186,7 @@ begin
             'from Apontamentos   '+
             'where Contrato = :Contrato   '+
             '      and DataEntrada between :DataInicial and :DataFinal '+
-            '      and fechamento = :Fechamento and Cooperado = 75  and Cooperado is not null '+
+            '      and fechamento = :Fechamento  and Cooperado is not null '+
             'order by cooperado');
 
   CooperadosContratos := C.CreateRecordset;
@@ -693,7 +694,7 @@ var
   TotalHoras, TotalHorasGeral, TotalHorasExcedente, TotalValor,TotalValorExcedente,
   TotalIntervalos, Intervalo, PacoteHoras, Horas, ValorHoraExcedente, ValorHora: Double;
   LogStr, BookMark: String;
-  Tipo: Integer;
+  Tipo, Diaria: Integer;
 begin
   C := DataPool.Open('MILLENIUM');
   PeriodosOut := DataPool.CreateRecordset('OFFICEDRIVER.CONTRATOS.FECHAMENTOS.CALCULO.PERIODOS');
@@ -704,7 +705,7 @@ begin
   Cooperados := Input.AsData['Cooperados'] as IwtsWriteData;
 
   Periodos := CondicaoComercial.AsData['Periodo'] as IwtsWriteData;
-
+  Diaria := CondicaoComercial.GetFieldByName('Diaria');
   while not Cooperados.EOF do
   begin
     Extrato := Cooperados.AsData['Extrato'] as IwtsWriteData;
@@ -749,18 +750,20 @@ begin
     TotalIntervalos := 0;
     PeriodosOut.Clear;
 
-    //Totalizandio
-    TotalHoras := 0;
-    TotalValor := 0;
-    TotalHorasExcedente := 0;
+
     Extrato.First;
     PacoteHoras :=  CondicaoComercial.Value['Horas'];
 
     while not Extrato.EOF do
     begin
+      LogDebug(Extrato.AsString['DataEntrada']);
       ExtratoPeriodo := Extrato.AsData['Periodos'] as IwtsWriteData;
       ExtratoPeriodo.First;
       Intervalo := HourToDecimal(Extrato.Value['FimIntervalo']) - HourToDecimal(Extrato.Value['InicioIntervalo']);
+      //Totalizandio
+      TotalHoras := 0;
+      TotalValor := 0;
+      TotalHorasExcedente := 0;
       while not ExtratoPeriodo.Eof do
       begin
         Horas := HourToDecimal(ExtratoPeriodo.Value['Horas']);
@@ -776,25 +779,26 @@ begin
           ExtratoPeriodo.SetFieldByName('Excedente', False);
 
           ExtratoPeriodo.Update;
-
-          BookMark := ExtratoPeriodo.GetBookmark;
-          ExtratoPeriodo.New;
-          ExtratoPeriodo.SetFieldByName('Descricao',Periodos.GetFieldByName('Descricao'));
-          ExtratoPeriodo.SetFieldByName('Horas',DecimalToHour((TotalHoras + Horas) - PacoteHoras));
-          ExtratoPeriodo.SetFieldByName('Valor',((TotalHoras + Horas) - PacoteHoras) * ValorHoraExcedente);
-          ExtratoPeriodo.SetFieldByName('Tipo',Tipo);
-          ExtratoPeriodo.SetFieldByName('ValorHora',ValorHora);
-          ExtratoPeriodo.SetFieldByName('ValorHoraExcedente', ValorHoraExcedente);
-          ExtratoPeriodo.SetFieldByName('Excedente', True);
-          ExtratoPeriodo.Add;
-
-          ExtratoPeriodo.SetBookmark(Bookmark);
+          if ((TotalHoras + Horas) - PacoteHoras) > 0 then
+          begin
+            BookMark := ExtratoPeriodo.GetBookmark;
+            ExtratoPeriodo.New;
+            ExtratoPeriodo.SetFieldByName('Descricao',Periodos.GetFieldByName('Descricao'));
+            ExtratoPeriodo.SetFieldByName('Horas',DecimalToHour((TotalHoras + Horas) - PacoteHoras));
+            ExtratoPeriodo.SetFieldByName('Valor',((TotalHoras + Horas) - PacoteHoras) * ValorHoraExcedente);
+            ExtratoPeriodo.SetFieldByName('Tipo',Tipo);
+            ExtratoPeriodo.SetFieldByName('ValorHora',ValorHora);
+            ExtratoPeriodo.SetFieldByName('ValorHoraExcedente', ValorHoraExcedente);
+            ExtratoPeriodo.SetFieldByName('Excedente', True);
+            ExtratoPeriodo.Add;
+            ExtratoPeriodo.SetBookmark(Bookmark);
+          end;
 
           TotalValor :=  TotalValor + ((PacoteHoras - TotalHoras) *  ValorHora);
           TotalHorasGeral := TotalHorasGeral + TotalValor;
           TotalHoras := PacoteHoras;
         end else
-        if TotalHoras  >= PacoteHoras then
+        if (TotalHoras  >= PacoteHoras) and (Horas > 0) then
         begin
           ExtratoPeriodo.SetFieldByName('Excedente', True);
           ExtratoPeriodo.SetFieldByName('Valor', (Horas * ValorHoraExcedente));
@@ -802,6 +806,7 @@ begin
           TotalHorasExcedente := TotalHorasExcedente + Horas;
           TotalValorExcedente := TotalValorExcedente + (Horas * ValorHoraExcedente);
         end else
+        if (Horas > 0) then
         begin
           ExtratoPeriodo.SetFieldByName('Excedente', False);
           ExtratoPeriodo.SetFieldByName('Valor', (Horas * ValorHora));
@@ -811,6 +816,20 @@ begin
         end;
         ExtratoPeriodo.Next;
       end;
+
+      if (TotalHoras > 0) and (TotalHoras < Diaria) then
+      begin
+        ExtratoPeriodo.New;
+        ExtratoPeriodo.SetFieldByName('Descricao',Periodos.GetFieldByName('Descricao'));
+        ExtratoPeriodo.SetFieldByName('Horas', Diaria - TotalHoras);
+        ExtratoPeriodo.SetFieldByName('Valor',(Diaria - TotalHoras) * ValorHora);
+        ExtratoPeriodo.SetFieldByName('Tipo',Tipo);
+        ExtratoPeriodo.SetFieldByName('ValorHora',ValorHora);
+        ExtratoPeriodo.SetFieldByName('ValorHoraExcedente', ValorHoraExcedente);
+        ExtratoPeriodo.SetFieldByName('Excedente', False);
+        ExtratoPeriodo.Add;
+      end;
+
       TotalIntervalos := TotalIntervalos +  Intervalo;
       Extrato.Value['Periodos'] := ExtratoPeriodo.Data;
       Extrato.Update;
@@ -819,17 +838,8 @@ begin
     Cooperados.Value['Extrato'] := Extrato.Data;
     Cooperados.Update;
     
-    if TotalHoras > 0 then
+    if TotalHorasGeral > 0 then
     begin
-      PeriodosOut.New;
-      PeriodosOut.Value['Descricao'] := ExtratoPeriodo.Value['Descricao'];
-      PeriodosOut.Value['Horas'] := DecimalToHour(TotalHoras);
-      PeriodosOut.Value['Valor'] := TotalHorasGeral;
-      PeriodosOut.Value['Tipo'] := ExtratoPeriodo.Value['Tipo'];
-      PeriodosOut.Value['ValorHora'] := ExtratoPeriodo.Value['ValorHora'];
-      PeriodosOut.Value['ValorHoraExcedente'] := ExtratoPeriodo.Value['ValorHoraExcedente'];
-      PeriodosOut.Add;
-
       Total.New;
       Total.Value['TotalPeriodo'] := PeriodosOut.Data;
       Total.Value['TotalIntervalo'] := DecimalToHour(TotalIntervalos);

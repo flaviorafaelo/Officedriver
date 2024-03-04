@@ -9,6 +9,7 @@
     <FIELDS NAME="TotalKM" DATATYPE="3"/>
     <FIELDS NAME="ValorKM" DATATYPE="7" SIZE="17" PRECISION="4"/>
     <FIELDS NAME="ValorKMExcedente" DATATYPE="7" SIZE="17" PRECISION="4"/>
+    <FIELDS NAME="Produto" DATATYPE="3"/>
     <INDEXES>
       <FIELDS>Id</FIELDS>
       <FLAGS> AQ==
