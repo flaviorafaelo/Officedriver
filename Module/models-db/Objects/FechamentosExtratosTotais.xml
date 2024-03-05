@@ -1,7 +1,0 @@
-<dbdic.objects.objects>
-  <ROW NAME="FechamentosExtratosTotais" CREATE_BLANK="FALSE" ORDER="0" DISABLE_LOCK_ESCALATION="FALSE">
-    <FIELDS NAME="Id" DATATYPE="3"/>
-    <FIELDS NAME="Fechamento" DATATYPE="3"/>
-    <FIELDS NAME="Cooperado"/>
-  </ROW>
-</dbdic.objects.objects>
